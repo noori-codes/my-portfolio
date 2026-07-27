@@ -21,17 +21,21 @@ export function Hero() {
       </div>
 
       <div className="relative mx-auto flex min-h-[calc(100svh-var(--header-h))] w-full max-w-6xl flex-col justify-center px-5 py-16 sm:px-8">
-        <p className="animate-fade-up font-mono text-xs tracking-[0.2em] text-accent uppercase">
-          {site.availability}
-        </p>
+        <div className="animate-fade-up flex items-center gap-3">
+          <BrandLogo size="sm" linked={false} priority />
+          <p className="font-mono text-xs tracking-[0.2em] text-accent uppercase">
+            {site.availability}
+          </p>
+        </div>
 
-        <h1 className="animate-fade-up delay-1 mt-6">
-          <span className="sr-only">{site.brand}</span>
-          <BrandLogo size="hero" linked={false} priority className="shadow-[0_0_60px_rgba(61,214,140,0.12)]" />
+        <h1 className="animate-fade-up delay-1 mt-5 font-sans text-[clamp(3.25rem,12vw,6.5rem)] leading-[0.92] font-bold tracking-[-0.04em] text-foreground">
+          {site.brand}
         </h1>
 
-        <p className="animate-fade-up delay-2 mt-5 font-mono text-sm text-muted sm:text-base">
+        <p className="animate-fade-up delay-2 mt-4 font-mono text-sm text-muted sm:text-base">
           {site.fullName}
+          <span className="text-muted-dim"> · </span>
+          {site.role}
           <span className="text-muted-dim"> · </span>
           {site.location}
         </p>

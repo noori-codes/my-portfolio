@@ -13,17 +13,25 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-## Build
+## Scripts
 
-```bash
-npm run build
-npm start
-```
+| Command | What it does |
+|---|---|
+| `npm run dev` | Local development |
+| `npm run build` | Production build |
+| `npm run start` | Serve production build |
+| `npm run lint` | ESLint |
+| `npm run typecheck` | TypeScript check |
 
 ## Content
 
-Edit site copy, projects, and links in `src/lib/site.ts`.
-Replace the profile photo at `public/images/imran.jpg`.
+Edit copy, projects, and links in `src/lib/site.ts`.
+
+- Profile photo: `public/images/imran.jpg`
+- Logo: `public/images/logo-transparent.png`
+- OG share image: `public/images/og-card.jpg`
+
+When adding a project, include `slug`, real `github` / `live` URLs, and it will appear on `/work` and `/work/[slug]`.
 
 ## Deploy
 

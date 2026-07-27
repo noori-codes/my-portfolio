@@ -10,12 +10,9 @@ export function Footer() {
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-5 py-10 sm:px-8 md:flex-row md:items-end md:justify-between">
         <div className="flex items-center gap-3">
           <BrandLogo size="sm" />
-          <div>
-            <p className="font-mono text-sm text-accent">{site.brand}</p>
-            <p className="mt-0.5 text-sm text-muted">
-              © {year} {site.fullName}. Built with Next.js.
-            </p>
-          </div>
+          <p className="text-sm text-muted">
+            © {year} {site.fullName}. Built with Next.js.
+          </p>
         </div>
         <nav className="flex flex-wrap gap-x-5 gap-y-2 font-mono text-sm text-muted" aria-label="Footer">
           {site.nav.map((item) => (

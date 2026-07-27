@@ -25,8 +25,8 @@ export const metadata: Metadata = {
   description: `${site.fullName} (${site.brand}) — ${site.headline}`,
   metadataBase: new URL(site.contact.portfolio),
   icons: {
-    icon: [{ url: "/images/imx-mark.png", type: "image/png" }],
-    apple: [{ url: "/images/imx-mark.png" }],
+    icon: [{ url: "/images/logo-transparent.png", type: "image/png" }],
+    apple: [{ url: "/images/logo-transparent.png" }],
   },
   openGraph: {
     title: `${site.brand} — ${site.fullName}`,
@@ -35,8 +35,36 @@ export const metadata: Metadata = {
     siteName: site.brand,
     locale: "en_US",
     type: "website",
-    images: [{ url: site.logo, width: 1023, height: 768, alt: `${site.brand} logo` }],
+    images: [
+      {
+        url: site.ogImage,
+        width: 1200,
+        height: 630,
+        alt: `${site.brand} — ${site.fullName}`,
+      },
+    ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: `${site.brand} — ${site.fullName}`,
+    description: site.headline,
+    images: [site.ogImage],
+  },
+};
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: site.fullName,
+  alternateName: site.brand,
+  url: site.contact.portfolio,
+  jobTitle: site.role,
+  email: site.contact.email,
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: site.location,
+  },
+  sameAs: [site.contact.github, site.contact.youtube],
 };
 
 export default function RootLayout({
@@ -47,9 +75,18 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${syne.variable} ${plexMono.variable} h-full`}>
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground antialiased">
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
         <Header />
-        <main className="flex-1 pt-[var(--header-h)]">{children}</main>
+        <main id="main-content" className="flex-1 pt-[var(--header-h)]">
+          {children}
+        </main>
         <Footer />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
       </body>
     </html>
   );

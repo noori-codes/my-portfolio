@@ -44,7 +44,7 @@ export function ContactForm() {
           name="name"
           required
           autoComplete="name"
-          className="border border-border bg-background px-4 py-3 text-foreground outline-none transition-colors focus:border-accent"
+          className="border border-border bg-background px-4 py-3 text-foreground outline-none transition-colors focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/40"
           placeholder="Your name"
         />
       </label>
@@ -58,7 +58,7 @@ export function ContactForm() {
           name="email"
           required
           autoComplete="email"
-          className="border border-border bg-background px-4 py-3 text-foreground outline-none transition-colors focus:border-accent"
+          className="border border-border bg-background px-4 py-3 text-foreground outline-none transition-colors focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/40"
           placeholder="you@email.com"
         />
       </label>
@@ -71,7 +71,7 @@ export function ContactForm() {
           name="message"
           required
           rows={5}
-          className="resize-y border border-border bg-background px-4 py-3 text-foreground outline-none transition-colors focus:border-accent"
+          className="resize-y border border-border bg-background px-4 py-3 text-foreground outline-none transition-colors focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/40"
           placeholder="Tell me about your project…"
         />
       </label>

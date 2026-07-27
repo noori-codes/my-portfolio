@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { ProjectCard } from "@/components/ProjectCard";
 import { site } from "@/lib/site";
 
@@ -22,8 +23,8 @@ export default function WorkPage() {
             Selected projects
           </h1>
           <p className="mt-4 max-w-xl text-muted">
-            Real builds across Node, Express, MongoDB, React, and Next.js—focused
-            on auth, APIs, and usable interfaces.
+            Real builds with public repos and live demos—focused on usable
+            interfaces, JavaScript, and full-stack patterns.
           </p>
         </div>
       </section>
@@ -52,9 +53,9 @@ export default function WorkPage() {
               GitHub
             </a>
             . Want something built?{" "}
-            <a href="/contact" className="text-accent hover:underline">
+            <Link href="/contact" className="text-accent hover:underline">
               Let&apos;s talk
-            </a>
+            </Link>
             .
           </p>
         </div>

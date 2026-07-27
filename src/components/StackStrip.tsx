@@ -52,6 +52,22 @@ export function StackStrip() {
             ))}
           </div>
         </div>
+
+        <div className="mt-8">
+          <p className="font-mono text-xs tracking-[0.2em] text-muted-dim uppercase">
+            Concepts
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {site.concepts.map((concept) => (
+              <span
+                key={concept}
+                className="border border-border bg-surface/60 px-2.5 py-1 font-mono text-[11px] text-muted"
+              >
+                {concept}
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

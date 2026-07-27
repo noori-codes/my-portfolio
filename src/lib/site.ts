@@ -1,3 +1,17 @@
+export type Project = {
+  slug: string;
+  name: string;
+  tagline: string;
+  description: string;
+  stack: string[];
+  highlights: string[];
+  featured: boolean;
+  github: string;
+  live: string | null;
+  year: string;
+  kind: string;
+};
+
 export const site = {
   brand: "IMX",
   fullName: "Imran Noori",
@@ -6,8 +20,9 @@ export const site = {
   location: "Afghanistan",
   availability: "Open to projects & collaboration",
   profileImage: "/images/imran.jpg",
-  logo: "/images/imx-logo.png",
-  logoMark: "/images/imx-mark.png",
+  logo: "/images/logo-transparent.png",
+  logoMark: "/images/logo-transparent.png",
+  ogImage: "/images/og-card.jpg",
   summary:
     "Full-stack developer and computer instructor building modern, scalable web applications with JavaScript, Node.js, Express, MongoDB, React, and Next.js. I teach programming, Linux, and creative tools—and ship clean, user-friendly products.",
   nav: [
@@ -53,56 +68,79 @@ export const site = {
   ],
   projects: [
     {
-      slug: "natours",
-      name: "Natours",
-      tagline: "Full-stack tour booking platform",
+      slug: "the-wild-oasis",
+      name: "The Wild Oasis",
+      tagline: "Cabin booking & hotel operations app",
       description:
-        "Production-style tour booking app with authentication, role-based access, bookings, reviews, image uploads, admin tools, and a secure REST API.",
-      stack: ["Node.js", "Express", "MongoDB", "Mongoose", "Pug", "JWT"],
+        "Full-stack cabin management experience with bookings, guest flows, and a polished React interface—built to practice real product patterns beyond static pages.",
+      stack: ["React", "JavaScript", "Supabase", "React Query"],
       highlights: [
-        "Auth & role-based authorization",
-        "Tour booking & reviews",
-        "Image upload & processing",
-        "Admin dashboard",
-        "Secure REST API",
+        "Booking and cabin management flows",
+        "Authenticated app experience",
+        "Data-driven UI with React Query",
+        "Production deploy on Vercel",
       ],
       featured: true,
-      github: "https://github.com/noori-codes",
-      live: null as string | null,
+      github: "https://github.com/noori-codes/the-wild-oasis",
+      live: "https://the-wild-oasis-eight-sooty.vercel.app",
+      year: "2025",
+      kind: "Full-stack app",
     },
     {
-      slug: "auth-api",
-      name: "Auth API Kit",
-      tagline: "JWT authentication system",
+      slug: "omnifood",
+      name: "Omnifood",
+      tagline: "Responsive food-delivery marketing site",
       description:
-        "Reusable authentication flow with signup, login, protected routes, and token-based access—built as a foundation for full-stack apps.",
-      stack: ["Node.js", "Express", "MongoDB", "JWT"],
+        "High-converting landing page for a fictional food service—layout systems, sections, and mobile-first CSS practiced end to end.",
+      stack: ["HTML", "CSS", "Responsive Design"],
       highlights: [
-        "Secure password hashing",
-        "Protected route middleware",
-        "Clean REST structure",
+        "Mobile-first layout",
+        "Marketing page structure",
+        "Deployed on Vercel",
       ],
       featured: false,
-      github: "https://github.com/noori-codes",
-      live: null as string | null,
+      github: "https://github.com/noori-codes/Omnifood",
+      live: "https://omnifood-ashen.vercel.app",
+      year: "2024",
+      kind: "Landing page",
     },
     {
-      slug: "next-apps",
-      name: "Next.js Apps",
-      tagline: "Modern React interfaces",
+      slug: "laslesvpn",
+      name: "LaslesVPN",
+      tagline: "VPN product landing page",
       description:
-        "Responsive frontends with Next.js—routing, server components patterns, and polished UI built for real use cases.",
-      stack: ["Next.js", "React", "Tailwind CSS"],
+        "Clean product landing UI with pricing, features, and responsive sections—focused on visual hierarchy and frontend craft.",
+      stack: ["HTML", "CSS"],
       highlights: [
-        "App Router patterns",
-        "Responsive layouts",
-        "Component-driven UI",
+        "Section-based landing layout",
+        "Responsive components",
+        "Live Vercel deploy",
       ],
       featured: false,
-      github: "https://github.com/noori-codes",
-      live: null as string | null,
+      github: "https://github.com/noori-codes/LaslesVPN",
+      live: "https://lasles-vpn-ecru-eight.vercel.app",
+      year: "2024",
+      kind: "Landing page",
     },
-  ],
+    {
+      slug: "guess-my-number",
+      name: "Guess My Number",
+      tagline: "Browser game in vanilla JavaScript",
+      description:
+        "A small interactive game built with HTML, CSS, and JavaScript—DOM updates, game state, and UX feedback without a framework.",
+      stack: ["HTML", "CSS", "JavaScript"],
+      highlights: [
+        "Game state logic",
+        "DOM manipulation",
+        "Instant playable demo",
+      ],
+      featured: false,
+      github: "https://github.com/noori-codes/Guess-My-Number-",
+      live: "https://guess-my-number-game-phi.vercel.app",
+      year: "2024",
+      kind: "JavaScript game",
+    },
+  ] satisfies Project[],
   education: {
     level: "High School",
     grade: "Grade 11",
@@ -150,4 +188,7 @@ export const site = {
 } as const;
 
 export type Site = typeof site;
-export type Project = (typeof site.projects)[number];
+
+export function getProject(slug: string): Project | undefined {
+  return site.projects.find((p) => p.slug === slug);
+}

@@ -20,7 +20,10 @@ export function ProjectCard({ project, featured = false }: Props) {
           </span>
         )}
         <span className="font-mono text-[10px] tracking-wider text-muted-dim uppercase">
-          {project.stack[0]}
+          {project.kind}
+        </span>
+        <span className="font-mono text-[10px] tracking-wider text-muted-dim">
+          {project.year}
         </span>
       </div>
 
@@ -29,7 +32,12 @@ export function ProjectCard({ project, featured = false }: Props) {
           featured ? "text-2xl sm:text-3xl" : "text-xl"
         }`}
       >
-        {project.name}
+        <Link
+          href={`/work/${project.slug}`}
+          className="transition-colors hover:text-accent"
+        >
+          {project.name}
+        </Link>
       </h3>
       <p className="mt-1 font-mono text-sm text-muted">{project.tagline}</p>
       <p className={`mt-4 text-muted ${featured ? "max-w-2xl" : "text-sm"}`}>
@@ -59,11 +67,17 @@ export function ProjectCard({ project, featured = false }: Props) {
       </div>
 
       <div className="mt-6 flex flex-wrap gap-4 font-mono text-sm">
+        <Link
+          href={`/work/${project.slug}`}
+          className="text-accent transition-opacity hover:opacity-80"
+        >
+          Case study →
+        </Link>
         <a
           href={project.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-accent transition-opacity hover:opacity-80"
+          className="text-muted transition-colors hover:text-accent"
         >
           GitHub ↗
         </a>
@@ -76,11 +90,7 @@ export function ProjectCard({ project, featured = false }: Props) {
           >
             Live demo ↗
           </a>
-        ) : (
-          <Link href="/contact" className="text-muted transition-colors hover:text-accent">
-            Ask about this build →
-          </Link>
-        )}
+        ) : null}
       </div>
     </article>
   );

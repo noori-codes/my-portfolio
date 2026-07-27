@@ -20,6 +20,7 @@ export default function AboutPage() {
           <h1 className="mt-3 max-w-2xl text-4xl font-bold tracking-tight sm:text-5xl">
             Developer. Instructor. Builder.
           </h1>
+          <p className="mt-2 font-mono text-sm text-accent">{site.role}</p>
           <p className="mt-4 max-w-2xl text-lg text-muted">{site.summary}</p>
         </div>
       </section>
