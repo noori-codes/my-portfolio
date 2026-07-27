@@ -1,12 +1,16 @@
 {
-  "name": "portfolio",
-  "version": "0.1.0",
+  "name": "imx-portfolio",
+  "version": "2.0.0",
   "private": true,
+  "description": "IMX — Imran Noori portfolio (Next.js)",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
+  },
+  "engines": {
+    "node": ">=18"
   },
   "dependencies": {
     "next": "16.2.12",
