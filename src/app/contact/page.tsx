@@ -8,24 +8,50 @@ export const metadata: Metadata = {
 };
 
 const links = [
-  { label: "Email", href: `mailto:${site.contact.email}`, value: site.contact.email },
-  { label: "GitHub", href: site.contact.github, value: "github.com/noori-codes", external: true },
-  { label: "YouTube", href: site.contact.youtube, value: "@techwithimx", external: true },
-  { label: "Location", href: null, value: site.location },
+  {
+    label: "Email",
+    href: `mailto:${site.contact.email}`,
+    value: site.contact.email,
+    hint: "Fastest reply",
+  },
+  {
+    label: "GitHub",
+    href: site.contact.github,
+    value: "github.com/noori-codes",
+    hint: "Code & repos",
+    external: true,
+  },
+  {
+    label: "YouTube",
+    href: site.contact.youtube,
+    value: "@techwithimx",
+    hint: "Teaching & tech",
+    external: true,
+  },
+  {
+    label: "Location",
+    href: null,
+    value: site.location,
+    hint: "Based in",
+  },
 ] as const;
 
 export default function ContactPage() {
   return (
-    <div className="pb-20">
-      <section className="border-b border-border py-16 sm:py-20">
+    <div className="pb-24">
+      <section className="border-b border-border py-20 sm:py-24">
         <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
-          <p className="font-mono text-xs tracking-[0.2em] text-accent uppercase">
-            Contact
-          </p>
-          <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
+          <div className="flex flex-wrap items-center gap-3">
+            <p className="section-label">Contact</p>
+            <span className="inline-flex items-center gap-2 border border-accent/25 bg-accent-glow px-2.5 py-1 font-mono text-[10px] tracking-wider text-accent uppercase">
+              <span className="size-1.5 rounded-full bg-accent" />
+              Available
+            </span>
+          </div>
+          <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
             Let&apos;s build something
           </h1>
-          <p className="mt-4 max-w-xl text-muted">
+          <p className="mt-5 max-w-xl text-muted">
             Projects, teaching, or collaboration—reach out anytime. Email is the
             fastest way to get a reply.
           </p>
@@ -33,45 +59,40 @@ export default function ContactPage() {
       </section>
 
       <section className="py-12 sm:py-16">
-        <div className="mx-auto grid w-full max-w-6xl gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:gap-16">
-          <div>
-            <h2 className="font-mono text-xs tracking-[0.2em] text-accent uppercase">
-              Direct links
-            </h2>
-            <ul className="mt-6 space-y-5">
-              {links.map((item) => (
-                <li key={item.label} className="border-b border-border pb-4">
-                  <p className="font-mono text-[10px] tracking-[0.18em] text-muted-dim uppercase">
-                    {item.label}
-                  </p>
-                  {item.href ? (
-                    <a
-                      href={item.href}
-                      {...("external" in item && item.external
-                        ? { target: "_blank", rel: "noopener noreferrer" }
-                        : {})}
-                      className="mt-1 inline-block text-lg text-foreground transition-colors hover:text-accent"
-                    >
-                      {item.value}
-                    </a>
-                  ) : (
-                    <p className="mt-1 text-lg">{item.value}</p>
-                  )}
-                </li>
-              ))}
-            </ul>
-            <p className="mt-6 font-mono text-xs text-muted-dim">
-              status: <span className="text-accent">{site.availability.toLowerCase()}</span>
-            </p>
+        <div className="mx-auto grid w-full max-w-6xl gap-5 px-5 sm:px-8 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="space-y-4">
+            {links.map((item) => (
+              <div
+                key={item.label}
+                className="border border-border bg-surface/40 p-5 transition-colors hover:border-accent/30"
+              >
+                <p className="font-mono text-[10px] tracking-[0.16em] text-muted-dim uppercase">
+                  {item.label}
+                  <span className="ml-2 text-muted-dim/70 normal-case tracking-normal">
+                    · {item.hint}
+                  </span>
+                </p>
+                {item.href ? (
+                  <a
+                    href={item.href}
+                    {...("external" in item && item.external
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
+                    className="mt-2 inline-block text-base break-all transition-colors hover:text-accent sm:text-lg"
+                  >
+                    {item.value}
+                  </a>
+                ) : (
+                  <p className="mt-2 text-base sm:text-lg">{item.value}</p>
+                )}
+              </div>
+            ))}
           </div>
 
-          <div className="border border-border bg-surface/50 p-6 sm:p-8">
-            <h2 className="font-mono text-xs tracking-[0.2em] text-accent uppercase">
-              Send a message
-            </h2>
-            <p className="mt-2 mb-6 text-sm text-muted">
-              Fills a mailto draft in your email client—no spam backend, just a
-              direct line.
+          <div className="border border-border bg-surface/40 p-6 sm:p-8">
+            <p className="section-label">Send a message</p>
+            <p className="mt-3 mb-7 text-sm text-muted">
+              Opens a mailto draft in your email client—direct, no spam backend.
             </p>
             <ContactForm />
           </div>

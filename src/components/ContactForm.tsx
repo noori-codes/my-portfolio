@@ -78,7 +78,7 @@ export function ContactForm() {
 
       <button
         type="submit"
-        className="mt-2 inline-flex w-fit bg-accent px-5 py-3 font-mono text-sm font-medium text-[#04140c] transition-colors hover:bg-accent-dim hover:text-foreground"
+        className="btn btn-primary mt-2 w-fit"
       >
         Send message
       </button>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { IBM_Plex_Mono, Syne } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { SiteBackground } from "@/components/SiteBackground";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -25,8 +26,12 @@ export const metadata: Metadata = {
   description: `${site.fullName} (${site.brand}) — ${site.headline}`,
   metadataBase: new URL(site.contact.portfolio),
   icons: {
-    icon: [{ url: "/images/logo-transparent.png", type: "image/png" }],
-    apple: [{ url: "/images/logo-transparent.png" }],
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/images/favicon.png", type: "image/png", sizes: "32x32" },
+      { url: "/images/favicon-512.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: [{ url: "/images/apple-touch-icon.png", sizes: "180x180" }],
   },
   openGraph: {
     title: `${site.brand} — ${site.fullName}`,
@@ -74,7 +79,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${syne.variable} ${plexMono.variable} h-full`}>
-      <body className="flex min-h-full flex-col bg-background font-sans text-foreground antialiased">
+      <body className="flex min-h-full flex-col font-sans text-foreground antialiased">
+        <SiteBackground />
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>

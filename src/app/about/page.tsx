@@ -131,7 +131,7 @@ export default function AboutPage() {
 
             <Link
               href="/contact"
-              className="inline-flex bg-accent px-5 py-3 font-mono text-sm font-medium text-[#04140c] transition-colors hover:bg-accent-dim hover:text-foreground"
+              className="btn btn-primary"
             >
               Work with me
             </Link>

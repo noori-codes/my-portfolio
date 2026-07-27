@@ -6,6 +6,11 @@ import { useEffect, useState } from "react";
 import { BrandLogo } from "@/components/BrandLogo";
 import { site } from "@/lib/site";
 
+function isActivePath(pathname: string, path: string) {
+  if (path === "/") return pathname === "/";
+  return pathname === path || pathname.startsWith(`${path}/`);
+}
+
 export function Header() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
@@ -48,17 +53,15 @@ export function Header() {
       <div className="mx-auto flex h-full w-full max-w-6xl items-center gap-4 px-5 sm:px-8">
         <BrandLogo size="sm" />
 
-        <nav className="ml-auto hidden items-center gap-8 md:flex" aria-label="Primary">
+        <nav className="ml-auto hidden items-center gap-7 md:flex" aria-label="Primary">
           {site.nav.map((item) => {
-            const active =
-              pathname === item.path || pathname.startsWith(`${item.path}/`);
+            const active = isActivePath(pathname, item.path);
             return (
               <Link
                 key={item.path}
                 href={item.path}
-                className={`font-mono text-sm transition-colors ${
-                  active ? "text-accent" : "text-muted hover:text-foreground"
-                }`}
+                className={`nav-link${active ? " is-active" : ""}`}
+                aria-current={active ? "page" : undefined}
               >
                 {item.name}
               </Link>
@@ -68,7 +71,7 @@ export function Header() {
             href={site.contact.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-mono text-sm text-muted transition-colors hover:text-accent"
+            className="nav-link nav-link--external"
           >
             GitHub ↗
           </a>
@@ -76,7 +79,7 @@ export function Header() {
 
         <button
           type="button"
-          className="ml-auto flex h-10 w-10 flex-col items-center justify-center gap-1.5 border border-border bg-surface md:hidden"
+          className="ml-auto flex h-10 w-10 flex-col items-center justify-center gap-1.5 border border-border bg-surface transition-colors hover:border-accent/50 md:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label="Toggle navigation"
@@ -95,23 +98,30 @@ export function Header() {
       {open && (
         <nav
           id="mobile-nav"
-          className="border-b border-border bg-surface px-5 py-4 md:hidden"
+          className="border-b border-border bg-surface px-5 py-3 md:hidden"
           aria-label="Mobile"
         >
-          <ul className="flex flex-col gap-3">
-            {site.nav.map((item) => (
-              <li key={item.path}>
-                <Link href={item.path} className="font-mono text-sm text-foreground">
-                  {item.name}
-                </Link>
-              </li>
-            ))}
+          <ul className="flex flex-col">
+            {site.nav.map((item) => {
+              const active = isActivePath(pathname, item.path);
+              return (
+                <li key={item.path}>
+                  <Link
+                    href={item.path}
+                    className={`nav-link nav-link--mobile${active ? " is-active" : ""}`}
+                    aria-current={active ? "page" : undefined}
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              );
+            })}
             <li>
               <a
                 href={site.contact.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-mono text-sm text-accent"
+                className="nav-link nav-link--mobile nav-link--external"
               >
                 GitHub ↗
               </a>

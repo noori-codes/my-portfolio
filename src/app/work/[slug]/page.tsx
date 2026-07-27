@@ -52,7 +52,7 @@ export default async function ProjectPage({ params }: Props) {
                 href={project.live}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex bg-accent px-5 py-3 font-mono text-sm font-medium text-[#04140c] transition-colors hover:bg-accent-dim hover:text-foreground"
+                className="btn btn-primary"
               >
                 Live demo ↗
               </a>
@@ -61,7 +61,7 @@ export default async function ProjectPage({ params }: Props) {
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex border border-border px-5 py-3 font-mono text-sm transition-colors hover:border-accent hover:text-accent"
+              className="btn btn-outline"
             >
               GitHub ↗
             </a>
@@ -72,14 +72,14 @@ export default async function ProjectPage({ params }: Props) {
       <section className="py-12 sm:py-16">
         <div className="mx-auto grid w-full max-w-6xl gap-12 px-5 sm:px-8 lg:grid-cols-[1.4fr_0.8fr]">
           <div>
-            <h2 className="font-mono text-xs tracking-[0.2em] text-accent uppercase">
+            <h2 className="section-label">
               Overview
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-muted">
               {project.description}
             </p>
 
-            <h2 className="mt-10 font-mono text-xs tracking-[0.2em] text-accent uppercase">
+            <h2 className="section-label mt-10">
               Highlights
             </h2>
             <ul className="mt-4 space-y-3">
@@ -93,7 +93,7 @@ export default async function ProjectPage({ params }: Props) {
           </div>
 
           <aside className="border border-border bg-surface/50 p-6 h-fit">
-            <h2 className="font-mono text-xs tracking-[0.2em] text-accent uppercase">
+            <h2 className="section-label">
               Stack
             </h2>
             <div className="mt-4 flex flex-wrap gap-2">

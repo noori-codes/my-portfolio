@@ -26,6 +26,7 @@ export const site = {
   summary:
     "Full-stack developer and computer instructor building modern, scalable web applications with JavaScript, Node.js, Express, MongoDB, React, and Next.js. I teach programming, Linux, and creative tools—and ship clean, user-friendly products.",
   nav: [
+    { name: "Home", path: "/" },
     { name: "Work", path: "/work" },
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
@@ -68,6 +69,26 @@ export const site = {
   ],
   projects: [
     {
+      slug: "natours",
+      name: "Natours",
+      tagline: "Full-stack tour booking platform",
+      description:
+        "Production-style tour booking app with authentication, role-based access, bookings, reviews, image uploads, admin tools, and a secure REST API—built with Node.js, Express, and MongoDB.",
+      stack: ["Node.js", "Express", "MongoDB", "Mongoose", "Pug", "JWT"],
+      highlights: [
+        "User auth & role-based authorization",
+        "Tour booking & reviews",
+        "Image upload & processing",
+        "Admin dashboard",
+        "Secure REST API",
+      ],
+      featured: true,
+      github: "https://github.com/noori-codes",
+      live: null,
+      year: "2025",
+      kind: "Full-stack app",
+    },
+    {
       slug: "the-wild-oasis",
       name: "The Wild Oasis",
       tagline: "Cabin booking & hotel operations app",
@@ -80,7 +101,7 @@ export const site = {
         "Data-driven UI with React Query",
         "Production deploy on Vercel",
       ],
-      featured: true,
+      featured: false,
       github: "https://github.com/noori-codes/the-wild-oasis",
       live: "https://the-wild-oasis-eight-sooty.vercel.app",
       year: "2025",

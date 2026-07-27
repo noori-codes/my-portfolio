@@ -1,73 +1,69 @@
+import { Reveal } from "@/components/Reveal";
 import { site } from "@/lib/site";
 
 const groups = [
-  { label: "frontend", items: site.skills.frontend },
-  { label: "backend", items: site.skills.backend },
-  { label: "data", items: site.skills.database },
-  { label: "tools", items: site.skills.tools },
+  { label: "Frontend", items: site.skills.frontend },
+  { label: "Backend", items: site.skills.backend },
+  { label: "Data", items: site.skills.database },
+  { label: "Tools", items: site.skills.tools },
 ] as const;
 
 export function StackStrip() {
   return (
-    <section className="relative border-t border-border py-20 sm:py-24">
-      <div className="absolute inset-0 grid-bg opacity-40" aria-hidden />
-      <div className="relative mx-auto w-full max-w-6xl px-5 sm:px-8">
-        <p className="font-mono text-xs tracking-[0.2em] text-accent uppercase">
-          Stack
-        </p>
-        <h2 className="mt-2 max-w-lg text-3xl font-semibold tracking-tight sm:text-4xl">
-          Tools I use to ship
-        </h2>
+    <section className="border-t border-border py-16 sm:py-20">
+      <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
+        <Reveal className="mb-6">
+          <p className="section-label">Stack</p>
+          <h2 className="section-title max-w-lg">Tools I use to ship</h2>
+          <p className="mt-2 max-w-lg text-sm text-muted">
+            A focused JavaScript stack for full-stack apps—clear layers,
+            practical tools.
+          </p>
+        </Reveal>
 
-        <div className="mt-10 overflow-hidden border border-border bg-surface">
-          <div className="flex items-center gap-2 border-b border-border px-4 py-2.5">
-            <span className="size-2.5 rounded-full bg-[#ff5f56]" />
-            <span className="size-2.5 rounded-full bg-[#ffbd2e]" />
-            <span className="size-2.5 rounded-full bg-[#27c93f]" />
-            <span className="ml-3 font-mono text-xs text-muted-dim">
-              stack.json — {site.brand}
-            </span>
-          </div>
-          <div className="space-y-5 p-5 font-mono text-sm sm:p-6">
-            {groups.map((group) => (
-              <div key={group.label}>
-                <p className="text-muted-dim">
-                  <span className="text-accent">&quot;{group.label}&quot;</span>
-                  <span className="text-muted">: [</span>
-                </p>
-                <p className="pl-4 text-foreground/90">
-                  {group.items.map((item, i) => (
-                    <span key={item}>
-                      <span className="text-muted">&quot;</span>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {groups.map((group, i) => (
+            <Reveal key={group.label} delay={i * 60}>
+              <div className="h-full border border-border bg-surface/40 p-4 transition-[border-color,background] duration-300 hover:border-accent/30 hover:bg-surface">
+                <div className="flex items-center justify-between gap-2">
+                  <h3 className="font-mono text-[11px] tracking-[0.14em] text-accent uppercase">
+                    {group.label}
+                  </h3>
+                  <span className="font-mono text-[10px] text-muted-dim">
+                    {group.items.length}
+                  </span>
+                </div>
+                <ul className="mt-3 space-y-1.5">
+                  {group.items.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-2 text-sm text-foreground/90"
+                    >
+                      <span className="mt-1.5 size-1 shrink-0 rounded-full bg-accent/70" />
                       {item}
-                      <span className="text-muted">&quot;</span>
-                      {i < group.items.length - 1 ? (
-                        <span className="text-muted">, </span>
-                      ) : null}
-                    </span>
+                    </li>
                   ))}
-                </p>
-                <p className="text-muted">],</p>
+                </ul>
               </div>
-            ))}
-          </div>
+            </Reveal>
+          ))}
         </div>
 
-        <div className="mt-8">
-          <p className="font-mono text-xs tracking-[0.2em] text-muted-dim uppercase">
+        <Reveal delay={80} className="mt-3 border border-border bg-surface/30 p-4">
+          <p className="font-mono text-[11px] tracking-[0.14em] text-muted-dim uppercase">
             Concepts
           </p>
-          <div className="mt-3 flex flex-wrap gap-2">
+          <div className="mt-3 flex flex-wrap gap-1.5">
             {site.concepts.map((concept) => (
               <span
                 key={concept}
-                className="border border-border bg-surface/60 px-2.5 py-1 font-mono text-[11px] text-muted"
+                className="border border-border bg-background/50 px-2 py-0.5 font-mono text-[11px] text-muted transition-colors hover:border-accent/40 hover:text-foreground"
               >
                 {concept}
               </span>
             ))}
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
