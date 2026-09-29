@@ -119,11 +119,25 @@ a {
 }
 
 .section-label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.7rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--accent);
+}
+
+.section-label::before {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  flex-shrink: 0;
+  border-top: 1px solid var(--accent);
+  border-left: 1px solid var(--accent);
+  opacity: 0.85;
 }
 
 .section-title {
@@ -353,6 +367,7 @@ a {
 
 .browser-frame {
   isolation: isolate;
+  position: relative;
   overflow: hidden;
   border: 1px solid var(--border);
   background: var(--surface-2);
@@ -363,6 +378,37 @@ a {
     border-color 0.35s ease,
     box-shadow 0.45s ease,
     transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.browser-frame::before,
+.browser-frame::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  border-style: solid;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.browser-frame::before {
+  top: 0.45rem;
+  left: 0.45rem;
+  border-width: 1px 0 0 1px;
+}
+
+.browser-frame::after {
+  right: 0.45rem;
+  bottom: 0.45rem;
+  border-width: 0 1px 1px 0;
+}
+
+.browser-frame:hover::before,
+.browser-frame:hover::after {
+  opacity: 1;
 }
 
 .browser-frame:hover {

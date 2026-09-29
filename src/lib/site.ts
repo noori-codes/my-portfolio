@@ -97,7 +97,7 @@ export const site = {
       ],
       featured: true,
       github: "https://github.com/noori-codes/linkhub",
-      live: "https://linkhub-inky.vercel.app",
+      live: "https://linkhub-imran.vercel.app",
       year: "2026",
       kind: "Full-stack product",
       image: "/images/linkhub.png",
