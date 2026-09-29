@@ -54,7 +54,7 @@ export function Header() {
       }`}
     >
       <div className="mx-auto flex h-full w-full max-w-6xl items-center gap-4 px-5 sm:px-8">
-        <BrandLogo size="sm" />
+        <BrandLogo size="md" priority />
 
         <nav
           className="ml-auto hidden items-center gap-7 md:flex"

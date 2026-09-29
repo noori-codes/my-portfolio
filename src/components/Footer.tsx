@@ -4,33 +4,29 @@ import { site } from "@/lib/site";
 
 export function Footer() {
   const year = new Date().getFullYear();
-  const mainNav = site.nav.filter((item) => item.path !== "/contact");
 
   return (
     <footer className="mt-auto border-t border-border">
-      <div className="mx-auto w-full max-w-6xl px-5 py-14 sm:px-8 sm:py-16">
-        <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
-          <div className="max-w-md">
+      <div className="mx-auto w-full max-w-6xl px-5 py-10 sm:px-8 sm:py-12">
+        <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
+          <div>
             <div className="flex items-center gap-3">
               <BrandLogo size="sm" />
-              <p className="font-mono text-[10px] tracking-[0.18em] text-accent uppercase">
+              <span className="font-mono text-[10px] tracking-[0.18em] text-muted-dim uppercase">
                 {site.brand}
-              </p>
+              </span>
             </div>
-            <p className="mt-4 text-sm leading-relaxed text-muted">
+            <p className="mt-4 max-w-xs text-sm text-muted">
               Full-stack apps, teaching, and products worth shipping.
-            </p>
-            <p className="mt-3 font-mono text-xs text-muted-dim">
-              © {year} {site.fullName}
             </p>
           </div>
 
-          <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:gap-14">
+          <div className="sm:text-right">
             <nav
-              className="flex flex-wrap gap-x-5 gap-y-2 font-mono text-sm"
+              className="flex flex-wrap gap-x-5 gap-y-2 font-mono text-sm sm:justify-end"
               aria-label="Footer"
             >
-              {mainNav.map((item) => (
+              {site.nav.map((item) => (
                 <Link key={item.path} href={item.path} className="footer-link">
                   {item.name}
                 </Link>
@@ -52,22 +48,18 @@ export function Footer() {
                 YouTube
               </a>
             </nav>
-
-            <div>
-              <Link href="/contact" className="btn btn-primary btn-sm">
-                Contact me
-              </Link>
-              <p className="mt-3 font-mono text-[11px] text-muted-dim">
-                <a
-                  href={`mailto:${site.contact.email}`}
-                  className="transition-colors hover:text-accent"
-                >
-                  {site.contact.email}
-                </a>
-              </p>
-            </div>
+            <a
+              href={`mailto:${site.contact.email}`}
+              className="mt-4 inline-block font-mono text-xs text-muted-dim transition-colors hover:text-accent"
+            >
+              {site.contact.email}
+            </a>
           </div>
         </div>
+
+        <p className="mt-8 border-t border-border pt-6 font-mono text-xs text-muted-dim">
+          © {year} {site.fullName}
+        </p>
       </div>
     </footer>
   );

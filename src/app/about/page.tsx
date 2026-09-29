@@ -192,8 +192,11 @@ export default function AboutPage() {
               <p className="max-w-md text-muted">
                 Want to work together on a product, API, or curriculum?
               </p>
-              <Link href="/contact" className="btn btn-primary mt-6">
-                Contact me
+              <Link
+                href="/contact"
+                className="mt-5 inline-block font-mono text-sm text-accent transition-opacity hover:opacity-80"
+              >
+                Contact me →
               </Link>
             </div>
           </div>

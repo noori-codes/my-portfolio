@@ -11,7 +11,7 @@
   --accent: #3dd68c;
   --accent-dim: #2a9e66;
   --accent-glow: rgba(61, 214, 140, 0.12);
-  --header-h: 4.25rem;
+  --header-h: 4.75rem;
 }
 
 @theme inline {

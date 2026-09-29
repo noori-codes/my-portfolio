@@ -46,8 +46,8 @@ export const site = {
       "React",
       "Next.js",
     ],
-    backend: ["Node.js", "Express.js", "REST APIs", "JWT Auth"],
-    database: ["MongoDB", "Mongoose"],
+    backend: ["Node.js", "Express.js", "NestJS", "REST APIs", "JWT Auth"],
+    database: ["MongoDB", "Mongoose", "Prisma"],
     tools: ["Git", "GitHub", "Linux (Ubuntu)", "VS Code", "npm"],
   },
   concepts: [

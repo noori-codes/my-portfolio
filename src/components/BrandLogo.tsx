@@ -10,8 +10,8 @@ type Props = {
 };
 
 const sizes = {
-  sm: "h-8 w-10",
-  md: "h-10 w-12",
+  sm: "h-9 w-11",
+  md: "h-11 w-14",
   lg: "h-14 w-[4.5rem]",
 } as const;
 
@@ -29,7 +29,7 @@ export function BrandLogo({
         src={site.logo}
         alt={linked ? "" : site.brand}
         fill
-        sizes={size === "lg" ? "72px" : "48px"}
+        sizes={size === "lg" ? "72px" : size === "md" ? "56px" : "44px"}
         priority={priority}
         className="object-contain object-center"
       />
