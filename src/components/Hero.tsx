@@ -18,7 +18,7 @@ export function Hero() {
           fill
           priority
           sizes="50vw"
-          className="object-cover object-[center_16%] saturate-[0.9] contrast-[1.04]"
+          className="object-cover object-[center_12%] saturate-[0.9] contrast-[1.04]"
         />
         <div className="absolute inset-0 bg-linear-to-r from-background via-background/55 to-transparent" />
         <div className="absolute inset-0 bg-linear-to-t from-background via-transparent to-background/25" />
@@ -32,7 +32,7 @@ export function Hero() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[center_18%] opacity-25 saturate-[0.75]"
+          className="object-cover object-[center_12%] opacity-25 saturate-[0.75]"
         />
         <div className="absolute inset-0 bg-linear-to-b from-background/75 via-background/88 to-background" />
       </div>

@@ -33,7 +33,7 @@ export default function AboutPage() {
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 420px"
-                className="object-cover object-[center_18%]"
+                className="object-cover object-[center_12%]"
               />
               <div
                 className="pointer-events-none absolute inset-0 bg-linear-to-t from-background/50 via-transparent to-transparent"
