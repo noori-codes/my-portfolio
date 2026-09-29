@@ -72,12 +72,15 @@ export function Hero() {
           ))}
         </ul>
 
-        <div className="animate-fade-up delay-4 mt-11 flex flex-wrap gap-3">
+        <div className="animate-fade-up delay-4 mt-11 flex flex-wrap items-center gap-x-6 gap-y-3">
           <Link href="/work" className="btn btn-primary">
             View work
           </Link>
-          <Link href="/contact" className="btn btn-outline">
-            Get in touch
+          <Link
+            href="/contact"
+            className="font-mono text-sm text-muted transition-colors hover:text-accent"
+          >
+            Contact me →
           </Link>
         </div>
       </div>

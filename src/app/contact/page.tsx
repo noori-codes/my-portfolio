@@ -7,32 +7,28 @@ export const metadata: Metadata = {
   description: `Contact ${site.fullName} — projects, teaching, and collaboration.`,
 };
 
-const links = [
+const sideLinks = [
   {
     label: "Email",
     href: `mailto:${site.contact.email}`,
     value: site.contact.email,
-    hint: "Fastest reply",
   },
   {
     label: "GitHub",
     href: site.contact.github,
-    value: "github.com/noori-codes",
-    hint: "Code & repos",
+    value: "noori-codes",
     external: true,
   },
   {
     label: "YouTube",
     href: site.contact.youtube,
     value: "@techwithimx",
-    hint: "Teaching & tech",
     external: true,
   },
   {
     label: "Location",
     href: null,
     value: site.location,
-    hint: "Based in",
   },
 ] as const;
 
@@ -52,47 +48,49 @@ export default function ContactPage() {
             Let&apos;s build something
           </h1>
           <p className="section-lede mt-6">
-            Projects, teaching, or collaboration—reach out anytime. Email is the
-            fastest way to get a reply.
+            Send a message below. I usually reply within a day or two.
           </p>
         </div>
       </section>
 
       <section className="py-16 sm:py-20">
-        <div className="mx-auto grid w-full max-w-6xl gap-14 px-5 sm:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
-          <div className="divide-y divide-border border-y border-border">
-            {links.map((item) => (
-              <div key={item.label} className="py-5">
-                <p className="font-mono text-[10px] tracking-[0.16em] text-muted-dim uppercase">
-                  {item.label}
-                  <span className="ml-2 text-muted-dim/70 normal-case tracking-normal">
-                    · {item.hint}
-                  </span>
-                </p>
-                {item.href ? (
-                  <a
-                    href={item.href}
-                    {...("external" in item && item.external
-                      ? { target: "_blank", rel: "noopener noreferrer" }
-                      : {})}
-                    className="mt-2 inline-block text-base break-all transition-colors hover:text-accent sm:text-lg"
-                  >
-                    {item.value}
-                  </a>
-                ) : (
-                  <p className="mt-2 text-base sm:text-lg">{item.value}</p>
-                )}
-              </div>
-            ))}
-          </div>
-
+        <div className="mx-auto grid w-full max-w-6xl gap-16 px-5 sm:px-8 lg:grid-cols-[1.2fr_0.8fr] lg:gap-20">
           <div>
-            <p className="section-label">Send a message</p>
+            <p className="section-label">Message</p>
             <p className="mt-3 mb-8 max-w-md text-sm text-muted">
-              Drop a note below and I&apos;ll reply by email.
+              Name, email, and what you need help with.
             </p>
             <ContactForm />
           </div>
+
+          <aside className="border-t border-border pt-8 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-10">
+            <p className="section-label">Other ways</p>
+            <p className="mt-3 mb-8 text-sm text-muted">
+              Prefer a direct link? Use these.
+            </p>
+            <div className="divide-y divide-border border-y border-border">
+              {sideLinks.map((item) => (
+                <div key={item.label} className="py-4">
+                  <p className="font-mono text-[10px] tracking-[0.16em] text-muted-dim uppercase">
+                    {item.label}
+                  </p>
+                  {item.href ? (
+                    <a
+                      href={item.href}
+                      {...("external" in item && item.external
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
+                      className="mt-1.5 inline-block text-sm break-all transition-colors hover:text-accent sm:text-base"
+                    >
+                      {item.value}
+                    </a>
+                  ) : (
+                    <p className="mt-1.5 text-sm sm:text-base">{item.value}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </aside>
         </div>
       </section>
     </div>

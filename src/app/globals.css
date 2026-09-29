@@ -217,6 +217,11 @@ a {
   transform: none;
 }
 
+.btn-sm {
+  padding: 0.55rem 0.95rem;
+  font-size: 0.8rem;
+}
+
 .nav-link {
   position: relative;
   display: inline-flex;

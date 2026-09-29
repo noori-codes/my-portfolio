@@ -8,7 +8,7 @@ export function ContactCta() {
       <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
         <Reveal>
           <div className="flex flex-wrap items-center gap-3">
-            <p className="section-label">Contact</p>
+            <p className="section-label">Next step</p>
             <span className="inline-flex items-center gap-2 font-mono text-[10px] tracking-wider text-accent uppercase">
               <span className="size-1.5 animate-pulse rounded-full bg-accent" />
               Available for work
@@ -16,68 +16,25 @@ export function ContactCta() {
           </div>
 
           <h2 className="section-title mt-5 max-w-2xl">
-            Have a project, a class, or a collaboration in mind?
+            Have a project in mind?
           </h2>
           <p className="section-lede">
-            I build full-stack apps and teach practical computing. Email is the
-            fastest path—or jump straight to GitHub.
+            Tell me what you&apos;re building—I&apos;ll reply by email.
           </p>
 
-          <div className="mt-10 flex flex-wrap gap-3">
+          <div className="mt-10">
             <Link href="/contact" className="btn btn-primary">
-              Start a conversation
+              Contact me
             </Link>
-            <a href={`mailto:${site.contact.email}`} className="btn btn-outline">
-              Email me
-            </a>
-            <a
-              href={site.contact.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-ghost"
-            >
-              GitHub ↗
-            </a>
-          </div>
-
-          <div className="mt-14 grid gap-8 border-t border-border pt-10 sm:grid-cols-3 sm:gap-10">
-            <a
-              href={`mailto:${site.contact.email}`}
-              className="group block transition-transform hover:translate-x-0.5"
-            >
-              <p className="font-mono text-[10px] tracking-[0.16em] text-muted-dim uppercase">
-                Email
-              </p>
-              <p className="mt-2 text-sm break-all text-foreground/90 transition-colors group-hover:text-accent">
+            <p className="mt-5 font-mono text-sm text-muted-dim">
+              Or write directly:{" "}
+              <a
+                href={`mailto:${site.contact.email}`}
+                className="text-muted transition-colors hover:text-accent"
+              >
                 {site.contact.email}
-              </p>
-            </a>
-            <a
-              href={site.contact.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block transition-transform hover:translate-x-0.5"
-            >
-              <p className="font-mono text-[10px] tracking-[0.16em] text-muted-dim uppercase">
-                GitHub
-              </p>
-              <p className="mt-2 text-sm text-foreground/90 transition-colors group-hover:text-accent">
-                noori-codes
-              </p>
-            </a>
-            <a
-              href={site.contact.youtube}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block transition-transform hover:translate-x-0.5"
-            >
-              <p className="font-mono text-[10px] tracking-[0.16em] text-muted-dim uppercase">
-                YouTube
-              </p>
-              <p className="mt-2 text-sm text-foreground/90 transition-colors group-hover:text-accent">
-                @techwithimx
-              </p>
-            </a>
+              </a>
+            </p>
           </div>
         </Reveal>
       </div>

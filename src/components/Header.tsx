@@ -11,10 +11,13 @@ function isActivePath(pathname: string, path: string) {
   return pathname === path || pathname.startsWith(`${path}/`);
 }
 
+const mainNav = site.nav.filter((item) => item.path !== "/contact");
+
 export function Header() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const onContact = pathname === "/contact";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -53,8 +56,11 @@ export function Header() {
       <div className="mx-auto flex h-full w-full max-w-6xl items-center gap-4 px-5 sm:px-8">
         <BrandLogo size="sm" />
 
-        <nav className="ml-auto hidden items-center gap-7 md:flex" aria-label="Primary">
-          {site.nav.map((item) => {
+        <nav
+          className="ml-auto hidden items-center gap-7 md:flex"
+          aria-label="Primary"
+        >
+          {mainNav.map((item) => {
             const active = isActivePath(pathname, item.path);
             return (
               <Link
@@ -75,6 +81,13 @@ export function Header() {
           >
             GitHub ↗
           </a>
+          {!onContact ? (
+            <Link href="/contact" className="btn btn-primary btn-sm">
+              Contact
+            </Link>
+          ) : (
+            <span className="font-mono text-sm text-accent">Contact</span>
+          )}
         </nav>
 
         <button
@@ -88,7 +101,9 @@ export function Header() {
           <span
             className={`block h-px w-4 bg-foreground transition-transform ${open ? "translate-y-[4px] rotate-45" : ""}`}
           />
-          <span className={`block h-px w-4 bg-foreground ${open ? "opacity-0" : ""}`} />
+          <span
+            className={`block h-px w-4 bg-foreground ${open ? "opacity-0" : ""}`}
+          />
           <span
             className={`block h-px w-4 bg-foreground transition-transform ${open ? "-translate-y-[4px] -rotate-45" : ""}`}
           />
@@ -98,11 +113,11 @@ export function Header() {
       {open && (
         <nav
           id="mobile-nav"
-          className="border-b border-border bg-surface px-5 py-3 md:hidden"
+          className="border-b border-border bg-surface px-5 py-4 md:hidden"
           aria-label="Mobile"
         >
           <ul className="flex flex-col">
-            {site.nav.map((item) => {
+            {mainNav.map((item) => {
               const active = isActivePath(pathname, item.path);
               return (
                 <li key={item.path}>
@@ -127,6 +142,11 @@ export function Header() {
               </a>
             </li>
           </ul>
+          {!onContact ? (
+            <Link href="/contact" className="btn btn-primary mt-4 w-full">
+              Contact me
+            </Link>
+          ) : null}
         </nav>
       )}
     </header>
