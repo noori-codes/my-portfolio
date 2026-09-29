@@ -55,7 +55,9 @@ export default async function ProjectPage({ params }: Props) {
           </Link>
 
           <div className="mt-8 flex flex-wrap items-center gap-3 font-mono text-[10px] tracking-[0.18em] text-muted-dim uppercase">
-            {project.featured ? <span className="text-accent">Featured</span> : null}
+            {project.featured ? (
+              <span className="text-accent">Featured</span>
+            ) : null}
             <span>{project.kind}</span>
             <span>{project.year}</span>
           </div>
@@ -122,6 +124,27 @@ export default async function ProjectPage({ params }: Props) {
               </div>
             ))}
 
+            {project.caseStudy?.decisions?.length ? (
+              <div className="border-t border-border pt-8">
+                <div className="flex items-baseline gap-3">
+                  <span className="font-mono text-sm text-accent">
+                    {String(story.length + 1).padStart(2, "0")}
+                  </span>
+                  <h2 className="font-mono text-[0.7rem] tracking-[0.2em] text-accent uppercase">
+                    Key decisions
+                  </h2>
+                </div>
+                <ul className="mt-6 space-y-4">
+                  {project.caseStudy.decisions.map((item) => (
+                    <li key={item} className="flex gap-3 text-muted">
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+
             <div className="border-t border-border pt-8">
               <h2 className="section-label">Highlights</h2>
               <ul className="mt-6 space-y-4">
@@ -144,6 +167,17 @@ export default async function ProjectPage({ params }: Props) {
                 </li>
               ))}
             </ul>
+
+            {project.caseStudy?.stackWhy ? (
+              <p className="mt-8 text-sm leading-relaxed text-muted">
+                {project.caseStudy.stackWhy}
+              </p>
+            ) : (
+              <p className="mt-8 font-mono text-xs leading-relaxed text-muted-dim">
+                Built as part of my path into professional full-stack
+                development.
+              </p>
+            )}
 
             <div className="mt-10 space-y-3 border-t border-border pt-8 font-mono text-sm">
               {project.live ? (

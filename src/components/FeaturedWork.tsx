@@ -4,9 +4,16 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { Reveal } from "@/components/Reveal";
 import { site } from "@/lib/site";
 
+/** Strong secondaries only — keeps flagships in focus */
+const HOME_SECONDARY = new Set([
+  "the-wild-oasis",
+  "natours",
+  "laslesvpn",
+]);
+
 export function FeaturedWork() {
   const featured = site.projects.filter((p) => p.featured);
-  const others = site.projects.filter((p) => !p.featured);
+  const others = site.projects.filter((p) => HOME_SECONDARY.has(p.slug));
 
   return (
     <section id="work" className="border-b border-border py-20 sm:py-24">
@@ -43,7 +50,7 @@ export function FeaturedWork() {
         {others.length > 0 ? (
           <div className="mt-16 border-t border-border pt-10 sm:mt-20">
             <Reveal className="mb-2 flex flex-wrap items-end justify-between gap-3">
-              <p className="section-label">More projects</p>
+              <p className="section-label">Also shipping</p>
               <Link
                 href="/work"
                 className="font-mono text-xs text-muted transition-colors hover:text-accent"

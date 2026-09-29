@@ -15,8 +15,8 @@ export function HomeIntro() {
       <div className="mx-auto grid w-full max-w-6xl gap-12 px-5 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
         <Reveal>
           <p className="section-label">About</p>
-          <h2 className="section-title mt-4 max-w-md">
-            Developer, instructor, and product builder.
+          <h2 className="section-title mt-4 max-w-lg">
+            Products first. Teaching always.
           </h2>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
             {site.summary}

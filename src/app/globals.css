@@ -523,6 +523,29 @@ a {
   width: 1.75rem;
 }
 
+.scroll-progress {
+  position: fixed;
+  top: var(--header-h);
+  left: 0;
+  z-index: 40;
+  height: 2px;
+  width: 100%;
+  transform-origin: left center;
+  background: var(--accent);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.magnetic-media {
+  transform-style: preserve-3d;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.magnetic-media .browser-frame:hover {
+  transform: none;
+}
+
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -551,6 +574,10 @@ a {
 
   .browser-frame:hover {
     transform: none;
+  }
+
+  .magnetic-media {
+    transform: none !important;
   }
 
   .reveal {

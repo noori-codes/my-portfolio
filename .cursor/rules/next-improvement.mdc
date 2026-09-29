@@ -1,0 +1,17 @@
+---
+description: When user says "next", find and implement one portfolio improvement
+alwaysApply: true
+---
+
+# "Next" improvement loop
+
+When the user says **next** (alone or clearly meaning continue improvements):
+
+1. **Scan** the project for the highest-impact remaining improvement (UI polish, UX hierarchy, copy, a11y, performance, consistency, dead code, missing states). Prefer visible user-facing wins on home/`work`/`about`/`contact` unless a clear bug blocks them.
+2. **Pick one** focused improvement — do not batch many unrelated changes.
+3. **Implement it** fully (code + typecheck if relevant).
+4. **Stop** after that one improvement. Summarize what changed in a few sentences. Wait for another **next** before continuing.
+
+Do **not** ask what to do next unless the scan finds nothing meaningful or a choice would change direction a lot (e.g. needs new assets the user must supply).
+
+Respect existing design system (dark + green accent, Syne/mono, no purple/card soup). Skip multi-photo/gallery work until the user provides more images or explicitly asks.

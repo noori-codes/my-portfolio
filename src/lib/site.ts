@@ -15,13 +15,15 @@ export type Project = {
     problem: string;
     approach: string;
     outcome: string;
+    decisions?: string[];
+    stackWhy?: string;
   };
 };
 
 export const site = {
   brand: "IMX",
   fullName: "Imran Noori",
-  headline: "I build full-stack web apps and teach people to do the same.",
+  headline: "I ship full-stack products—and teach people to build them.",
   role: "Full-Stack Web Developer",
   location: "Afghanistan",
   availability: "Open to projects & collaboration",
@@ -30,7 +32,7 @@ export const site = {
   logoMark: "/images/logo-transparent.png",
   ogImage: "/images/og-card.jpg",
   summary:
-    "Full-stack developer and computer instructor building modern, scalable web applications with JavaScript, Node.js, Express, MongoDB, React, and Next.js. I teach programming, Linux, and creative tools—and ship clean, user-friendly products.",
+    "I build and ship full-stack products like LinkHub and IMX OS—auth, APIs, polished UIs, and real deploy pipelines. Alongside that I teach practical computing so students can move from tutorials to working software.",
   nav: [
     { name: "Home", path: "/" },
     { name: "Work", path: "/work" },
@@ -108,6 +110,13 @@ export const site = {
           "Shipped a monorepo product: Express + MongoDB API with JWT auth, and a Next.js dashboard with live mobile preview, themes, shop collections, and click tracking.",
         outcome:
           "A publishable public profile at /u/[username] with onboarding, email verify, analytics, and a dashboard that feels like a real SaaS—not a demo.",
+        decisions: [
+          "Split API and web into a monorepo so auth, uploads, and public pages stay independently deployable",
+          "Live phone preview in the dashboard so creators see the public page before they publish",
+          "Track views, clicks, and shares as first-class analytics—not an afterthought",
+        ],
+        stackWhy:
+          "Express + MongoDB for a flexible content model; Next.js + React Query for a snappy authenticated dashboard and SSR-friendly public profiles.",
       },
     },
     {
@@ -144,6 +153,13 @@ export const site = {
           "Designed a personal OS UI around daily pulse: focus sessions, habits, goals, notes (TipTap), and analytics on Next.js with Supabase auth and Zustand state.",
         outcome:
           "A cohesive dark workspace with streaks, review, and an “Ask IMX” entry point—built as a product I’d actually use every day.",
+        decisions: [
+          "Organize navigation as Operate / Build / Reflect so the mental model matches the day",
+          "Put focus time and habit pulse on the home dashboard—not buried in settings",
+          "Use TipTap for notes so writing feels native, not bolted on",
+        ],
+        stackWhy:
+          "Next.js for app structure, Supabase for auth and data, Zustand for local UI state, Recharts for lightweight analytics.",
       },
     },
     {
@@ -165,6 +181,20 @@ export const site = {
       live: null,
       year: "2025",
       kind: "Full-stack app",
+      caseStudy: {
+        problem:
+          "I needed a production-shaped backend project—auth, roles, bookings, and media—not another CRUD tutorial.",
+        approach:
+          "Built a tour platform with JWT auth, role-based access, reviews, image processing, and an admin surface on Node, Express, and MongoDB.",
+        outcome:
+          "A full MVC-style app that taught me how secure REST APIs and real user flows hang together.",
+        decisions: [
+          "Role-based access early so admin and user paths stay separate",
+          "Image processing in the upload path instead of ignoring media complexity",
+        ],
+        stackWhy:
+          "Classic Node/Express/Mongo stack to learn server fundamentals before frameworks abstract them away.",
+      },
     },
     {
       slug: "the-wild-oasis",
@@ -184,6 +214,20 @@ export const site = {
       live: "https://the-wild-oasis-imx.vercel.app",
       year: "2025",
       kind: "Full-stack app",
+      caseStudy: {
+        problem:
+          "Static pages weren’t enough—I wanted authenticated product flows with real data and booking logic.",
+        approach:
+          "Built a cabin operations app with Supabase auth/data and React Query–driven UI for bookings and cabin management.",
+        outcome:
+          "A deployable product experience that feels closer to hospitality software than a demo landing page.",
+        decisions: [
+          "Supabase for auth + data so the app could ship without a custom API first",
+          "React Query for server state so the UI stays in sync with bookings",
+        ],
+        stackWhy:
+          "React + Supabase + React Query is a fast path to authenticated, data-heavy UIs.",
+      },
     },
     {
       slug: "omnifood",

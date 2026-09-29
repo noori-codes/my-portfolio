@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { IBM_Plex_Mono, Syne } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { ScrollProgress } from "@/components/ScrollProgress";
 import { SiteBackground } from "@/components/SiteBackground";
 import { site } from "@/lib/site";
 import "./globals.css";
@@ -85,6 +86,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <Header />
+        <ScrollProgress />
         <main id="main-content" className="flex-1 pt-[var(--header-h)]">
           {children}
         </main>

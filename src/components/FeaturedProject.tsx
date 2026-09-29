@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BrowserFrame } from "@/components/BrowserFrame";
+import { MagneticMedia } from "@/components/MagneticMedia";
 import type { Project } from "@/lib/site";
 
 type Props = {
@@ -18,18 +19,20 @@ export function FeaturedProject({ project, index, reverse = false }: Props) {
         className={`lg:col-span-7 ${reverse ? "lg:order-2" : "lg:order-1"}`}
       >
         {project.image ? (
-          <Link href={`/work/${project.slug}`} className="project-media block">
-            <BrowserFrame
-              src={project.image}
-              alt={`${project.name} screenshot`}
-              url={project.live}
-              sizes="(max-width: 1024px) 100vw, 55vw"
-            >
-              <span className="absolute top-3 left-3 z-10 border border-border/80 bg-background/80 px-2.5 py-1 font-mono text-[10px] tracking-[0.18em] text-accent uppercase backdrop-blur-sm">
-                Featured
-              </span>
-            </BrowserFrame>
-          </Link>
+          <MagneticMedia>
+            <Link href={`/work/${project.slug}`} className="project-media block">
+              <BrowserFrame
+                src={project.image}
+                alt={`${project.name} screenshot`}
+                url={project.live}
+                sizes="(max-width: 1024px) 100vw, 55vw"
+              >
+                <span className="absolute top-3 left-3 z-10 border border-border/80 bg-background/80 px-2.5 py-1 font-mono text-[10px] tracking-[0.18em] text-accent uppercase backdrop-blur-sm">
+                  Featured
+                </span>
+              </BrowserFrame>
+            </Link>
+          </MagneticMedia>
         ) : (
           <Link
             href={`/work/${project.slug}`}
