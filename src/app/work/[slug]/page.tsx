@@ -23,10 +23,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-function nextProject(slug: string): Project | undefined {
+function adjacentProjects(slug: string): {
+  prev: Project | undefined;
+  next: Project | undefined;
+} {
   const index = site.projects.findIndex((p) => p.slug === slug);
-  if (index < 0) return undefined;
-  return site.projects[(index + 1) % site.projects.length];
+  if (index < 0) return { prev: undefined, next: undefined };
+  const len = site.projects.length;
+  return {
+    prev: site.projects[(index - 1 + len) % len],
+    next: site.projects[(index + 1) % len],
+  };
 }
 
 export default async function ProjectPage({ params }: Props) {
@@ -34,7 +41,7 @@ export default async function ProjectPage({ params }: Props) {
   const project = getProject(slug);
   if (!project) notFound();
 
-  const next = nextProject(slug);
+  const { prev, next } = adjacentProjects(slug);
   const story = project.caseStudy
     ? [
         { label: "Problem", body: project.caseStudy.problem },
@@ -203,8 +210,8 @@ export default async function ProjectPage({ params }: Props) {
         </div>
       </section>
 
-      <section className="border-t border-border py-12 sm:py-14">
-        <div className="mx-auto flex w-full max-w-6xl flex-wrap items-end justify-between gap-6 px-5 sm:px-8">
+      <section className="border-t border-border py-10 sm:py-12">
+        <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
           <p className="font-mono text-sm text-muted">
             Want something like this built?{" "}
             <Link href="/contact" className="text-accent hover:underline">
@@ -212,21 +219,58 @@ export default async function ProjectPage({ params }: Props) {
             </Link>
             .
           </p>
-          {next ? (
-            <Link
-              href={`/work/${next.slug}`}
-              className="group text-right transition-colors"
-            >
-              <p className="font-mono text-[10px] tracking-[0.16em] text-muted-dim uppercase">
-                Next project
-              </p>
-              <p className="mt-1 text-lg font-semibold tracking-tight group-hover:text-accent">
-                {next.name} →
-              </p>
-            </Link>
-          ) : null}
         </div>
       </section>
+
+      {(prev || next) && (
+        <nav
+          className="border-t border-border"
+          aria-label="Adjacent projects"
+        >
+          <div className="mx-auto grid w-full max-w-6xl sm:grid-cols-2">
+            {prev ? (
+              <Link
+                href={`/work/${prev.slug}`}
+                className="group border-b border-border px-5 py-10 transition-colors hover:bg-surface/50 sm:border-r sm:border-b-0 sm:px-8 sm:py-12"
+              >
+                <p className="font-mono text-[10px] tracking-[0.16em] text-muted-dim uppercase">
+                  ← Previous
+                </p>
+                <p className="mt-3 text-xl font-semibold tracking-tight transition-colors group-hover:text-accent sm:text-2xl">
+                  {prev.name}
+                </p>
+                <p className="mt-2 font-mono text-[11px] text-muted-dim">
+                  {prev.kind}
+                  <span className="text-border"> · </span>
+                  {prev.year}
+                </p>
+              </Link>
+            ) : (
+              <div className="hidden sm:block" />
+            )}
+            {next ? (
+              <Link
+                href={`/work/${next.slug}`}
+                className={`group px-5 py-10 text-right transition-colors hover:bg-surface/50 sm:px-8 sm:py-12 ${
+                  prev ? "" : "sm:col-start-2"
+                }`}
+              >
+                <p className="font-mono text-[10px] tracking-[0.16em] text-muted-dim uppercase">
+                  Next →
+                </p>
+                <p className="mt-3 text-xl font-semibold tracking-tight transition-colors group-hover:text-accent sm:text-2xl">
+                  {next.name}
+                </p>
+                <p className="mt-2 font-mono text-[11px] text-muted-dim">
+                  {next.kind}
+                  <span className="text-border"> · </span>
+                  {next.year}
+                </p>
+              </Link>
+            ) : null}
+          </div>
+        </nav>
+      )}
     </div>
   );
 }

@@ -10,14 +10,9 @@ export function Footer() {
       <div className="mx-auto w-full max-w-6xl px-5 py-10 sm:px-8 sm:py-12">
         <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <div className="flex items-center gap-3">
-              <BrandLogo size="sm" />
-              <span className="font-mono text-[10px] tracking-[0.18em] text-muted-dim uppercase">
-                {site.brand}
-              </span>
-            </div>
-            <p className="mt-4 max-w-xs text-sm text-muted">
-              Full-stack apps, teaching, and products worth shipping.
+            <BrandLogo size="sm" wordmark />
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">
+              {site.headline}
             </p>
           </div>
 
@@ -57,9 +52,14 @@ export function Footer() {
           </div>
         </div>
 
-        <p className="mt-8 border-t border-border pt-6 font-mono text-xs text-muted-dim">
-          © {year} {site.fullName}
-        </p>
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-6">
+          <p className="font-mono text-xs text-muted-dim">
+            © {year} {site.fullName}
+          </p>
+          <p className="font-mono text-xs text-muted-dim">
+            Built with Next.js
+          </p>
+        </div>
       </div>
     </footer>
   );

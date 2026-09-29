@@ -1,5 +1,7 @@
+"use client";
+
 import Image from "next/image";
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 
 type Props = {
   src: string;
@@ -31,6 +33,8 @@ export function BrowserFrame({
   aspectClassName = "aspect-4/3 sm:aspect-16/10",
   children,
 }: Props) {
+  const [loaded, setLoaded] = useState(false);
+
   return (
     <div className={`browser-frame group/frame ${className}`}>
       <div className="browser-frame__chrome" aria-hidden>
@@ -46,15 +50,24 @@ export function BrowserFrame({
       </div>
 
       <div
-        className={`browser-frame__viewport relative overflow-hidden ${aspectClassName}`}
+        className={`browser-frame__viewport relative overflow-hidden bg-surface ${aspectClassName}`}
       >
+        <div
+          className={`browser-frame__shimmer pointer-events-none absolute inset-0 transition-opacity duration-500 ${
+            loaded ? "opacity-0" : "opacity-100"
+          }`}
+          aria-hidden
+        />
         <Image
           src={src}
           alt={alt}
           fill
           priority={priority}
           sizes={sizes}
-          className="object-cover object-top transition-transform duration-700 ease-out group-hover/frame:scale-[1.035]"
+          onLoad={() => setLoaded(true)}
+          className={`object-cover object-top transition-[transform,opacity] duration-700 ease-out group-hover/frame:scale-[1.035] ${
+            loaded ? "opacity-100" : "opacity-0"
+          }`}
         />
         <div
           className="pointer-events-none absolute inset-0 bg-linear-to-t from-background/40 via-transparent to-transparent"

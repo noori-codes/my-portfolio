@@ -504,7 +504,27 @@ a {
 }
 
 .browser-frame__viewport {
-  background: var(--background);
+  background: var(--surface);
+}
+
+.browser-frame__shimmer {
+  background: linear-gradient(
+    110deg,
+    var(--surface) 0%,
+    var(--surface-2) 40%,
+    var(--surface) 80%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
 }
 
 .project-media {
@@ -570,6 +590,10 @@ a {
   }
 
   .cursor-blink::after {
+    animation: none;
+  }
+
+  .browser-frame__shimmer {
     animation: none;
   }
 
