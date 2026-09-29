@@ -18,10 +18,10 @@ export default function WorkPage() {
       <section className="border-b border-border py-20 sm:py-24">
         <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
           <p className="section-label">Work</p>
-          <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
+          <h1 className="mt-3 text-4xl font-bold tracking-[-0.04em] sm:text-5xl lg:text-6xl">
             Selected projects
           </h1>
-          <p className="mt-5 max-w-xl text-muted">
+          <p className="section-lede mt-6">
             Full-stack products and frontends with public demos—built end to
             end.
           </p>

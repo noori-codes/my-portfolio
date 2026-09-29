@@ -17,11 +17,13 @@ export default function AboutPage() {
           <p className="font-mono text-xs tracking-[0.2em] text-accent uppercase">
             About
           </p>
-          <h1 className="mt-3 max-w-2xl text-4xl font-bold tracking-tight sm:text-5xl">
+          <h1 className="mt-3 max-w-2xl text-4xl font-bold tracking-[-0.04em] sm:text-5xl lg:text-6xl">
             Developer. Instructor. Builder.
           </h1>
-          <p className="mt-2 font-mono text-sm text-accent">{site.role}</p>
-          <p className="mt-4 max-w-2xl text-lg text-muted">{site.summary}</p>
+          <p className="mt-3 font-mono text-sm text-accent">{site.role}</p>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+            {site.summary}
+          </p>
         </div>
       </section>
 
@@ -105,11 +107,18 @@ export default function AboutPage() {
               <h2 className="font-mono text-xs tracking-[0.2em] text-accent uppercase">
                 How I can help
               </h2>
-              <div className="mt-4 grid gap-4 sm:grid-cols-3">
-                {site.services.map((service) => (
-                  <div key={service.title} className="border border-border p-4">
-                    <h3 className="font-semibold">{service.title}</h3>
-                    <p className="mt-2 text-sm text-muted">{service.description}</p>
+              <div className="mt-6 grid gap-8 sm:grid-cols-3 sm:gap-10">
+                {site.services.map((service, i) => (
+                  <div key={service.title} className="border-t border-border pt-5">
+                    <p className="font-mono text-[11px] text-muted-dim">
+                      {String(i + 1).padStart(2, "0")}
+                    </p>
+                    <h3 className="mt-2 font-semibold tracking-tight">
+                      {service.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted">
+                      {service.description}
+                    </p>
                   </div>
                 ))}
               </div>

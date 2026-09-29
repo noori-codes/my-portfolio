@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { BrowserFrame } from "@/components/BrowserFrame";
 import type { Project } from "@/lib/site";
 
 type Props = {
@@ -17,34 +17,27 @@ export function FeaturedProject({ project, index, reverse = false }: Props) {
       <div
         className={`lg:col-span-7 ${reverse ? "lg:order-2" : "lg:order-1"}`}
       >
-        <Link
-          href={`/work/${project.slug}`}
-          className="project-media relative block overflow-hidden border border-border bg-surface-2"
-        >
-          {project.image ? (
-            <div className="relative aspect-4/3 sm:aspect-16/10">
-              <Image
-                src={project.image}
-                alt={`${project.name} screenshot`}
-                fill
-                sizes="(max-width: 1024px) 100vw, 55vw"
-                className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-              />
-              <div
-                className="pointer-events-none absolute inset-0 bg-linear-to-t from-background/50 via-transparent to-transparent opacity-80"
-                aria-hidden
-              />
-            </div>
-          ) : (
-            <div className="flex aspect-16/10 items-center justify-center bg-surface font-mono text-sm text-muted-dim">
-              {project.name}
-            </div>
-          )}
-
-          <span className="absolute top-4 left-4 z-10 border border-border/80 bg-background/80 px-2.5 py-1 font-mono text-[10px] tracking-[0.18em] text-accent uppercase backdrop-blur-sm">
-            Featured
-          </span>
-        </Link>
+        {project.image ? (
+          <Link href={`/work/${project.slug}`} className="project-media block">
+            <BrowserFrame
+              src={project.image}
+              alt={`${project.name} screenshot`}
+              url={project.live}
+              sizes="(max-width: 1024px) 100vw, 55vw"
+            >
+              <span className="absolute top-3 left-3 z-10 border border-border/80 bg-background/80 px-2.5 py-1 font-mono text-[10px] tracking-[0.18em] text-accent uppercase backdrop-blur-sm">
+                Featured
+              </span>
+            </BrowserFrame>
+          </Link>
+        ) : (
+          <Link
+            href={`/work/${project.slug}`}
+            className="project-media flex aspect-16/10 items-center justify-center border border-border bg-surface font-mono text-sm text-muted-dim"
+          >
+            {project.name}
+          </Link>
+        )}
       </div>
 
       <div

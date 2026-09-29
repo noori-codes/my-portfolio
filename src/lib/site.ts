@@ -11,6 +11,11 @@ export type Project = {
   year: string;
   kind: string;
   image?: string;
+  caseStudy?: {
+    problem: string;
+    approach: string;
+    outcome: string;
+  };
 };
 
 export const site = {
@@ -96,6 +101,14 @@ export const site = {
       year: "2026",
       kind: "Full-stack product",
       image: "/images/linkhub.png",
+      caseStudy: {
+        problem:
+          "Creators need one place for links, branding, and light commerce—without duct-taping a bio page, a shop, and analytics together.",
+        approach:
+          "Shipped a monorepo product: Express + MongoDB API with JWT auth, and a Next.js dashboard with live mobile preview, themes, shop collections, and click tracking.",
+        outcome:
+          "A publishable public profile at /u/[username] with onboarding, email verify, analytics, and a dashboard that feels like a real SaaS—not a demo.",
+      },
     },
     {
       slug: "imx-os",
@@ -124,6 +137,14 @@ export const site = {
       year: "2026",
       kind: "Full-stack product",
       image: "/images/imx-os.png",
+      caseStudy: {
+        problem:
+          "Productivity tools scatter attention across apps. I wanted one calm space for operate → build → reflect—without noise.",
+        approach:
+          "Designed a personal OS UI around daily pulse: focus sessions, habits, goals, notes (TipTap), and analytics on Next.js with Supabase auth and Zustand state.",
+        outcome:
+          "A cohesive dark workspace with streaks, review, and an “Ask IMX” entry point—built as a product I’d actually use every day.",
+      },
     },
     {
       slug: "natours",

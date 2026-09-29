@@ -10,36 +10,32 @@ const groups = [
 
 export function StackStrip() {
   return (
-    <section className="border-t border-border py-16 sm:py-20">
+    <section className="border-t border-border py-24 sm:py-28">
       <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
-        <Reveal className="mb-6">
+        <Reveal className="mb-12 sm:mb-14">
           <p className="section-label">Stack</p>
           <h2 className="section-title max-w-lg">Tools I use to ship</h2>
-          <p className="mt-2 max-w-lg text-sm text-muted">
+          <p className="section-lede">
             A focused JavaScript stack for full-stack apps—clear layers,
             practical tools.
           </p>
         </Reveal>
 
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           {groups.map((group, i) => (
             <Reveal key={group.label} delay={i * 60}>
-              <div className="h-full border border-border bg-surface/40 p-4 transition-[border-color,background] duration-300 hover:border-accent/30 hover:bg-surface">
-                <div className="flex items-center justify-between gap-2">
+              <div className="border-t border-border pt-5">
+                <div className="flex items-baseline justify-between gap-2">
                   <h3 className="font-mono text-[11px] tracking-[0.14em] text-accent uppercase">
                     {group.label}
                   </h3>
                   <span className="font-mono text-[10px] text-muted-dim">
-                    {group.items.length}
+                    {String(group.items.length).padStart(2, "0")}
                   </span>
                 </div>
-                <ul className="mt-3 space-y-1.5">
+                <ul className="mt-4 space-y-2.5">
                   {group.items.map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-start gap-2 text-sm text-foreground/90"
-                    >
-                      <span className="mt-1.5 size-1 shrink-0 rounded-full bg-accent/70" />
+                    <li key={item} className="text-sm text-foreground/88">
                       {item}
                     </li>
                   ))}
@@ -49,15 +45,15 @@ export function StackStrip() {
           ))}
         </div>
 
-        <Reveal delay={80} className="mt-3 border border-border bg-surface/30 p-4">
+        <Reveal delay={80} className="mt-14 border-t border-border pt-8">
           <p className="font-mono text-[11px] tracking-[0.14em] text-muted-dim uppercase">
             Concepts
           </p>
-          <div className="mt-3 flex flex-wrap gap-1.5">
+          <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
             {site.concepts.map((concept) => (
               <span
                 key={concept}
-                className="border border-border bg-background/50 px-2 py-0.5 font-mono text-[11px] text-muted transition-colors hover:border-accent/40 hover:text-foreground"
+                className="font-mono text-[12px] text-muted transition-colors hover:text-accent"
               >
                 {concept}
               </span>

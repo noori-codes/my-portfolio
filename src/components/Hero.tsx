@@ -3,21 +3,26 @@ import Link from "next/link";
 import { BrandLogo } from "@/components/BrandLogo";
 import { site } from "@/lib/site";
 
+const proof = ["LinkHub", "IMX OS", "Teaching"] as const;
+
 export function Hero() {
   return (
     <section className="relative min-h-[calc(100svh-var(--header-h))] overflow-hidden">
-      <div className="absolute inset-0 bg-transparent" aria-hidden />
-      <div className="hero-photo absolute inset-y-0 right-0 hidden w-[46%] lg:block" aria-hidden>
+      <div
+        className="hero-photo absolute inset-y-0 right-0 hidden w-[48%] lg:block xl:w-[50%]"
+        aria-hidden
+      >
         <Image
           src={site.profileImage}
           alt=""
           fill
           priority
-          sizes="46vw"
-          className="object-cover object-[center_18%] opacity-80 saturate-[0.85] contrast-[1.05]"
+          sizes="50vw"
+          className="object-cover object-[center_16%] saturate-[0.9] contrast-[1.04]"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-background/20" />
+        <div className="absolute inset-0 bg-linear-to-r from-background via-background/55 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-background via-transparent to-background/25" />
+        <div className="absolute inset-y-0 left-0 w-px bg-linear-to-b from-transparent via-accent/25 to-transparent" />
       </div>
 
       <div className="absolute inset-0 lg:hidden" aria-hidden>
@@ -27,9 +32,9 @@ export function Hero() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[center_18%] opacity-30 saturate-[0.7]"
+          className="object-cover object-[center_18%] opacity-25 saturate-[0.75]"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/85 to-background" />
+        <div className="absolute inset-0 bg-linear-to-b from-background/75 via-background/88 to-background" />
       </div>
 
       <div className="relative mx-auto flex min-h-[calc(100svh-var(--header-h))] w-full max-w-6xl flex-col justify-center px-5 py-20 sm:px-8 lg:py-24">
@@ -38,44 +43,43 @@ export function Hero() {
           <p className="section-label">{site.availability}</p>
         </div>
 
-        <h1 className="animate-fade-up delay-1 mt-6 font-sans text-[clamp(3.25rem,11vw,6rem)] leading-[0.92] font-bold tracking-[-0.04em] text-foreground">
+        <h1 className="animate-fade-up delay-1 mt-7 font-sans text-[clamp(3.75rem,12vw,7rem)] leading-[0.9] font-bold tracking-[-0.05em] text-foreground">
           {site.brand}
         </h1>
 
-        <p className="animate-fade-up delay-2 mt-5 font-mono text-sm text-muted sm:text-base">
-          {site.fullName}
-          <span className="text-muted-dim"> · </span>
-          {site.role}
-          <span className="text-muted-dim"> · </span>
-          {site.location}
-        </p>
-
-        <p className="animate-fade-up delay-3 mt-7 max-w-md text-lg leading-relaxed text-foreground/85 sm:text-xl">
+        <p className="animate-fade-up delay-2 mt-6 max-w-lg text-xl leading-snug text-foreground/90 sm:text-2xl">
           {site.headline}
         </p>
 
-        <div className="animate-fade-up delay-4 mt-10 flex flex-wrap gap-3">
+        <p className="animate-fade-up delay-3 mt-5 font-mono text-sm text-muted">
+          {site.fullName}
+          <span className="text-muted-dim"> · </span>
+          {site.role}
+        </p>
+
+        <ul className="animate-fade-up delay-3 mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-[11px] tracking-[0.12em] text-muted-dim uppercase">
+          {proof.map((item, i) => (
+            <li key={item} className="flex items-center gap-3">
+              {i > 0 ? (
+                <span className="text-border" aria-hidden>
+                  /
+                </span>
+              ) : null}
+              <span className="text-muted transition-colors hover:text-accent">
+                {item}
+              </span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="animate-fade-up delay-4 mt-11 flex flex-wrap gap-3">
           <Link href="/work" className="btn btn-primary">
             View work
           </Link>
           <Link href="/contact" className="btn btn-outline">
             Get in touch
           </Link>
-          <a
-            href={site.contact.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-ghost"
-          >
-            GitHub ↗
-          </a>
         </div>
-
-        <p className="animate-fade-up delay-5 mt-14 font-mono text-xs text-muted-dim sm:text-sm">
-          <span className="text-accent">imx@portfolio</span>
-          <span className="text-muted-dim">:~$ </span>
-          <span className="cursor-blink text-muted">whoami</span>
-        </p>
       </div>
     </section>
   );
