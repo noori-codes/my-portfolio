@@ -284,6 +284,8 @@ export const site = {
       kind: "JavaScript game",
     },
   ] satisfies Project[],
+  /** Strong secondaries shown on home + Work “Also shipping” */
+  secondarySlugs: ["the-wild-oasis", "natours", "laslesvpn"] as const,
   education: {
     level: "High School",
     grade: "Grade 11",

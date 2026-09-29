@@ -4,16 +4,11 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { Reveal } from "@/components/Reveal";
 import { site } from "@/lib/site";
 
-/** Strong secondaries only — keeps flagships in focus */
-const HOME_SECONDARY = new Set([
-  "the-wild-oasis",
-  "natours",
-  "laslesvpn",
-]);
+const secondarySet = new Set<string>(site.secondarySlugs);
 
 export function FeaturedWork() {
   const featured = site.projects.filter((p) => p.featured);
-  const others = site.projects.filter((p) => HOME_SECONDARY.has(p.slug));
+  const others = site.projects.filter((p) => secondarySet.has(p.slug));
 
   return (
     <section id="work" className="border-b border-border py-20 sm:py-24">
