@@ -6,15 +6,19 @@ import { site } from "@/lib/site";
 
 export function FeaturedWork() {
   const featured = site.projects.filter((p) => p.featured);
-  const others = site.projects.filter((p) => !p.featured).slice(0, 4);
+  const others = site.projects.filter((p) => !p.featured);
 
   return (
-    <section className="border-t border-border py-24 sm:py-32">
+    <section id="work" className="border-b border-border py-20 sm:py-24">
       <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
-        <Reveal className="mb-14 flex flex-wrap items-end justify-between gap-4 sm:mb-20">
+        <Reveal className="mb-12 flex flex-wrap items-end justify-between gap-4 sm:mb-16">
           <div>
             <p className="section-label">Selected work</p>
-            <h2 className="section-title">Projects that prove the stack</h2>
+            <h2 className="section-title">Flagship projects</h2>
+            <p className="section-lede">
+              Two products built end to end—product thinking, full-stack
+              execution, and polish.
+            </p>
           </div>
           <Link
             href="/work"
@@ -24,9 +28,9 @@ export function FeaturedWork() {
           </Link>
         </Reveal>
 
-        <div className="space-y-20 sm:space-y-28">
+        <div className="space-y-16 sm:space-y-20">
           {featured.map((project, i) => (
-            <Reveal key={project.slug} delay={i * 60}>
+            <Reveal key={project.slug} delay={i * 50}>
               <FeaturedProject
                 project={project}
                 index={i}
@@ -37,13 +41,19 @@ export function FeaturedWork() {
         </div>
 
         {others.length > 0 ? (
-          <div className="mt-20 border-t border-border pt-12 sm:mt-28">
-            <Reveal className="mb-2">
+          <div className="mt-16 border-t border-border pt-10 sm:mt-20">
+            <Reveal className="mb-2 flex flex-wrap items-end justify-between gap-3">
               <p className="section-label">More projects</p>
+              <Link
+                href="/work"
+                className="font-mono text-xs text-muted transition-colors hover:text-accent"
+              >
+                Full archive →
+              </Link>
             </Reveal>
-            <div>
+            <div className="border-t border-border">
               {others.map((project, i) => (
-                <Reveal key={project.slug} delay={i * 50}>
+                <Reveal key={project.slug} delay={i * 40}>
                   <ProjectCard project={project} index={i} />
                 </Reveal>
               ))}

@@ -1,15 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
-import { BrandLogo } from "@/components/BrandLogo";
 import { site } from "@/lib/site";
 
-const proof = ["LinkHub", "IMX OS", "Teaching"] as const;
+const proof = [
+  { label: "LinkHub", href: "/work/linkhub" },
+  { label: "IMX OS", href: "/work/imx-os" },
+  { label: "Teaching", href: "/about" },
+  { label: "Available", href: "/contact" },
+] as const;
 
 export function Hero() {
   return (
-    <section className="relative min-h-[calc(100svh-var(--header-h))] overflow-hidden">
+    <section className="relative min-h-[calc(100svh-var(--header-h))] overflow-hidden border-b border-border">
       <div
-        className="hero-photo absolute inset-y-0 right-0 hidden w-[48%] lg:block xl:w-[50%]"
+        className="hero-photo absolute inset-y-0 right-0 hidden w-[50%] lg:block xl:w-[52%]"
         aria-hidden
       >
         <Image
@@ -17,12 +21,12 @@ export function Hero() {
           alt=""
           fill
           priority
-          sizes="50vw"
-          className="object-cover object-[center_12%] saturate-[0.9] contrast-[1.04]"
+          sizes="52vw"
+          className="object-cover object-[center_10%] saturate-[0.92] contrast-[1.04]"
         />
-        <div className="absolute inset-0 bg-linear-to-r from-background via-background/55 to-transparent" />
-        <div className="absolute inset-0 bg-linear-to-t from-background via-transparent to-background/25" />
-        <div className="absolute inset-y-0 left-0 w-px bg-linear-to-b from-transparent via-accent/25 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-r from-background via-background/50 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-background/70 via-transparent to-background/20" />
+        <div className="absolute inset-y-0 left-0 w-px bg-linear-to-b from-transparent via-accent/30 to-transparent" />
       </div>
 
       <div className="absolute inset-0 lg:hidden" aria-hidden>
@@ -32,18 +36,15 @@ export function Hero() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[center_12%] opacity-25 saturate-[0.75]"
+          className="object-cover object-[center_10%] opacity-30 saturate-[0.8]"
         />
-        <div className="absolute inset-0 bg-linear-to-b from-background/75 via-background/88 to-background" />
+        <div className="absolute inset-0 bg-linear-to-b from-background/70 via-background/88 to-background" />
       </div>
 
       <div className="relative mx-auto flex min-h-[calc(100svh-var(--header-h))] w-full max-w-6xl flex-col justify-center px-5 py-20 sm:px-8 lg:py-24">
-        <div className="animate-fade-up flex max-w-xl items-center gap-3">
-          <BrandLogo size="sm" linked={false} priority />
-          <p className="section-label">{site.availability}</p>
-        </div>
+        <p className="section-label animate-fade-up">{site.availability}</p>
 
-        <h1 className="animate-fade-up delay-1 mt-7 font-sans text-[clamp(3.75rem,12vw,7rem)] leading-[0.9] font-bold tracking-[-0.05em] text-foreground">
+        <h1 className="animate-fade-up delay-1 mt-6 font-sans text-[clamp(4rem,13vw,7.5rem)] leading-[0.88] font-bold tracking-[-0.055em] text-foreground">
           {site.brand}
         </h1>
 
@@ -55,24 +56,29 @@ export function Hero() {
           {site.fullName}
           <span className="text-muted-dim"> · </span>
           {site.role}
+          <span className="text-muted-dim"> · </span>
+          {site.location}
         </p>
 
-        <ul className="animate-fade-up delay-3 mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-[11px] tracking-[0.12em] text-muted-dim uppercase">
+        <ul className="animate-fade-up delay-3 mt-7 flex flex-wrap items-center gap-x-1 gap-y-2 font-mono text-[11px] tracking-[0.12em] text-muted-dim uppercase">
           {proof.map((item, i) => (
-            <li key={item} className="flex items-center gap-3">
+            <li key={item.label} className="flex items-center">
               {i > 0 ? (
-                <span className="text-border" aria-hidden>
+                <span className="mx-2.5 text-border sm:mx-3" aria-hidden>
                   /
                 </span>
               ) : null}
-              <span className="text-muted transition-colors hover:text-accent">
-                {item}
-              </span>
+              <Link
+                href={item.href}
+                className="text-muted transition-colors hover:text-accent"
+              >
+                {item.label}
+              </Link>
             </li>
           ))}
         </ul>
 
-        <div className="animate-fade-up delay-4 mt-11 flex flex-wrap items-center gap-x-6 gap-y-3">
+        <div className="animate-fade-up delay-4 mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
           <Link href="/work" className="btn btn-primary">
             View work
           </Link>
@@ -83,6 +89,14 @@ export function Hero() {
             Contact me →
           </Link>
         </div>
+
+        <a
+          href="#intro"
+          className="hero-scroll animate-fade-up delay-5 mt-16 inline-flex w-fit items-center gap-2 font-mono text-[10px] tracking-[0.2em] text-muted-dim uppercase transition-colors hover:text-accent lg:mt-20"
+        >
+          <span className="hero-scroll__line" aria-hidden />
+          Scroll
+        </a>
       </div>
     </section>
   );

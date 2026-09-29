@@ -8,11 +8,11 @@ const groups = [
   { label: "Tools", items: site.skills.tools },
 ] as const;
 
-export function StackStrip() {
+export function HomeStack() {
   return (
-    <section className="border-t border-border py-24 sm:py-28">
+    <section className="border-b border-border py-16 sm:py-20">
       <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
-        <Reveal className="mb-12 sm:mb-14">
+        <Reveal className="mb-10 sm:mb-12">
           <p className="section-label">Stack</p>
           <h2 className="section-title max-w-lg">Tools I use to ship</h2>
           <p className="section-lede">
@@ -21,9 +21,9 @@ export function StackStrip() {
           </p>
         </Reveal>
 
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           {groups.map((group, i) => (
-            <Reveal key={group.label} delay={i * 60}>
+            <Reveal key={group.label} delay={i * 50}>
               <div className="border-t border-border pt-5">
                 <div className="flex items-baseline justify-between gap-2">
                   <h3 className="font-mono text-[11px] tracking-[0.14em] text-accent uppercase">
@@ -33,7 +33,7 @@ export function StackStrip() {
                     {String(group.items.length).padStart(2, "0")}
                   </span>
                 </div>
-                <ul className="mt-4 space-y-2.5">
+                <ul className="mt-4 space-y-2">
                   {group.items.map((item) => (
                     <li key={item} className="text-sm text-foreground/88">
                       {item}
@@ -45,11 +45,11 @@ export function StackStrip() {
           ))}
         </div>
 
-        <Reveal delay={80} className="mt-14 border-t border-border pt-8">
+        <Reveal delay={80} className="mt-12 border-t border-border pt-7">
           <p className="font-mono text-[11px] tracking-[0.14em] text-muted-dim uppercase">
             Concepts
           </p>
-          <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+          <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
             {site.concepts.map((concept) => (
               <span
                 key={concept}
