@@ -5,9 +5,19 @@ import { site } from "@/lib/site";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
+const fieldClass =
+  "border border-border bg-surface/40 px-4 py-3.5 text-foreground outline-none transition-[border-color,background,box-shadow] duration-200 placeholder:text-muted-dim/80 hover:border-border hover:bg-surface/70 focus-visible:border-accent focus-visible:bg-background focus-visible:ring-2 focus-visible:ring-accent/35 disabled:opacity-60";
+
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
+
+  function clearFeedback() {
+    if (status === "sent" || status === "error") {
+      setStatus("idle");
+      setError(null);
+    }
+  }
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -44,7 +54,7 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="grid gap-4">
+    <form onSubmit={onSubmit} className="grid gap-5" noValidate={false}>
       {status === "sent" && (
         <p
           role="status"
@@ -67,8 +77,8 @@ export function ContactForm() {
         </p>
       )}
 
-      <label className="grid gap-1.5">
-        <span className="font-mono text-xs tracking-wider text-muted uppercase">
+      <label className="grid gap-2">
+        <span className="font-mono text-[11px] tracking-[0.14em] text-muted uppercase">
           Name
         </span>
         <input
@@ -76,13 +86,14 @@ export function ContactForm() {
           required
           autoComplete="name"
           disabled={status === "sending"}
-          className="border border-border bg-background px-4 py-3 text-foreground outline-none transition-colors focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/40 disabled:opacity-60"
+          onChange={clearFeedback}
+          className={fieldClass}
           placeholder="Your name"
         />
       </label>
 
-      <label className="grid gap-1.5">
-        <span className="font-mono text-xs tracking-wider text-muted uppercase">
+      <label className="grid gap-2">
+        <span className="font-mono text-[11px] tracking-[0.14em] text-muted uppercase">
           Email
         </span>
         <input
@@ -91,32 +102,39 @@ export function ContactForm() {
           required
           autoComplete="email"
           disabled={status === "sending"}
-          className="border border-border bg-background px-4 py-3 text-foreground outline-none transition-colors focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/40 disabled:opacity-60"
+          onChange={clearFeedback}
+          className={fieldClass}
           placeholder="you@email.com"
         />
       </label>
 
-      <label className="grid gap-1.5">
-        <span className="font-mono text-xs tracking-wider text-muted uppercase">
+      <label className="grid gap-2">
+        <span className="font-mono text-[11px] tracking-[0.14em] text-muted uppercase">
           Message
         </span>
         <textarea
           name="message"
           required
-          rows={5}
+          rows={6}
           disabled={status === "sending"}
-          className="resize-y border border-border bg-background px-4 py-3 text-foreground outline-none transition-colors focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/40 disabled:opacity-60"
-          placeholder="Tell me about your project…"
+          onChange={clearFeedback}
+          className={`resize-y ${fieldClass}`}
+          placeholder="What are you building? Timeline, goals, anything useful…"
         />
       </label>
 
-      <button
-        type="submit"
-        disabled={status === "sending"}
-        className="btn btn-primary mt-2 w-fit disabled:opacity-60"
-      >
-        {status === "sending" ? "Sending…" : "Send message"}
-      </button>
+      <div className="mt-1 flex flex-wrap items-center gap-x-5 gap-y-3">
+        <button
+          type="submit"
+          disabled={status === "sending"}
+          className="btn btn-primary disabled:opacity-60"
+        >
+          {status === "sending" ? "Sending…" : "Send message"}
+        </button>
+        <p className="font-mono text-[11px] text-muted-dim">
+          Usually replies within 1–2 days
+        </p>
+      </div>
     </form>
   );
 }

@@ -26,7 +26,7 @@ export function Hero() {
         />
         <div className="absolute inset-0 bg-linear-to-r from-background via-background/55 to-transparent" />
         <div className="absolute inset-0 bg-linear-to-t from-background/75 via-transparent to-background/25" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_40%,rgba(61,214,140,0.08),transparent_55%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_40%,rgba(var(--accent-rgb),0.08),transparent_55%)]" />
         <div className="absolute inset-y-0 left-0 w-px bg-linear-to-b from-transparent via-accent/35 to-transparent" />
       </div>
 
