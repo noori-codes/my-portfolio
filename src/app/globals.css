@@ -481,6 +481,23 @@ a {
   text-overflow: ellipsis;
 }
 
+button.browser-frame__url {
+  margin: 0;
+  cursor: pointer;
+  text-align: left;
+  appearance: none;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+.browser-frame__url--live:hover {
+  border-color: rgba(var(--accent-rgb), 0.45);
+  color: var(--accent);
+  background: rgba(var(--accent-rgb), 0.06);
+}
+
 .browser-frame__lock {
   width: 0.55rem;
   height: 0.55rem;

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/ContactForm";
+import { CopyEmail } from "@/components/CopyEmail";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -8,11 +9,6 @@ export const metadata: Metadata = {
 };
 
 const sideLinks = [
-  {
-    label: "Email",
-    href: `mailto:${site.contact.email}`,
-    value: site.contact.email,
-  },
   {
     label: "GitHub",
     href: site.contact.github,
@@ -27,7 +23,7 @@ const sideLinks = [
   },
   {
     label: "Location",
-    href: null,
+    href: null as string | null,
     value: site.location,
   },
 ] as const;
@@ -69,6 +65,12 @@ export default function ContactPage() {
               Prefer a direct link? Use these.
             </p>
             <div className="divide-y divide-border border-y border-border">
+              <div className="py-4">
+                <p className="font-mono text-[10px] tracking-[0.16em] text-muted-dim uppercase">
+                  Email
+                </p>
+                <CopyEmail className="mt-1.5" />
+              </div>
               {sideLinks.map((item) => (
                 <div key={item.label} className="py-4">
                   <p className="font-mono text-[10px] tracking-[0.16em] text-muted-dim uppercase">

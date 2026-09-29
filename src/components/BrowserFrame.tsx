@@ -35,18 +35,37 @@ export function BrowserFrame({
 }: Props) {
   const [loaded, setLoaded] = useState(false);
 
+  const host = displayUrl(url);
+  const hasLive = Boolean(url);
+
   return (
     <div className={`browser-frame group/frame ${className}`}>
-      <div className="browser-frame__chrome" aria-hidden>
-        <div className="browser-frame__dots">
+      <div className="browser-frame__chrome">
+        <div className="browser-frame__dots" aria-hidden>
           <span />
           <span />
           <span />
         </div>
-        <div className="browser-frame__url">
-          <span className="browser-frame__lock" />
-          {displayUrl(url)}
-        </div>
+        {hasLive && url ? (
+          <button
+            type="button"
+            className="browser-frame__url browser-frame__url--live"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              window.open(url, "_blank", "noopener,noreferrer");
+            }}
+            aria-label={`Open live demo ${host}`}
+          >
+            <span className="browser-frame__lock" aria-hidden />
+            {host}
+          </button>
+        ) : (
+          <div className="browser-frame__url" aria-hidden>
+            <span className="browser-frame__lock" />
+            {host}
+          </div>
+        )}
       </div>
 
       <div

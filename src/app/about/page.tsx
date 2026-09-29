@@ -192,12 +192,17 @@ export default function AboutPage() {
               <p className="max-w-md text-muted">
                 Want to work together on a product, API, or curriculum?
               </p>
-              <Link
-                href="/contact"
-                className="mt-5 inline-block font-mono text-sm text-accent transition-opacity hover:opacity-80"
-              >
-                Contact me →
-              </Link>
+              <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+                <Link href="/contact" className="btn btn-primary">
+                  Contact me
+                </Link>
+                <a
+                  href={`mailto:${site.contact.email}`}
+                  className="font-mono text-sm text-muted transition-colors hover:text-accent"
+                >
+                  {site.contact.email}
+                </a>
+              </div>
             </div>
           </div>
         </div>
