@@ -92,7 +92,7 @@ export default function ContactPage() {
           <div className="border border-border bg-surface/40 p-6 sm:p-8">
             <p className="section-label">Send a message</p>
             <p className="mt-3 mb-7 text-sm text-muted">
-              Opens a mailto draft in your email client—direct, no spam backend.
+              Drop a note below and I&apos;ll reply by email.
             </p>
             <ContactForm />
           </div>

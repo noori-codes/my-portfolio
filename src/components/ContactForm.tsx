@@ -3,22 +3,44 @@
 import { FormEvent, useState } from "react";
 import { site } from "@/lib/site";
 
+type Status = "idle" | "sending" | "sent" | "error";
+
 export function ContactForm() {
-  const [status, setStatus] = useState<"idle" | "sent">("idle");
+  const [status, setStatus] = useState<Status>("idle");
+  const [error, setError] = useState<string | null>(null);
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    const name = String(data.get("name") || "");
-    const email = String(data.get("email") || "");
-    const message = String(data.get("message") || "");
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const name = String(data.get("name") || "").trim();
+    const email = String(data.get("email") || "").trim();
+    const message = String(data.get("message") || "").trim();
 
-    const subject = encodeURIComponent(`Portfolio message from ${name}`);
-    const body = encodeURIComponent(
-      `${message}\n\n— ${name}\n${email}`,
-    );
-    window.location.href = `mailto:${site.contact.email}?subject=${subject}&body=${body}`;
-    setStatus("sent");
+    setStatus("sending");
+    setError(null);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      const payload = (await res.json().catch(() => null)) as {
+        error?: string;
+      } | null;
+
+      if (!res.ok) {
+        throw new Error(payload?.error || "Something went wrong.");
+      }
+
+      form.reset();
+      setStatus("sent");
+    } catch (err) {
+      setStatus("error");
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    }
   }
 
   return (
@@ -28,7 +50,16 @@ export function ContactForm() {
           role="status"
           className="border border-accent/30 bg-accent-glow px-4 py-3 font-mono text-sm text-accent"
         >
-          Opening your email client… If nothing opens, write me at{" "}
+          Message sent — I&apos;ll get back to you soon.
+        </p>
+      )}
+
+      {status === "error" && error && (
+        <p
+          role="alert"
+          className="border border-red-500/30 bg-red-500/10 px-4 py-3 font-mono text-sm text-red-300"
+        >
+          {error} You can also write me at{" "}
           <a href={`mailto:${site.contact.email}`} className="underline">
             {site.contact.email}
           </a>
@@ -44,7 +75,8 @@ export function ContactForm() {
           name="name"
           required
           autoComplete="name"
-          className="border border-border bg-background px-4 py-3 text-foreground outline-none transition-colors focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/40"
+          disabled={status === "sending"}
+          className="border border-border bg-background px-4 py-3 text-foreground outline-none transition-colors focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/40 disabled:opacity-60"
           placeholder="Your name"
         />
       </label>
@@ -58,7 +90,8 @@ export function ContactForm() {
           name="email"
           required
           autoComplete="email"
-          className="border border-border bg-background px-4 py-3 text-foreground outline-none transition-colors focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/40"
+          disabled={status === "sending"}
+          className="border border-border bg-background px-4 py-3 text-foreground outline-none transition-colors focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/40 disabled:opacity-60"
           placeholder="you@email.com"
         />
       </label>
@@ -71,16 +104,18 @@ export function ContactForm() {
           name="message"
           required
           rows={5}
-          className="resize-y border border-border bg-background px-4 py-3 text-foreground outline-none transition-colors focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/40"
+          disabled={status === "sending"}
+          className="resize-y border border-border bg-background px-4 py-3 text-foreground outline-none transition-colors focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/40 disabled:opacity-60"
           placeholder="Tell me about your project…"
         />
       </label>
 
       <button
         type="submit"
-        className="btn btn-primary mt-2 w-fit"
+        disabled={status === "sending"}
+        className="btn btn-primary mt-2 w-fit disabled:opacity-60"
       >
-        Send message
+        {status === "sending" ? "Sending…" : "Send message"}
       </button>
     </form>
   );
