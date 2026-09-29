@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { FeaturedProject } from "@/components/FeaturedProject";
 import { ProjectCard } from "@/components/ProjectCard";
 import { site } from "@/lib/site";
 
@@ -21,24 +22,37 @@ export default function WorkPage() {
             Selected projects
           </h1>
           <p className="mt-5 max-w-xl text-muted">
-            Full-stack apps and frontends with public demos—Node, Express,
-            MongoDB, React, and more.
+            Full-stack products and frontends with public demos—built end to
+            end.
           </p>
         </div>
       </section>
 
-      <section className="py-12 sm:py-16">
-        <div className="mx-auto w-full max-w-6xl space-y-5 px-5 sm:px-8">
-          {featured.map((project) => (
-            <ProjectCard key={project.slug} project={project} featured />
+      <section className="py-16 sm:py-20">
+        <div className="mx-auto w-full max-w-6xl space-y-20 px-5 sm:space-y-28 sm:px-8">
+          {featured.map((project, i) => (
+            <FeaturedProject
+              key={project.slug}
+              project={project}
+              index={i}
+              reverse={i % 2 === 1}
+            />
           ))}
-          <div className="grid gap-5 sm:grid-cols-2">
-            {rest.map((project) => (
-              <ProjectCard key={project.slug} project={project} />
-            ))}
-          </div>
         </div>
       </section>
+
+      {rest.length > 0 ? (
+        <section className="border-t border-border py-14 sm:py-16">
+          <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
+            <p className="section-label mb-6">Archive</p>
+            <div className="border-t border-border">
+              {rest.map((project, i) => (
+                <ProjectCard key={project.slug} project={project} index={i} />
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <section className="border-t border-border py-12">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">

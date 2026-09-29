@@ -10,6 +10,7 @@ export type Project = {
   live: string | null;
   year: string;
   kind: string;
+  image?: string;
 };
 
 export const site = {
@@ -69,6 +70,62 @@ export const site = {
   ],
   projects: [
     {
+      slug: "linkhub",
+      name: "LinkHub",
+      tagline: "Link-in-bio product with shop & analytics",
+      description:
+        "Full-stack link-in-bio platform—one public page for links, themes, and a shop with product collections. Auth, onboarding, live preview, click tracking, and a polished dashboard built as a monorepo.",
+      stack: [
+        "Next.js",
+        "React Query",
+        "Express",
+        "MongoDB",
+        "JWT",
+        "TypeScript",
+      ],
+      highlights: [
+        "Auth, email verify, and password reset",
+        "Links, themes, shop & collections",
+        "Public profile with view/click analytics",
+        "Live mobile preview in the dashboard",
+        "Monorepo: Express API + Next.js web",
+      ],
+      featured: true,
+      github: "https://github.com/noori-codes/linkhub",
+      live: "https://linkhub-inky.vercel.app",
+      year: "2026",
+      kind: "Full-stack product",
+      image: "/images/linkhub.png",
+    },
+    {
+      slug: "imx-os",
+      name: "IMX OS",
+      tagline: "Personal OS for focus, habits & goals",
+      description:
+        "A dark, calm personal operating system—tasks, focus sessions, habits, goals, notes, books, and analytics in one clear room. Built with Next.js, Supabase, and a polished productivity UI.",
+      stack: [
+        "Next.js",
+        "Supabase",
+        "TypeScript",
+        "Zustand",
+        "TipTap",
+        "Recharts",
+      ],
+      highlights: [
+        "Dashboard with focus, habits & streaks",
+        "Tasks, calendar, goals, notes & books",
+        "Focus sessions and daily review",
+        "Analytics and “Ask IMX” assistant",
+        "Auth & data with Supabase",
+      ],
+      featured: true,
+      github: "https://github.com/noori-codes/imx-os",
+      live: "https://imx-os.vercel.app",
+      year: "2026",
+      kind: "Full-stack product",
+      image: "/images/imx-os.png",
+    },
+    {
       slug: "natours",
       name: "Natours",
       tagline: "Full-stack tour booking platform",
@@ -82,7 +139,7 @@ export const site = {
         "Admin dashboard",
         "Secure REST API",
       ],
-      featured: true,
+      featured: false,
       github: "https://github.com/noori-codes",
       live: null,
       year: "2025",

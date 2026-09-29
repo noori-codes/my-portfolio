@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProject, site } from "@/lib/site";
@@ -66,6 +67,19 @@ export default async function ProjectPage({ params }: Props) {
               GitHub ↗
             </a>
           </div>
+
+          {project.image ? (
+            <div className="relative mt-10 aspect-video overflow-hidden border border-border bg-surface/40">
+              <Image
+                src={project.image}
+                alt={`${project.name} screenshot`}
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 72rem"
+                className="object-cover object-top"
+              />
+            </div>
+          ) : null}
         </div>
       </section>
 
