@@ -6,7 +6,7 @@ const facts = [
   { label: "Based in", value: site.location },
   { label: "Role", value: site.role },
   { label: "Focus", value: "Next.js · NestJS · Prisma" },
-  { label: "Status", value: "Open to projects" },
+  { label: "Channel", value: "@techwithimx" },
 ] as const;
 
 export function HomeIntro() {
@@ -37,7 +37,18 @@ export function HomeIntro() {
                   {fact.label}
                 </dt>
                 <dd className="mt-1.5 text-sm text-foreground/90 sm:text-base">
-                  {fact.value}
+                  {fact.label === "Channel" ? (
+                    <a
+                      href={site.contact.youtube}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="transition-colors hover:text-accent"
+                    >
+                      {fact.value}
+                    </a>
+                  ) : (
+                    fact.value
+                  )}
                 </dd>
               </div>
             ))}

@@ -6,7 +6,7 @@ export type Project = {
   stack: string[];
   highlights: string[];
   featured: boolean;
-  github: string;
+  github: string | null;
   live: string | null;
   year: string;
   kind: string;
@@ -29,7 +29,7 @@ export const site = {
   availability: "Open to projects & collaboration",
   profileImage: "/images/my-photo.jpg",
   logo: "/images/logo-transparent.png",
-  logoMark: "/images/logo-transparent.png",
+  logoMark: "/images/imx-mark.png",
   ogImage: "/images/og-card.jpg",
   summary:
     "I build and ship full-stack products like LinkHub and IMX OS—auth, APIs, polished UIs, and real deploy pipelines. Alongside that I teach practical computing so students can move from tutorials to working software.",
@@ -177,7 +177,7 @@ export const site = {
         "Secure REST API",
       ],
       featured: false,
-      github: "https://github.com/noori-codes",
+      github: null,
       live: null,
       year: "2025",
       kind: "Full-stack app",
@@ -214,6 +214,7 @@ export const site = {
       live: "https://the-wild-oasis-imx.vercel.app",
       year: "2025",
       kind: "Full-stack app",
+      image: "/images/the-wild-oasis.png",
       caseStudy: {
         problem:
           "Static pages weren’t enough—I wanted authenticated product flows with real data and booking logic.",
@@ -264,6 +265,7 @@ export const site = {
       live: "https://imran-vpn.vercel.app",
       year: "2024",
       kind: "Landing page",
+      image: "/images/laslesvpn.png",
     },
     {
       slug: "guess-my-number",
@@ -282,9 +284,10 @@ export const site = {
       live: "https://guess-my-number-game-phi.vercel.app",
       year: "2024",
       kind: "JavaScript game",
+      image: "/images/guess-my-number.png",
     },
   ] satisfies Project[],
-  /** Strong secondaries shown on home + Work “Also shipping” */
+  /** Strong secondaries shown on Work “Also shipping” (home keeps flagships only) */
   secondarySlugs: ["the-wild-oasis", "natours", "laslesvpn"] as const,
   education: {
     level: "High School",

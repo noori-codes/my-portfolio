@@ -9,10 +9,10 @@ export function ContactCta() {
         <Reveal>
           <p className="section-label">Contact</p>
           <h2 className="section-title mt-5 max-w-2xl">
-            Let&apos;s build something worth shipping.
+            Have a product in mind?
           </h2>
           <p className="section-lede">
-            Projects, teaching, or collaboration—one message is enough to start.
+            Tell me what you&apos;re building—I&apos;ll reply within a day or two.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">

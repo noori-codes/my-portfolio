@@ -15,10 +15,19 @@ export default function AboutPage() {
         <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
           <p className="section-label">About</p>
           <h1 className="mt-5 max-w-3xl text-4xl font-bold tracking-[-0.04em] sm:text-5xl lg:text-6xl">
-            Developer. Instructor. Builder.
+            I ship products—and teach people to build them.
           </h1>
           <p className="mt-6 max-w-2xl text-xl leading-relaxed text-foreground/85">
-            I ship full-stack web apps and teach people the craft behind them.
+            Full-stack apps in production, plus hands-on computing classes and{" "}
+            <a
+              href={site.contact.youtube}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-accent transition-opacity hover:opacity-80"
+            >
+              @techwithimx
+            </a>
+            .
           </p>
         </div>
       </section>
@@ -98,15 +107,14 @@ export default function AboutPage() {
 
                 <li className="relative pl-6">
                   <span
-                    className="absolute top-2 left-0 size-2 rounded-full bg-accent/50"
+                    className="absolute top-2 left-0 size-1.5 rounded-full bg-muted-dim"
                     aria-hidden
                   />
-                  <h3 className="text-xl font-semibold tracking-tight">
-                    {site.education.level}
-                    <span className="text-muted"> · </span>
-                    <span className="text-accent">{site.education.grade}</span>
-                  </h3>
-                  <p className="mt-2 max-w-xl leading-relaxed text-muted">
+                  <p className="font-mono text-[11px] tracking-[0.14em] text-muted-dim uppercase">
+                    Also studying
+                  </p>
+                  <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted">
+                    {site.education.level} · {site.education.grade}.{" "}
                     {site.education.note}
                   </p>
                 </li>
@@ -173,6 +181,40 @@ export default function AboutPage() {
                   </div>
                 ))}
               </div>
+            </div>
+
+            <div className="mt-14 border-t border-border pt-8">
+              <div className="flex items-baseline gap-3">
+                <span className="font-mono text-sm text-accent">04</span>
+                <h2 className="font-mono text-[0.7rem] tracking-[0.2em] text-accent uppercase">
+                  Stack
+                </h2>
+              </div>
+              <div className="mt-8 grid gap-8 sm:grid-cols-2">
+                {(
+                  [
+                    { label: "Frontend", items: site.skills.frontend },
+                    { label: "Backend", items: site.skills.backend },
+                    { label: "Data", items: site.skills.database },
+                    { label: "Tools", items: site.skills.tools },
+                  ] as const
+                ).map((group) => (
+                  <div key={group.label}>
+                    <h3 className="font-mono text-[11px] tracking-[0.14em] text-muted-dim uppercase">
+                      {group.label}
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-muted">
+                      {group.items.join(" · ")}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-8 font-mono text-[11px] tracking-[0.14em] text-muted-dim uppercase">
+                Concepts
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-muted">
+                {site.concepts.join(" · ")}
+              </p>
             </div>
 
             <div className="mt-14 border-t border-border pt-8">

@@ -33,18 +33,13 @@ export default function ContactPage() {
     <div className="pb-28">
       <section className="border-b border-border py-20 sm:py-28">
         <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
-          <div className="flex flex-wrap items-center gap-3">
-            <p className="section-label">Contact</p>
-            <span className="inline-flex items-center gap-2 font-mono text-[10px] tracking-wider text-accent uppercase">
-              <span className="size-1.5 animate-pulse rounded-full bg-accent" />
-              Available
-            </span>
-          </div>
+          <p className="section-label">{site.availability}</p>
           <h1 className="mt-5 text-4xl font-bold tracking-[-0.04em] sm:text-5xl lg:text-6xl">
-            Let&apos;s build something
+            Start a conversation
           </h1>
           <p className="section-lede mt-6">
-            Send a message below. I usually reply within a day or two.
+            Projects, teaching, or collaboration—send a note and I&apos;ll reply
+            within a day or two.
           </p>
         </div>
       </section>

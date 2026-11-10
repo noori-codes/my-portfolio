@@ -6,7 +6,6 @@ const proof = [
   { label: "LinkHub", href: "/work/linkhub" },
   { label: "IMX OS", href: "/work/imx-os" },
   { label: "Teaching", href: "/about" },
-  { label: "Available", href: "/contact" },
 ] as const;
 
 export function Hero() {

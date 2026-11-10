@@ -93,11 +93,11 @@ export default function WorkPage() {
             >
               GitHub
             </a>
-            . Want something built?{" "}
+            .{" "}
             <Link href="/contact" className="text-accent hover:underline">
-              Let&apos;s talk
-            </Link>
-            .
+              Reach out
+            </Link>{" "}
+            if you want something like this shipped.
           </p>
         </div>
       </section>

@@ -38,7 +38,7 @@ export function BrandLogo({
     >
       <span className={`relative inline-block shrink-0 ${box}`}>
         <Image
-          src={site.logo}
+          src={site.logoMark}
           alt=""
           fill
           sizes={size === "lg" ? "72px" : size === "md" ? "56px" : "44px"}

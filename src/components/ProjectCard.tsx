@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/lib/site";
 
@@ -12,31 +13,56 @@ export function ProjectCard({ project, index }: Props) {
 
   return (
     <article className="project-row group border-t border-border py-5 transition-colors first:border-t-0 sm:py-6">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8">
-        <div className="min-w-0 flex-1">
-          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-            {number ? (
-              <span className="font-mono text-[11px] text-muted-dim">
-                {number}
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
+        <div className="flex min-w-0 flex-1 gap-4 sm:gap-5">
+          <Link
+            href={`/work/${project.slug}`}
+            className="relative hidden aspect-16/10 w-28 shrink-0 overflow-hidden border border-border bg-surface-2 sm:block sm:w-32"
+            aria-hidden
+            tabIndex={-1}
+          >
+            {project.image ? (
+              <Image
+                src={project.image}
+                alt=""
+                fill
+                sizes="128px"
+                className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+              />
+            ) : (
+              <span className="absolute inset-0 flex items-center justify-center bg-[radial-gradient(ellipse_at_30%_20%,rgba(var(--accent-rgb),0.12),transparent_55%)] font-mono text-[10px] tracking-[0.14em] text-muted-dim uppercase">
+                {project.name.slice(0, 2)}
               </span>
-            ) : null}
-            <span className="font-mono text-[10px] tracking-[0.14em] text-muted-dim uppercase">
-              {project.kind}
-            </span>
-            <span className="font-mono text-[10px] text-muted-dim">
-              {project.year}
-            </span>
-          </div>
+            )}
+          </Link>
 
-          <h3 className="mt-2 text-xl font-semibold tracking-tight transition-colors group-hover:text-accent sm:text-2xl">
-            <Link href={`/work/${project.slug}`}>{project.name}</Link>
-          </h3>
-          <p className="mt-1.5 max-w-xl text-sm text-muted">{project.tagline}</p>
+          <div className="min-w-0 flex-1">
+            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              {number ? (
+                <span className="font-mono text-[11px] text-muted-dim">
+                  {number}
+                </span>
+              ) : null}
+              <span className="font-mono text-[10px] tracking-[0.14em] text-muted-dim uppercase">
+                {project.kind}
+              </span>
+              <span className="font-mono text-[10px] text-muted-dim">
+                {project.year}
+              </span>
+            </div>
 
-          <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 font-mono text-[11px] text-muted-dim">
-            {project.stack.slice(0, 5).map((tech) => (
-              <span key={tech}>{tech}</span>
-            ))}
+            <h3 className="mt-2 text-xl font-semibold tracking-tight transition-colors group-hover:text-accent sm:text-2xl">
+              <Link href={`/work/${project.slug}`}>{project.name}</Link>
+            </h3>
+            <p className="mt-1.5 max-w-xl text-sm text-muted">
+              {project.tagline}
+            </p>
+
+            <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 font-mono text-[11px] text-muted-dim">
+              {project.stack.slice(0, 5).map((tech) => (
+                <span key={tech}>{tech}</span>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -57,14 +83,16 @@ export function ProjectCard({ project, index }: Props) {
               Live ↗
             </a>
           ) : null}
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted transition-colors hover:text-accent"
-          >
-            Code ↗
-          </a>
+          {project.github ? (
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted transition-colors hover:text-accent"
+            >
+              Code ↗
+            </a>
+          ) : null}
         </div>
       </div>
     </article>

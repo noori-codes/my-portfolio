@@ -12,7 +12,16 @@ export function Footer() {
           <div>
             <BrandLogo size="sm" wordmark />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">
-              {site.headline}
+              Full-stack products from Afghanistan—plus teaching on{" "}
+              <a
+                href={site.contact.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent transition-opacity hover:opacity-80"
+              >
+                @techwithimx
+              </a>
+              .
             </p>
           </div>
 
@@ -57,7 +66,7 @@ export function Footer() {
             © {year} {site.fullName}
           </p>
           <p className="font-mono text-xs text-muted-dim">
-            Built with Next.js
+            {site.location} · shipping &amp; teaching
           </p>
         </div>
       </div>

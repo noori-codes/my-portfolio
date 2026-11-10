@@ -2,7 +2,7 @@ import { ContactCta } from "@/components/ContactCta";
 import { FeaturedWork } from "@/components/FeaturedWork";
 import { Hero } from "@/components/Hero";
 import { HomeIntro } from "@/components/HomeIntro";
-import { HomeStack } from "@/components/HomeStack";
+import { HomeTeaching } from "@/components/HomeTeaching";
 
 export default function HomePage() {
   return (
@@ -10,7 +10,7 @@ export default function HomePage() {
       <Hero />
       <HomeIntro />
       <FeaturedWork />
-      <HomeStack />
+      <HomeTeaching />
       <ContactCta />
     </>
   );

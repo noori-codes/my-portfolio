@@ -87,14 +87,16 @@ export default async function ProjectPage({ params }: Props) {
                 Live demo ↗
               </a>
             ) : null}
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-outline"
-            >
-              GitHub ↗
-            </a>
+            {project.github ? (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-outline"
+              >
+                GitHub ↗
+              </a>
+            ) : null}
           </div>
 
           {project.image ? (
@@ -197,14 +199,16 @@ export default async function ProjectPage({ params }: Props) {
                   Open live demo ↗
                 </a>
               ) : null}
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block text-muted transition-colors hover:text-accent"
-              >
-                View source ↗
-              </a>
+              {project.github ? (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-muted transition-colors hover:text-accent"
+                >
+                  View source ↗
+                </a>
+              ) : null}
             </div>
           </aside>
         </div>
@@ -213,9 +217,9 @@ export default async function ProjectPage({ params }: Props) {
       <section className="border-t border-border py-10 sm:py-12">
         <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
           <p className="font-mono text-sm text-muted">
-            Want something like this built?{" "}
+            Need a similar build?{" "}
             <Link href="/contact" className="text-accent hover:underline">
-              Let&apos;s talk
+              Message me
             </Link>
             .
           </p>

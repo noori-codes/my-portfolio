@@ -26,11 +26,7 @@ export function FeaturedProject({ project, index, reverse = false }: Props) {
                 alt={`${project.name} screenshot`}
                 url={project.live}
                 sizes="(max-width: 1024px) 100vw, 55vw"
-              >
-                <span className="absolute top-3 left-3 z-10 border border-border/80 bg-background/80 px-2.5 py-1 font-mono text-[10px] tracking-[0.18em] text-accent uppercase backdrop-blur-sm">
-                  Featured
-                </span>
-              </BrowserFrame>
+              />
             </Link>
           </MagneticMedia>
         ) : (
@@ -99,14 +95,16 @@ export function FeaturedProject({ project, index, reverse = false }: Props) {
               Live demo ↗
             </a>
           ) : null}
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-mono text-sm text-muted transition-colors hover:text-accent"
-          >
-            GitHub ↗
-          </a>
+          {project.github ? (
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-sm text-muted transition-colors hover:text-accent"
+            >
+              GitHub ↗
+            </a>
+          ) : null}
         </div>
       </div>
     </article>

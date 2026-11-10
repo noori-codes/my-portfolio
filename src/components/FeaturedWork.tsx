@@ -1,14 +1,10 @@
 import Link from "next/link";
 import { FeaturedProject } from "@/components/FeaturedProject";
-import { ProjectCard } from "@/components/ProjectCard";
 import { Reveal } from "@/components/Reveal";
 import { site } from "@/lib/site";
 
-const secondarySet = new Set<string>(site.secondarySlugs);
-
 export function FeaturedWork() {
   const featured = site.projects.filter((p) => p.featured);
-  const others = site.projects.filter((p) => secondarySet.has(p.slug));
 
   return (
     <section id="work" className="border-b border-border py-20 sm:py-24">
@@ -18,8 +14,8 @@ export function FeaturedWork() {
             <p className="section-label">Selected work</p>
             <h2 className="section-title">Flagship projects</h2>
             <p className="section-lede">
-              Two products built end to end—product thinking, full-stack
-              execution, and polish.
+              Two products built end to end—auth, APIs, polish, and real
+              deploys.
             </p>
           </div>
           <Link
@@ -41,27 +37,6 @@ export function FeaturedWork() {
             </Reveal>
           ))}
         </div>
-
-        {others.length > 0 ? (
-          <div className="mt-16 border-t border-border pt-10 sm:mt-20">
-            <Reveal className="mb-2 flex flex-wrap items-end justify-between gap-3">
-              <p className="section-label">Also shipping</p>
-              <Link
-                href="/work"
-                className="font-mono text-xs text-muted transition-colors hover:text-accent"
-              >
-                Full archive →
-              </Link>
-            </Reveal>
-            <div className="border-t border-border">
-              {others.map((project, i) => (
-                <Reveal key={project.slug} delay={i * 40}>
-                  <ProjectCard project={project} index={i} />
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        ) : null}
       </div>
     </section>
   );
