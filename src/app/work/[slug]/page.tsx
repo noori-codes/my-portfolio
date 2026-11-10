@@ -52,8 +52,8 @@ export default async function ProjectPage({ params }: Props) {
 
   return (
     <div className="pb-24">
-      <section className="border-b border-border py-16 sm:py-20">
-        <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
+      <section className="border-b border-border py-16 sm:py-24">
+        <div className="page-shell">
           <Link
             href="/work"
             className="font-mono text-xs tracking-wider text-muted transition-colors hover:text-accent"
@@ -61,7 +61,7 @@ export default async function ProjectPage({ params }: Props) {
             ← All work
           </Link>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3 font-mono text-[10px] tracking-[0.18em] text-muted-dim uppercase">
+          <div className="mt-10 flex flex-wrap items-center gap-3 font-mono text-[10px] tracking-[0.16em] text-muted-dim uppercase">
             {project.featured ? (
               <span className="text-accent">Featured</span>
             ) : null}
@@ -69,14 +69,14 @@ export default async function ProjectPage({ params }: Props) {
             <span>{project.year}</span>
           </div>
 
-          <h1 className="mt-4 text-4xl font-bold tracking-[-0.04em] sm:text-5xl lg:text-6xl">
+          <h1 className="mt-4 max-w-4xl text-4xl font-bold tracking-[-0.045em] sm:text-5xl lg:text-6xl">
             {project.name}
           </h1>
-          <p className="mt-4 max-w-2xl text-lg text-muted sm:text-xl">
+          <p className="mt-5 max-w-2xl text-lg text-muted sm:text-xl">
             {project.tagline}
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-9 flex flex-wrap gap-3">
             {project.live ? (
               <a
                 href={project.live}
@@ -100,7 +100,7 @@ export default async function ProjectPage({ params }: Props) {
           </div>
 
           {project.image ? (
-            <div className="mt-12 sm:mt-14">
+            <div className="mt-14 sm:mt-16">
               <BrowserFrame
                 src={project.image}
                 alt={`${project.name} screenshot`}
@@ -114,8 +114,8 @@ export default async function ProjectPage({ params }: Props) {
         </div>
       </section>
 
-      <section className="py-16 sm:py-20">
-        <div className="mx-auto grid w-full max-w-6xl gap-16 px-5 sm:px-8 lg:grid-cols-[1.35fr_0.65fr] lg:gap-20">
+      <section className="py-16 sm:py-24">
+        <div className="page-shell grid gap-16 lg:grid-cols-[1.35fr_0.65fr] lg:gap-20">
           <div className="space-y-12 sm:space-y-14">
             {story.map((block, i) => (
               <div key={block.label} className="border-t border-border pt-8">
@@ -123,11 +123,11 @@ export default async function ProjectPage({ params }: Props) {
                   <span className="font-mono text-sm text-accent">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <h2 className="font-mono text-[0.7rem] tracking-[0.2em] text-accent uppercase">
+                  <h2 className="font-mono text-[0.7rem] tracking-[0.18em] text-accent uppercase">
                     {block.label}
                   </h2>
                 </div>
-                <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
+                <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted">
                   {block.body}
                 </p>
               </div>
@@ -139,14 +139,14 @@ export default async function ProjectPage({ params }: Props) {
                   <span className="font-mono text-sm text-accent">
                     {String(story.length + 1).padStart(2, "0")}
                   </span>
-                  <h2 className="font-mono text-[0.7rem] tracking-[0.2em] text-accent uppercase">
+                  <h2 className="font-mono text-[0.7rem] tracking-[0.18em] text-accent uppercase">
                     Key decisions
                   </h2>
                 </div>
                 <ul className="mt-6 space-y-4">
                   {project.caseStudy.decisions.map((item) => (
                     <li key={item} className="flex gap-3 text-muted">
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent" />
+                      <span className="mt-2 size-1 shrink-0 bg-accent" />
                       {item}
                     </li>
                   ))}
@@ -159,7 +159,7 @@ export default async function ProjectPage({ params }: Props) {
               <ul className="mt-6 space-y-4">
                 {project.highlights.map((item) => (
                   <li key={item} className="flex gap-3 text-muted">
-                    <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent" />
+                    <span className="mt-2 size-1 shrink-0 bg-accent" />
                     {item}
                   </li>
                 ))}
@@ -167,7 +167,7 @@ export default async function ProjectPage({ params }: Props) {
             </div>
           </div>
 
-          <aside className="h-fit border-t border-border pt-8 lg:sticky lg:top-28">
+          <aside className="h-fit border-t border-border pt-8 lg:sticky lg:top-24 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-10">
             <h2 className="section-label">Stack</h2>
             <ul className="mt-6 space-y-2.5">
               {project.stack.map((tech) => (
@@ -181,12 +181,7 @@ export default async function ProjectPage({ params }: Props) {
               <p className="mt-8 text-sm leading-relaxed text-muted">
                 {project.caseStudy.stackWhy}
               </p>
-            ) : (
-              <p className="mt-8 font-mono text-xs leading-relaxed text-muted-dim">
-                Built as part of my path into professional full-stack
-                development.
-              </p>
-            )}
+            ) : null}
 
             <div className="mt-10 space-y-3 border-t border-border pt-8 font-mono text-sm">
               {project.live ? (
@@ -214,8 +209,8 @@ export default async function ProjectPage({ params }: Props) {
         </div>
       </section>
 
-      <section className="border-t border-border py-10 sm:py-12">
-        <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
+      <section className="border-t border-border py-12">
+        <div className="page-shell">
           <p className="font-mono text-sm text-muted">
             Need a similar build?{" "}
             <Link href="/contact" className="text-accent hover:underline">
@@ -227,15 +222,12 @@ export default async function ProjectPage({ params }: Props) {
       </section>
 
       {(prev || next) && (
-        <nav
-          className="border-t border-border"
-          aria-label="Adjacent projects"
-        >
-          <div className="mx-auto grid w-full max-w-6xl sm:grid-cols-2">
+        <nav className="border-t border-border" aria-label="Adjacent projects">
+          <div className="page-shell grid sm:grid-cols-2 sm:px-0">
             {prev ? (
               <Link
                 href={`/work/${prev.slug}`}
-                className="group border-b border-border px-5 py-10 transition-colors hover:bg-surface/50 sm:border-r sm:border-b-0 sm:px-8 sm:py-12"
+                className="group border-b border-border py-10 transition-colors hover:bg-surface/40 sm:border-r sm:border-b-0 sm:pr-8"
               >
                 <p className="font-mono text-[10px] tracking-[0.16em] text-muted-dim uppercase">
                   ← Previous
@@ -255,7 +247,7 @@ export default async function ProjectPage({ params }: Props) {
             {next ? (
               <Link
                 href={`/work/${next.slug}`}
-                className={`group px-5 py-10 text-right transition-colors hover:bg-surface/50 sm:px-8 sm:py-12 ${
+                className={`group py-10 text-right transition-colors hover:bg-surface/40 sm:pl-8 ${
                   prev ? "" : "sm:col-start-2"
                 }`}
               >

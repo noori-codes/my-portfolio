@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { BrowserFrame } from "@/components/BrowserFrame";
-import { MagneticMedia } from "@/components/MagneticMedia";
 import type { Project } from "@/lib/site";
 
 type Props = {
@@ -9,32 +8,40 @@ type Props = {
   reverse?: boolean;
 };
 
-export function FeaturedProject({ project, index, reverse = false }: Props) {
+export function FeaturedProject({
+  project,
+  index,
+  reverse = false,
+}: Props) {
   const number = String(index + 1).padStart(2, "0");
-  const stack = project.stack.slice(0, 4);
+  const stack = project.stack.slice(0, 5);
 
   return (
-    <article className="group grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
+    <article className="group grid items-center gap-8 border-b border-border pb-16 last:border-b-0 last:pb-0 sm:pb-20 lg:grid-cols-12 lg:gap-12 lg:pb-24">
       <div
         className={`lg:col-span-7 ${reverse ? "lg:order-2" : "lg:order-1"}`}
       >
         {project.image ? (
-          <MagneticMedia>
-            <Link href={`/work/${project.slug}`} className="project-media block">
-              <BrowserFrame
-                src={project.image}
-                alt={`${project.name} screenshot`}
-                url={project.live}
-                sizes="(max-width: 1024px) 100vw, 55vw"
-              />
-            </Link>
-          </MagneticMedia>
+          <Link href={`/work/${project.slug}`} className="project-media block">
+            <BrowserFrame
+              src={project.image}
+              alt={`${project.name} screenshot`}
+              url={project.live}
+              sizes="(max-width: 1024px) 100vw, 55vw"
+            />
+          </Link>
         ) : (
           <Link
             href={`/work/${project.slug}`}
-            className="project-media flex aspect-16/10 items-center justify-center border border-border bg-surface font-mono text-sm text-muted-dim"
+            className="project-media relative flex aspect-16/10 items-center justify-center overflow-hidden border border-border bg-surface"
           >
-            {project.name}
+            <span
+              className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,rgba(var(--accent-rgb),0.12),transparent_55%)]"
+              aria-hidden
+            />
+            <span className="relative font-mono text-sm tracking-[0.14em] text-muted-dim uppercase">
+              {project.name}
+            </span>
           </Link>
         )}
       </div>
@@ -72,18 +79,18 @@ export function FeaturedProject({ project, index, reverse = false }: Props) {
         <ul className="mt-5 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[11px] text-muted-dim">
           {stack.map((tech) => (
             <li key={tech} className="flex items-center gap-2">
-              <span className="size-1 rounded-full bg-accent/70" aria-hidden />
+              <span className="size-1 bg-accent/70" aria-hidden />
               {tech}
             </li>
           ))}
         </ul>
 
-        <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
+        <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
           <Link
             href={`/work/${project.slug}`}
-            className="font-mono text-sm text-accent transition-opacity hover:opacity-80"
+            className="btn btn-outline btn-sm"
           >
-            View project →
+            Case study
           </Link>
           {project.live ? (
             <a
@@ -92,7 +99,7 @@ export function FeaturedProject({ project, index, reverse = false }: Props) {
               rel="noopener noreferrer"
               className="font-mono text-sm text-muted transition-colors hover:text-accent"
             >
-              Live demo ↗
+              Live ↗
             </a>
           ) : null}
           {project.github ? (
@@ -102,7 +109,7 @@ export function FeaturedProject({ project, index, reverse = false }: Props) {
               rel="noopener noreferrer"
               className="font-mono text-sm text-muted transition-colors hover:text-accent"
             >
-              GitHub ↗
+              Code ↗
             </a>
           ) : null}
         </div>
