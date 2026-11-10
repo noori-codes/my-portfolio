@@ -6,7 +6,7 @@ import { site } from "@/lib/site";
 type Status = "idle" | "sending" | "sent" | "error";
 
 const fieldClass =
-  "border border-border bg-surface/40 px-4 py-3.5 text-foreground outline-none transition-[border-color,background,box-shadow] duration-200 placeholder:text-muted-dim/80 hover:border-border hover:bg-surface/70 focus-visible:border-accent focus-visible:bg-background focus-visible:ring-2 focus-visible:ring-accent/35 disabled:opacity-60";
+  "w-full border border-border bg-surface/40 px-4 py-3.5 text-foreground outline-none transition-[border-color,background,box-shadow] duration-200 placeholder:text-muted-dim/80 hover:bg-surface/70 focus-visible:border-accent focus-visible:bg-background focus-visible:ring-2 focus-visible:ring-accent/35 disabled:opacity-60";
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -55,16 +55,16 @@ export function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} className="grid gap-5" noValidate={false}>
-      {status === "sent" && (
+      {status === "sent" ? (
         <p
           role="status"
           className="border border-accent/30 bg-accent-glow px-4 py-3 font-mono text-sm text-accent"
         >
           Message sent — I&apos;ll get back to you soon.
         </p>
-      )}
+      ) : null}
 
-      {status === "error" && error && (
+      {status === "error" && error ? (
         <p
           role="alert"
           className="border border-red-500/30 bg-red-500/10 px-4 py-3 font-mono text-sm text-red-300"
@@ -75,38 +75,40 @@ export function ContactForm() {
           </a>
           .
         </p>
-      )}
+      ) : null}
 
-      <label className="grid gap-2">
-        <span className="font-mono text-[11px] tracking-[0.14em] text-muted uppercase">
-          Name
-        </span>
-        <input
-          name="name"
-          required
-          autoComplete="name"
-          disabled={status === "sending"}
-          onChange={clearFeedback}
-          className={fieldClass}
-          placeholder="Your name"
-        />
-      </label>
+      <div className="grid gap-5 sm:grid-cols-2">
+        <label className="grid gap-2">
+          <span className="font-mono text-[11px] tracking-[0.14em] text-muted uppercase">
+            Name
+          </span>
+          <input
+            name="name"
+            required
+            autoComplete="name"
+            disabled={status === "sending"}
+            onChange={clearFeedback}
+            className={fieldClass}
+            placeholder="Your name"
+          />
+        </label>
 
-      <label className="grid gap-2">
-        <span className="font-mono text-[11px] tracking-[0.14em] text-muted uppercase">
-          Email
-        </span>
-        <input
-          type="email"
-          name="email"
-          required
-          autoComplete="email"
-          disabled={status === "sending"}
-          onChange={clearFeedback}
-          className={fieldClass}
-          placeholder="you@email.com"
-        />
-      </label>
+        <label className="grid gap-2">
+          <span className="font-mono text-[11px] tracking-[0.14em] text-muted uppercase">
+            Email
+          </span>
+          <input
+            type="email"
+            name="email"
+            required
+            autoComplete="email"
+            disabled={status === "sending"}
+            onChange={clearFeedback}
+            className={fieldClass}
+            placeholder="you@email.com"
+          />
+        </label>
+      </div>
 
       <label className="grid gap-2">
         <span className="font-mono text-[11px] tracking-[0.14em] text-muted uppercase">
@@ -115,7 +117,7 @@ export function ContactForm() {
         <textarea
           name="message"
           required
-          rows={6}
+          rows={7}
           disabled={status === "sending"}
           onChange={clearFeedback}
           className={`resize-y ${fieldClass}`}
@@ -127,12 +129,12 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={status === "sending"}
-          className="btn btn-primary disabled:opacity-60"
+          className="btn btn-primary disabled:cursor-not-allowed disabled:opacity-60"
         >
           {status === "sending" ? "Sending…" : "Send message"}
         </button>
         <p className="font-mono text-[11px] text-muted-dim">
-          Usually replies within 1–2 days
+          Replies in 1–2 days
         </p>
       </div>
     </form>

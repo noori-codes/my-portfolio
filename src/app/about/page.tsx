@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { Reveal } from "@/components/Reveal";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -8,245 +9,269 @@ export const metadata: Metadata = {
   description: `About ${site.fullName} — full-stack developer and computer instructor.`,
 };
 
+const skillGroups = [
+  { label: "Frontend", items: site.skills.frontend },
+  { label: "Backend", items: site.skills.backend },
+  { label: "Data", items: site.skills.database },
+  { label: "Tools", items: site.skills.tools },
+] as const;
+
+const featuredNames = site.projects
+  .filter((p) => p.featured)
+  .map((p) => p.name)
+  .join(", ");
+
 export default function AboutPage() {
   return (
     <div className="pb-28">
-      <section className="border-b border-border py-20 sm:py-28">
-        <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
-          <p className="section-label">About</p>
-          <h1 className="mt-5 max-w-3xl text-4xl font-bold tracking-[-0.04em] sm:text-5xl lg:text-6xl">
-            I ship products—and teach people to build them.
-          </h1>
-          <p className="mt-6 max-w-2xl text-xl leading-relaxed text-foreground/85">
-            Full-stack apps in production, plus hands-on computing classes and{" "}
-            <a
-              href={site.contact.youtube}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-accent transition-opacity hover:opacity-80"
-            >
-              @techwithimx
-            </a>
-            .
-          </p>
-        </div>
-      </section>
+      <section className="relative overflow-hidden border-b border-border">
+        <div
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_90%_20%,rgba(var(--accent-rgb),0.07),transparent_45%)]"
+          aria-hidden
+        />
+        <div className="page-shell relative grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:py-24">
+          <div className="max-w-xl">
+            <p className="section-label">About</p>
+            <h1 className="mt-5 text-4xl font-bold tracking-[-0.045em] sm:text-5xl lg:text-[3.5rem] lg:leading-[1.05]">
+              Products in production.
+              <span className="mt-2 block text-foreground/90">
+                Teaching in the room.
+              </span>
+            </h1>
+            <p className="mt-6 max-w-lg text-base leading-relaxed text-muted sm:text-lg">
+              {site.fullName} — {site.role} based in {site.location}. I ship
+              full-stack apps and teach people the craft behind them.
+            </p>
+            <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <Link href="/work" className="btn btn-primary">
+                See the work
+              </Link>
+              <a
+                href={site.contact.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-sm text-muted transition-colors hover:text-accent"
+              >
+                @techwithimx ↗
+              </a>
+            </div>
+          </div>
 
-      <section className="py-16 sm:py-24">
-        <div className="mx-auto grid w-full max-w-6xl gap-12 px-5 sm:px-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16 xl:gap-20">
-          <aside className="lg:sticky lg:top-28 lg:self-start">
-            <div className="relative aspect-4/5 w-full max-w-md overflow-hidden border border-border bg-surface-2">
+          <div className="relative mx-auto w-full max-w-sm lg:mx-0 lg:ml-auto lg:max-w-md">
+            <div
+              className="pointer-events-none absolute -inset-8 bg-[radial-gradient(ellipse_at_center,rgba(var(--accent-rgb),0.14),transparent_68%)] blur-2xl"
+              aria-hidden
+            />
+            <div className="about-photo relative aspect-4/5 overflow-hidden border border-border/70 bg-surface-2 shadow-[0_30px_80px_-44px_rgba(0,0,0,0.9)]">
               <Image
                 src={site.profileImage}
                 alt={site.fullName}
                 fill
                 priority
-                sizes="(max-width: 1024px) 100vw, 420px"
-                className="object-cover object-[center_12%]"
+                sizes="(max-width: 1024px) 90vw, 400px"
+                className="object-cover object-[center_12%] saturate-[0.92]"
               />
               <div
                 className="pointer-events-none absolute inset-0 bg-linear-to-t from-background/50 via-transparent to-transparent"
                 aria-hidden
               />
             </div>
-            <div className="mt-5">
-              <p className="text-lg font-semibold tracking-tight">
-                {site.fullName}
-              </p>
-              <p className="mt-1 font-mono text-sm text-muted">
-                {site.role}
-                <span className="text-muted-dim"> · </span>
-                {site.location}
-              </p>
-            </div>
-          </aside>
+            <p className="mt-4 font-mono text-[11px] tracking-[0.14em] text-muted-dim uppercase">
+              {site.availability}
+            </p>
+          </div>
+        </div>
+      </section>
 
-          <div className="min-w-0">
-            <div className="border-t border-border pt-8">
-              <div className="flex items-baseline gap-3">
-                <span className="font-mono text-sm text-accent">01</span>
-                <h2 className="font-mono text-[0.7rem] tracking-[0.2em] text-accent uppercase">
-                  Story
-                </h2>
-              </div>
-              <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">
-                {site.summary}
+      <section className="border-b border-border py-16 sm:py-20">
+        <div className="page-shell grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+          <Reveal>
+            <p className="section-label">Story</p>
+            <h2 className="section-title max-w-sm">
+              Build it. Ship it. Teach it.
+            </h2>
+          </Reveal>
+          <Reveal delay={60}>
+            <p className="max-w-xl text-lg leading-relaxed text-muted">
+              {site.summary}
+            </p>
+            <p className="mt-5 max-w-xl text-sm leading-relaxed text-muted-dim">
+              Right now that looks like {featuredNames}—real deploys, not
+              tutorial clones.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="border-b border-border py-16 sm:py-20">
+        <div className="page-shell">
+          <Reveal className="mb-12">
+            <p className="section-label">Two lanes</p>
+            <h2 className="section-title">How I spend my days</h2>
+          </Reveal>
+
+          <div className="grid gap-10 border-t border-border pt-10 lg:grid-cols-2 lg:gap-16">
+            <Reveal>
+              <p className="font-mono text-[11px] tracking-[0.16em] text-accent uppercase">
+                Ship
               </p>
-            </div>
-
-            <div className="mt-14 border-t border-border pt-8">
-              <div className="flex items-baseline gap-3">
-                <span className="font-mono text-sm text-accent">02</span>
-                <h2 className="font-mono text-[0.7rem] tracking-[0.2em] text-accent uppercase">
-                  Path
-                </h2>
-              </div>
-
-              <ol className="mt-8 space-y-10">
-                {site.experience.map((job) => (
-                  <li key={job.role} className="relative pl-6">
-                    <span
-                      className="absolute top-2 left-0 size-2 rounded-full bg-accent"
-                      aria-hidden
-                    />
-                    <span
-                      className="absolute top-5 left-[3px] h-[calc(100%+1.5rem)] w-px bg-border"
-                      aria-hidden
-                    />
-                    <h3 className="text-xl font-semibold tracking-tight">
-                      {job.role}
-                    </h3>
-                    <p className="mt-2 max-w-xl leading-relaxed text-muted">
-                      {job.description}
-                    </p>
-                    <p className="mt-3 font-mono text-[11px] tracking-wide text-muted-dim">
-                      {job.topics.join(" · ")}
-                    </p>
+              <h3 className="mt-3 text-2xl font-semibold tracking-tight">
+                Full-stack products
+              </h3>
+              <p className="mt-4 max-w-md leading-relaxed text-muted">
+                Auth, APIs, databases, and polished UIs—end to end. I care about
+                product thinking as much as the stack.
+              </p>
+              <ul className="mt-6 space-y-2.5 font-mono text-sm text-muted-dim">
+                {site.services.map((service) => (
+                  <li key={service.title} className="flex gap-3">
+                    <span className="mt-2 size-1 shrink-0 bg-accent" aria-hidden />
+                    {service.title}
                   </li>
                 ))}
+              </ul>
+              <Link
+                href="/work"
+                className="mt-7 inline-block font-mono text-sm text-accent transition-opacity hover:opacity-80"
+              >
+                Browse projects →
+              </Link>
+            </Reveal>
 
-                <li className="relative pl-6">
-                  <span
-                    className="absolute top-2 left-0 size-1.5 rounded-full bg-muted-dim"
-                    aria-hidden
-                  />
-                  <p className="font-mono text-[11px] tracking-[0.14em] text-muted-dim uppercase">
-                    Also studying
-                  </p>
-                  <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted">
-                    {site.education.level} · {site.education.grade}.{" "}
-                    {site.education.note}
-                  </p>
-                </li>
-              </ol>
+            <Reveal delay={70}>
+              <p className="font-mono text-[11px] tracking-[0.16em] text-accent uppercase">
+                Teach
+              </p>
+              <h3 className="mt-3 text-2xl font-semibold tracking-tight">
+                Computer instructor
+              </h3>
+              <p className="mt-4 max-w-md leading-relaxed text-muted">
+                {site.experience[0]?.description}
+              </p>
+              <p className="mt-5 font-mono text-[11px] tracking-wide text-muted-dim">
+                {site.experience[0]?.topics.join(" · ")}
+              </p>
+              <a
+                href={site.contact.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-7 inline-block font-mono text-sm text-accent transition-opacity hover:opacity-80"
+              >
+                Watch @techwithimx ↗
+              </a>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-border py-16 sm:py-20">
+        <div className="page-shell">
+          <Reveal className="mb-10 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="section-label">Stack</p>
+              <h2 className="section-title">Tools I ship with</h2>
             </div>
+            <p className="max-w-xs font-mono text-[11px] leading-relaxed tracking-wide text-muted-dim">
+              Focused JavaScript stack—clear layers, practical tools.
+            </p>
+          </Reveal>
 
-            <div className="mt-14 grid gap-10 border-t border-border pt-8 sm:grid-cols-2">
-              <div>
-                <h2 className="font-mono text-[0.7rem] tracking-[0.2em] text-accent uppercase">
-                  Languages
-                </h2>
-                <ul className="mt-4 space-y-3">
-                  {site.languages.map((lang) => (
-                    <li key={lang.name}>
-                      <p className="font-medium">{lang.name}</p>
-                      <p className="font-mono text-xs text-muted-dim">
-                        {lang.level}
-                      </p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h2 className="font-mono text-[0.7rem] tracking-[0.2em] text-accent uppercase">
-                  Learning now
-                </h2>
-                <ul className="mt-4 space-y-2.5">
-                  {site.learning.map((item) => (
-                    <li
-                      key={item}
-                      className="font-mono text-sm text-muted"
-                    >
+          <div className="grid gap-8 border-t border-border pt-8 sm:grid-cols-2 lg:grid-cols-4">
+            {skillGroups.map((group, i) => (
+              <Reveal key={group.label} delay={i * 40}>
+                <h3 className="font-mono text-[11px] tracking-[0.14em] text-accent uppercase">
+                  {group.label}
+                </h3>
+                <ul className="mt-4 space-y-2">
+                  {group.items.map((item) => (
+                    <li key={item} className="text-sm text-foreground/85">
                       {item}
                     </li>
                   ))}
                 </ul>
-              </div>
-            </div>
-
-            <div className="mt-14 border-t border-border pt-8">
-              <div className="flex items-baseline gap-3">
-                <span className="font-mono text-sm text-accent">03</span>
-                <h2 className="font-mono text-[0.7rem] tracking-[0.2em] text-accent uppercase">
-                  How I can help
-                </h2>
-              </div>
-              <div className="mt-8 space-y-8">
-                {site.services.map((service, i) => (
-                  <div
-                    key={service.title}
-                    className="grid gap-2 sm:grid-cols-[3rem_1fr] sm:gap-6"
-                  >
-                    <p className="font-mono text-sm text-muted-dim">
-                      {String(i + 1).padStart(2, "0")}
-                    </p>
-                    <div>
-                      <h3 className="text-lg font-semibold tracking-tight">
-                        {service.title}
-                      </h3>
-                      <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted">
-                        {service.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="mt-14 border-t border-border pt-8">
-              <div className="flex items-baseline gap-3">
-                <span className="font-mono text-sm text-accent">04</span>
-                <h2 className="font-mono text-[0.7rem] tracking-[0.2em] text-accent uppercase">
-                  Stack
-                </h2>
-              </div>
-              <div className="mt-8 grid gap-8 sm:grid-cols-2">
-                {(
-                  [
-                    { label: "Frontend", items: site.skills.frontend },
-                    { label: "Backend", items: site.skills.backend },
-                    { label: "Data", items: site.skills.database },
-                    { label: "Tools", items: site.skills.tools },
-                  ] as const
-                ).map((group) => (
-                  <div key={group.label}>
-                    <h3 className="font-mono text-[11px] tracking-[0.14em] text-muted-dim uppercase">
-                      {group.label}
-                    </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-muted">
-                      {group.items.join(" · ")}
-                    </p>
-                  </div>
-                ))}
-              </div>
-              <p className="mt-8 font-mono text-[11px] tracking-[0.14em] text-muted-dim uppercase">
-                Concepts
-              </p>
-              <p className="mt-3 text-sm leading-relaxed text-muted">
-                {site.concepts.join(" · ")}
-              </p>
-            </div>
-
-            <div className="mt-14 border-t border-border pt-8">
-              <h2 className="font-mono text-[0.7rem] tracking-[0.2em] text-accent uppercase">
-                Focus
-              </h2>
-              <ul className="mt-5 space-y-3">
-                {site.goals.map((goal) => (
-                  <li key={goal} className="max-w-xl text-muted">
-                    {goal}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="mt-14 border-t border-border pt-10">
-              <p className="max-w-md text-muted">
-                Want to work together on a product, API, or curriculum?
-              </p>
-              <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
-                <Link href="/contact" className="btn btn-primary">
-                  Contact me
-                </Link>
-                <a
-                  href={`mailto:${site.contact.email}`}
-                  className="font-mono text-sm text-muted transition-colors hover:text-accent"
-                >
-                  {site.contact.email}
-                </a>
-              </div>
-            </div>
+              </Reveal>
+            ))}
           </div>
+
+          <Reveal delay={80} className="mt-10 border-t border-border pt-7">
+            <p className="font-mono text-[11px] tracking-[0.14em] text-muted-dim uppercase">
+              Concepts
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-muted">
+              {site.concepts.join(" · ")}
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="border-b border-border py-14 sm:py-16">
+        <div className="page-shell grid gap-10 sm:grid-cols-3">
+          <Reveal>
+            <p className="font-mono text-[11px] tracking-[0.14em] text-muted-dim uppercase">
+              Languages
+            </p>
+            <ul className="mt-4 space-y-3">
+              {site.languages.map((lang) => (
+                <li key={lang.name}>
+                  <p className="font-medium">{lang.name}</p>
+                  <p className="font-mono text-xs text-muted-dim">{lang.level}</p>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+          <Reveal delay={50}>
+            <p className="font-mono text-[11px] tracking-[0.14em] text-muted-dim uppercase">
+              Learning now
+            </p>
+            <ul className="mt-4 space-y-2">
+              {site.learning.map((item) => (
+                <li key={item} className="text-sm text-muted">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+          <Reveal delay={90}>
+            <p className="font-mono text-[11px] tracking-[0.14em] text-muted-dim uppercase">
+              Focus
+            </p>
+            <ul className="mt-4 space-y-2">
+              {site.goals.slice(0, 3).map((goal) => (
+                <li key={goal} className="text-sm text-muted">
+                  {goal}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-6 font-mono text-[10px] leading-relaxed tracking-wide text-muted-dim">
+              Also studying · {site.education.level}, {site.education.grade}
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="py-16 sm:py-20">
+        <div className="page-shell">
+          <Reveal>
+            <p className="section-label">Contact</p>
+            <h2 className="section-title max-w-xl">
+              Building something—or teaching a room?
+            </h2>
+            <p className="section-lede">
+              Projects, APIs, curriculum, or collaboration. One message is
+              enough.
+            </p>
+            <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <Link href="/contact" className="btn btn-primary">
+                Start a conversation
+              </Link>
+              <a
+                href={`mailto:${site.contact.email}`}
+                className="font-mono text-sm text-muted transition-colors hover:text-accent"
+              >
+                {site.contact.email}
+              </a>
+            </div>
+          </Reveal>
         </div>
       </section>
     </div>
