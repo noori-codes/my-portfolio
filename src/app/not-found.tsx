@@ -3,10 +3,10 @@ import { site } from "@/lib/site";
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-[70vh] flex-col justify-center px-5 py-20 sm:px-8">
-      <div className="mx-auto w-full max-w-6xl">
+    <div className="flex min-h-[70vh] flex-col justify-center py-20">
+      <div className="page-shell">
         <p className="section-label">404</p>
-        <h1 className="mt-4 text-4xl font-bold tracking-[-0.04em] sm:text-5xl lg:text-6xl">
+        <h1 className="mt-4 text-4xl font-bold tracking-[-0.045em] sm:text-5xl">
           Page not found
         </h1>
         <p className="section-lede mt-5">
@@ -32,9 +32,8 @@ export default function NotFound() {
         </div>
 
         <p className="mt-14 font-mono text-xs text-muted-dim">
-          <span className="text-accent">{site.brand.toLowerCase()}@portfolio</span>
-          <span className="text-muted-dim">:~$ </span>
-          cd /
+          <span className="text-accent">{site.brand.toLowerCase()}</span>
+          <span className="text-muted-dim"> · lost route</span>
         </p>
       </div>
     </div>

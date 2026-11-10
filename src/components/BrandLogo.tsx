@@ -3,24 +3,21 @@ import Link from "next/link";
 import { site } from "@/lib/site";
 
 type Props = {
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md";
   linked?: boolean;
   className?: string;
   priority?: boolean;
-  /** Show IMX text beside the mark (header) */
   wordmark?: boolean;
 };
 
 const sizes = {
-  sm: "h-9 w-11",
-  md: "h-11 w-14",
-  lg: "h-14 w-[4.5rem]",
+  sm: "h-8 w-9",
+  md: "h-9 w-11",
 } as const;
 
 const wordmarkClass = {
   sm: "text-sm",
-  md: "text-base",
-  lg: "text-lg",
+  md: "text-[0.95rem]",
 } as const;
 
 export function BrandLogo({
@@ -30,18 +27,14 @@ export function BrandLogo({
   priority = false,
   wordmark = false,
 }: Props) {
-  const box = sizes[size];
-
   const mark = (
-    <span
-      className={`inline-flex items-center gap-2.5 ${className}`}
-    >
-      <span className={`relative inline-block shrink-0 ${box}`}>
+    <span className={`inline-flex items-center gap-2 ${className}`}>
+      <span className={`relative inline-block shrink-0 ${sizes[size]}`}>
         <Image
           src={site.logoMark}
           alt=""
           fill
-          sizes={size === "lg" ? "72px" : size === "md" ? "56px" : "44px"}
+          sizes={size === "md" ? "44px" : "36px"}
           priority={priority}
           className="object-contain object-center"
         />
@@ -68,7 +61,7 @@ export function BrandLogo({
     <Link
       href="/"
       aria-label={`${site.brand} home`}
-      className="inline-flex shrink-0 transition-opacity hover:opacity-90"
+      className="inline-flex shrink-0 transition-opacity hover:opacity-85"
     >
       {mark}
     </Link>

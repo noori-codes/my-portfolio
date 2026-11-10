@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BrandLogo } from "@/components/BrandLogo";
+import { SocialIcons } from "@/components/SocialIcons";
 import { site } from "@/lib/site";
 
 function isActivePath(pathname: string, path: string) {
@@ -11,7 +12,9 @@ function isActivePath(pathname: string, path: string) {
   return pathname === path || pathname.startsWith(`${path}/`);
 }
 
-const mainNav = site.nav.filter((item) => item.path !== "/contact");
+const mainNav = site.nav.filter(
+  (item) => item.path !== "/" && item.path !== "/contact",
+);
 
 export function Header() {
   const pathname = usePathname();
@@ -26,7 +29,7 @@ export function Header() {
   }
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY > 12);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -51,11 +54,11 @@ export function Header() {
     <header
       className={`fixed inset-x-0 top-0 z-50 h-[var(--header-h)] transition-[background,border-color,backdrop-filter] duration-300 ${
         scrolled || open
-          ? "border-b border-border bg-background/80 backdrop-blur-md"
+          ? "border-b border-border/80 bg-background/75 backdrop-blur-md"
           : "border-b border-transparent"
       }`}
     >
-      <div className="mx-auto flex h-full w-full max-w-6xl items-center gap-4 px-5 sm:px-8">
+      <div className="page-shell flex h-full items-center gap-4">
         <BrandLogo size="md" priority wordmark />
 
         <nav
@@ -75,47 +78,49 @@ export function Header() {
               </Link>
             );
           })}
-          <a
-            href={site.contact.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="nav-link nav-link--external"
-          >
-            GitHub ↗
-          </a>
+
+          <span className="mx-0.5 h-3.5 w-px bg-border" aria-hidden />
+
+          <SocialIcons />
+
           {!onContact ? (
             <Link href="/contact" className="btn btn-primary btn-sm">
               Contact
             </Link>
           ) : (
-            <span className="font-mono text-sm text-accent">Contact</span>
+            <span className="font-mono text-xs tracking-wide text-accent">
+              Contact
+            </span>
           )}
         </nav>
 
-        <button
-          type="button"
-          className="ml-auto flex h-10 w-10 flex-col items-center justify-center gap-1.5 border border-border bg-surface transition-colors hover:border-accent/50 md:hidden"
-          aria-expanded={open}
-          aria-controls="mobile-nav"
-          aria-label="Toggle navigation"
-          onClick={() => setOpen((v) => !v)}
-        >
-          <span
-            className={`block h-px w-4 bg-foreground transition-transform ${open ? "translate-y-[4px] rotate-45" : ""}`}
-          />
-          <span
-            className={`block h-px w-4 bg-foreground ${open ? "opacity-0" : ""}`}
-          />
-          <span
-            className={`block h-px w-4 bg-foreground transition-transform ${open ? "-translate-y-[4px] -rotate-45" : ""}`}
-          />
-        </button>
+        <div className="ml-auto flex items-center gap-2 md:hidden">
+          <SocialIcons />
+          <button
+            type="button"
+            className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 border border-border bg-surface/80 transition-colors hover:border-accent/40"
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            aria-label="Toggle navigation"
+            onClick={() => setOpen((v) => !v)}
+          >
+            <span
+              className={`block h-px w-3.5 bg-foreground transition-transform ${open ? "translate-y-[3.5px] rotate-45" : ""}`}
+            />
+            <span
+              className={`block h-px w-3.5 bg-foreground ${open ? "opacity-0" : ""}`}
+            />
+            <span
+              className={`block h-px w-3.5 bg-foreground transition-transform ${open ? "-translate-y-[3.5px] -rotate-45" : ""}`}
+            />
+          </button>
+        </div>
       </div>
 
-      {open && (
+      {open ? (
         <nav
           id="mobile-nav"
-          className="border-b border-border bg-surface px-5 py-4 md:hidden"
+          className="border-b border-border bg-background/95 px-5 py-5 backdrop-blur-md md:hidden"
           aria-label="Mobile"
         >
           <ul className="flex flex-col">
@@ -133,24 +138,14 @@ export function Header() {
                 </li>
               );
             })}
-            <li>
-              <a
-                href={site.contact.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="nav-link nav-link--mobile nav-link--external"
-              >
-                GitHub ↗
-              </a>
-            </li>
           </ul>
           {!onContact ? (
-            <Link href="/contact" className="btn btn-primary mt-4 w-full">
-              Contact me
+            <Link href="/contact" className="btn btn-primary mt-5 w-full">
+              Contact
             </Link>
           ) : null}
         </nav>
-      )}
+      ) : null}
     </header>
   );
 }
