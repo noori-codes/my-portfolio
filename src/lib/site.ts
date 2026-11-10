@@ -32,7 +32,7 @@ export const site = {
   logoMark: "/images/imx-mark.png",
   ogImage: "/images/og-card.jpg",
   summary:
-    "I build and ship full-stack products like LinkHub and IMX OS—auth, APIs, polished UIs, and real deploy pipelines. Alongside that I teach practical computing so students can move from tutorials to working software.",
+    "I build and ship full-stack products like FrameOne, LinkHub, and IMX OS—auth, APIs, polished UIs, and real deploy pipelines. Alongside that I teach practical computing so students can move from tutorials to working software.",
   nav: [
     { name: "Home", path: "/" },
     { name: "Work", path: "/work" },
@@ -76,6 +76,49 @@ export const site = {
     },
   ],
   projects: [
+    {
+      slug: "frameone",
+      name: "FrameOne",
+      tagline: "Cinematic movie & TV discovery app",
+      description:
+        "Full-stack movie and TV discovery experience—trending titles, search, rich detail pages, favorites, and watchlists. Powered by TMDB, with Auth.js auth and Prisma + PostgreSQL persistence.",
+      stack: [
+        "Next.js",
+        "Prisma",
+        "PostgreSQL",
+        "Auth.js",
+        "TMDB API",
+        "Tailwind CSS",
+      ],
+      highlights: [
+        "Home hero carousel and curated discovery rows",
+        "Search with rich movie/TV detail views",
+        "Favorites and watchlist across sessions",
+        "Credentials auth with profile and avatars",
+        "TMDB metadata, posters, cast, and trailers",
+      ],
+      featured: true,
+      github: "https://github.com/noori-codes/FrameOne",
+      live: "https://frameone-imran.vercel.app",
+      year: "2026",
+      kind: "Full-stack product",
+      image: "/images/frameone.png",
+      caseStudy: {
+        problem:
+          "Movie discovery apps often feel either sparse or cluttered—hard to browse, search, and keep a personal watchlist in one polished place.",
+        approach:
+          "Built a cinematic Next.js app on TMDB for catalog data, with Auth.js for accounts and Prisma + PostgreSQL for favorites, watchlists, and profile state.",
+        outcome:
+          "A deployable discovery product with trending rows, detail pages (cast, similar titles, trailers), and personal lists that persist across sessions.",
+        decisions: [
+          "Use TMDB as the source of truth for catalog, posters, and trailers instead of scraping or hardcoding titles",
+          "Persist favorites and watchlists in PostgreSQL so personalization survives reloads and devices",
+          "Keep the UI cinematic—hero carousel and horizontal rows—so browsing feels like a product, not a table of results",
+        ],
+        stackWhy:
+          "Next.js for app structure and performance, Prisma + Postgres for durable user data, Auth.js for credentials auth, TMDB for rich media metadata.",
+      },
+    },
     {
       slug: "linkhub",
       name: "LinkHub",
