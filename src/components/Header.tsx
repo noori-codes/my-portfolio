@@ -131,6 +131,14 @@ export function Header() {
 
           <SocialIcons />
 
+          <span
+            className="hidden items-center gap-2 font-mono text-[11px] tracking-[0.12em] text-muted uppercase lg:inline-flex"
+            title={site.availability}
+          >
+            <span className="size-1.5 shrink-0 bg-accent" aria-hidden />
+            {site.availabilityShort}
+          </span>
+
           {!onContact ? (
             <Link href="/contact" className="btn btn-primary btn-sm">
               Contact
@@ -191,8 +199,15 @@ export function Header() {
               );
             })}
           </ul>
+          <p
+            className="mt-5 flex items-center gap-2 font-mono text-[11px] tracking-[0.12em] text-muted uppercase"
+            title={site.availability}
+          >
+            <span className="size-1.5 shrink-0 bg-accent" aria-hidden />
+            {site.availabilityShort}
+          </p>
           {!onContact ? (
-            <Link href="/contact" className="btn btn-primary mt-5 w-full">
+            <Link href="/contact" className="btn btn-primary mt-4 w-full">
               Contact
             </Link>
           ) : null}

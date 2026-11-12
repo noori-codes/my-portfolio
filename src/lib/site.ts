@@ -27,6 +27,8 @@ export const site = {
   role: "Full-Stack Web Developer",
   location: "Afghanistan",
   availability: "Open to projects & collaboration",
+  /** Compact header / chrome label */
+  availabilityShort: "Available",
   /** Bump when site copy/structure changes — used by sitemap lastModified. */
   contentUpdated: "2026-11-13",
   profileImage: "/images/my-photo.jpg",
