@@ -1,12 +1,15 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState, type ReactNode } from "react";
 
 type Props = {
   src: string;
   alt: string;
   url?: string | null;
+  /** Optional case-study / detail link for the screenshot viewport. */
+  href?: string;
   priority?: boolean;
   sizes?: string;
   className?: string;
@@ -27,6 +30,7 @@ export function BrowserFrame({
   src,
   alt,
   url,
+  href,
   priority = false,
   sizes = "(max-width: 1024px) 100vw, 55vw",
   className = "",
@@ -38,6 +42,20 @@ export function BrowserFrame({
   const host = displayUrl(url);
   const hasLive = Boolean(url);
 
+  const image = (
+    <Image
+      src={src}
+      alt={alt}
+      fill
+      priority={priority}
+      sizes={sizes}
+      onLoad={() => setLoaded(true)}
+      className={`object-cover object-top transition-[transform,opacity] duration-700 ease-out group-hover/frame:scale-[1.035] ${
+        loaded ? "opacity-100" : "opacity-0"
+      }`}
+    />
+  );
+
   return (
     <div className={`browser-frame group/frame ${className}`}>
       <div className="browser-frame__chrome">
@@ -47,19 +65,16 @@ export function BrowserFrame({
           <span />
         </div>
         {hasLive && url ? (
-          <button
-            type="button"
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
             className="browser-frame__url browser-frame__url--live"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              window.open(url, "_blank", "noopener,noreferrer");
-            }}
             aria-label={`Open live demo ${host}`}
           >
             <span className="browser-frame__lock" aria-hidden />
             {host}
-          </button>
+          </a>
         ) : (
           <div className="browser-frame__url" aria-hidden>
             <span className="browser-frame__lock" />
@@ -77,17 +92,17 @@ export function BrowserFrame({
           }`}
           aria-hidden
         />
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          priority={priority}
-          sizes={sizes}
-          onLoad={() => setLoaded(true)}
-          className={`object-cover object-top transition-[transform,opacity] duration-700 ease-out group-hover/frame:scale-[1.035] ${
-            loaded ? "opacity-100" : "opacity-0"
-          }`}
-        />
+        {href ? (
+          <Link
+            href={href}
+            className="absolute inset-0 block"
+            aria-label={alt}
+          >
+            {image}
+          </Link>
+        ) : (
+          image
+        )}
         <div
           className="pointer-events-none absolute inset-0 bg-linear-to-t from-background/40 via-transparent to-transparent"
           aria-hidden

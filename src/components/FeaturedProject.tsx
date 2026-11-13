@@ -22,24 +22,29 @@ export function FeaturedProject({
         className={`lg:col-span-7 ${reverse ? "lg:order-2" : "lg:order-1"}`}
       >
         {project.image ? (
-          <Link href={`/work/${project.slug}`} className="project-media block">
+          <div className="project-media">
             <BrowserFrame
               src={project.image}
               alt={`${project.name} screenshot`}
               url={project.live}
+              href={`/work/${project.slug}`}
               sizes="(max-width: 1024px) 100vw, 55vw"
             />
-          </Link>
+          </div>
         ) : (
           <Link
             href={`/work/${project.slug}`}
             className="project-media relative flex aspect-16/10 items-center justify-center overflow-hidden border border-border bg-surface"
+            aria-label={`${project.name} case study`}
           >
             <span
               className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,rgba(var(--accent-rgb),0.12),transparent_55%)]"
               aria-hidden
             />
-            <span className="relative font-mono text-sm tracking-[0.14em] text-muted-dim uppercase">
+            <span
+              className="relative font-mono text-sm tracking-[0.14em] text-muted-dim uppercase"
+              aria-hidden
+            >
               {project.name}
             </span>
           </Link>

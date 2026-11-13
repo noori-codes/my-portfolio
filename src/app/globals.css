@@ -478,10 +478,12 @@ a {
   text-overflow: ellipsis;
 }
 
+a.browser-frame__url,
 button.browser-frame__url {
   margin: 0;
   cursor: pointer;
   text-align: left;
+  text-decoration: none;
   appearance: none;
   transition:
     border-color 0.2s ease,
