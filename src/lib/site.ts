@@ -27,8 +27,9 @@ export const site = {
   role: "Full-Stack Web Developer",
   location: "Afghanistan",
   availability: "Open to projects & collaboration",
+  /** Bump when site copy/structure changes — used by sitemap lastModified. */
+  contentUpdated: "2026-11-13",
   profileImage: "/images/my-photo.jpg",
-  logo: "/images/logo-transparent.png",
   logoMark: "/images/imx-mark.png",
   ogImage: "/images/og-card.jpg",
   summary:

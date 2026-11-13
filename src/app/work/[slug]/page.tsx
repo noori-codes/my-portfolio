@@ -67,12 +67,61 @@ function adjacentProjects(slug: string): {
   };
 }
 
+function absoluteUrl(path: string) {
+  return new URL(path, site.contact.portfolio).toString();
+}
+
+function projectJsonLd(project: Project) {
+  const pageUrl = absoluteUrl(`/work/${project.slug}`);
+  const sameAs = [project.live, project.github].filter(
+    (value): value is string => Boolean(value),
+  );
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: project.name,
+    headline: project.tagline,
+    description: project.description,
+    url: pageUrl,
+    dateCreated: project.year,
+    keywords: project.stack.join(", "),
+    author: {
+      "@type": "Person",
+      name: site.fullName,
+      url: site.contact.portfolio,
+    },
+    creator: {
+      "@type": "Person",
+      name: site.fullName,
+      url: site.contact.portfolio,
+    },
+    ...(project.image
+      ? { image: absoluteUrl(project.image) }
+      : { image: absoluteUrl(site.ogImage) }),
+    ...(sameAs.length ? { sameAs } : {}),
+    ...(project.live
+      ? {
+          mainEntity: {
+            "@type": "WebApplication",
+            name: project.name,
+            url: project.live,
+            applicationCategory: "WebApplication",
+            operatingSystem: "Any",
+            browserRequirements: "Requires a modern web browser",
+          },
+        }
+      : {}),
+  };
+}
+
 export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) notFound();
 
   const { prev, next } = adjacentProjects(slug);
+  const jsonLd = projectJsonLd(project);
   const story = project.caseStudy
     ? [
         { label: "Problem", body: project.caseStudy.problem },
@@ -83,6 +132,10 @@ export default async function ProjectPage({ params }: Props) {
 
   return (
     <div className="pb-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <section className="border-b border-border py-16 sm:py-24">
         <div className="page-shell">
           <Link

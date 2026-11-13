@@ -41,7 +41,7 @@ Edit copy, projects, skills, and links in [`src/lib/site.ts`](src/lib/site.ts).
 | Asset | Path |
 |---|---|
 | Profile photo | `public/images/my-photo.jpg` |
-| Logo | `public/images/logo-transparent.png` |
+| Logo mark | `public/images/imx-mark.png` |
 | OG share image | `public/images/og-card.jpg` |
 | Project screenshots | `public/images/linkhub.png`, `public/images/imx-os.png` |
 

@@ -332,21 +332,6 @@ a {
   transform: translateY(-1px);
 }
 
-.social-icons--mobile {
-  gap: 0.35rem;
-}
-
-.social-icons--mobile .social-icon {
-  width: 2.4rem;
-  height: 2.4rem;
-  border: 1px solid var(--border);
-  color: var(--muted);
-}
-
-.social-icons--mobile .social-icon:hover {
-  border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
-}
-
 @keyframes fade-up {
   from {
     opacity: 0;
