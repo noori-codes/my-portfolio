@@ -26,6 +26,7 @@ export function ContactForm() {
     const name = String(data.get("name") || "").trim();
     const email = String(data.get("email") || "").trim();
     const message = String(data.get("message") || "").trim();
+    const company = String(data.get("company") || "").trim();
 
     setStatus("sending");
     setError(null);
@@ -34,7 +35,7 @@ export function ContactForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message }),
+        body: JSON.stringify({ name, email, message, company }),
       });
 
       const payload = (await res.json().catch(() => null)) as {
@@ -54,7 +55,11 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="grid gap-5" noValidate={false}>
+    <form
+      onSubmit={onSubmit}
+      className="relative grid gap-5"
+      noValidate={false}
+    >
       {status === "sent" ? (
         <p
           role="status"
@@ -76,6 +81,23 @@ export function ContactForm() {
           .
         </p>
       ) : null}
+
+      {/* Honeypot — leave empty. Hidden from people, not from basic bots. */}
+      <div
+        className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
+        aria-hidden
+      >
+        <label>
+          Company
+          <input
+            type="text"
+            name="company"
+            tabIndex={-1}
+            autoComplete="off"
+            disabled={status === "sending"}
+          />
+        </label>
+      </div>
 
       <div className="grid gap-5 sm:grid-cols-2">
         <label className="grid gap-2">

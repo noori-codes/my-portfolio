@@ -1,11 +1,17 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { clientIp, rateLimit } from "@/lib/rate-limit";
 
 type ContactBody = {
   name?: string;
   email?: string;
   message?: string;
+  /** Honeypot — must stay empty. */
+  company?: string;
 };
+
+const RATE_LIMIT = 5;
+const RATE_WINDOW_MS = 15 * 60 * 1000;
 
 function requiredEnv(name: string): string {
   const value = process.env[name];
@@ -24,7 +30,23 @@ function escapeHtml(value: string): string {
     .replaceAll("'", "&#39;");
 }
 
+function sanitizeHeader(value: string): string {
+  return value.replace(/[\r\n]+/g, " ").trim();
+}
+
 export async function POST(request: Request) {
+  const ip = clientIp(request);
+  const limited = rateLimit(`contact:${ip}`, RATE_LIMIT, RATE_WINDOW_MS);
+  if (!limited.ok) {
+    return NextResponse.json(
+      { error: "Too many messages. Please try again later." },
+      {
+        status: 429,
+        headers: { "Retry-After": String(limited.retryAfterSec) },
+      },
+    );
+  }
+
   let body: ContactBody;
 
   try {
@@ -33,8 +55,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 });
   }
 
-  const name = String(body.name ?? "").trim();
-  const email = String(body.email ?? "").trim();
+  // Bots that fill every field — pretend success so they don't retry smarter.
+  if (String(body.company ?? "").trim()) {
+    return NextResponse.json({ ok: true });
+  }
+
+  const name = sanitizeHeader(String(body.name ?? "").trim());
+  const email = sanitizeHeader(String(body.email ?? "").trim());
   const message = String(body.message ?? "").trim();
 
   if (!name || !email || !message) {
