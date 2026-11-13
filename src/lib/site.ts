@@ -331,8 +331,11 @@ export const site = {
       image: "/images/guess-my-number.png",
     },
   ] satisfies Project[],
-  /** Strong secondaries shown on Work “Also shipping” (home keeps flagships only) */
-  secondarySlugs: ["the-wild-oasis", "natours", "laslesvpn"] as const,
+  /**
+   * Strong secondaries on Work “Also shipping” — public demos preferred.
+   * Natours stays in Earlier until a live URL / screenshot ships.
+   */
+  secondarySlugs: ["the-wild-oasis", "laslesvpn", "omnifood"] as const,
   education: {
     level: "High School",
     grade: "Grade 11",

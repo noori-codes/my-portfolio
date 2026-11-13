@@ -83,8 +83,8 @@ export default function WorkPage() {
               <p className="section-label">Also shipping</p>
               <h2 className="section-title">Stronger builds</h2>
               <p className="section-lede">
-                Full-stack practice and product UIs that moved me closer to
-                production work.
+                Public demos and product UIs that moved me closer to production
+                work—still practice, still shipped.
               </p>
             </Reveal>
             <div className="border-t border-border">
@@ -105,8 +105,8 @@ export default function WorkPage() {
               <p className="section-label">Earlier</p>
               <h2 className="section-title">Foundations</h2>
               <p className="section-lede">
-                Landing pages and experiments that taught layout, state, and
-                shipping to Vercel.
+                Landing pages, games, and backend drills that taught layout,
+                state, APIs, and shipping.
               </p>
             </Reveal>
             <div className="border-t border-border">
