@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BrandLogo } from "@/components/BrandLogo";
 import { SocialIcons } from "@/components/SocialIcons";
 import { site } from "@/lib/site";
@@ -12,6 +12,9 @@ function isActivePath(pathname: string, path: string) {
   return pathname === path || pathname.startsWith(`${path}/`);
 }
 
+const FOCUSABLE =
+  'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
 const mainNav = site.nav.filter(
   (item) => item.path !== "/" && item.path !== "/contact",
 );
@@ -20,13 +23,13 @@ export function Header() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [navPath, setNavPath] = useState(pathname);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLElement>(null);
   const onContact = pathname === "/contact";
 
-  if (navPath !== pathname) {
-    setNavPath(pathname);
+  useEffect(() => {
     setOpen(false);
-  }
+  }, [pathname]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -38,8 +41,48 @@ export function Header() {
   useEffect(() => {
     if (!open) return;
 
+    const panel = panelRef.current;
+    const button = menuButtonRef.current;
+    if (!panel || !button) return;
+
+    const getFocusable = () => {
+      const inPanel = [
+        ...panel.querySelectorAll<HTMLElement>(FOCUSABLE),
+      ];
+      return [button, ...inPanel];
+    };
+
+    const previouslyFocused =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
+
+    const firstInPanel = panel.querySelector<HTMLElement>(FOCUSABLE);
+    (firstInPanel ?? button).focus();
+
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setOpen(false);
+        return;
+      }
+
+      if (e.key !== "Tab") return;
+
+      const focusables = getFocusable();
+      if (focusables.length === 0) return;
+
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement;
+
+      if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
 
     document.body.style.overflow = "hidden";
@@ -47,6 +90,11 @@ export function Header() {
     return () => {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", onKey);
+      if (previouslyFocused?.isConnected) {
+        previouslyFocused.focus();
+      } else {
+        button.focus();
+      }
     };
   }, [open]);
 
@@ -97,11 +145,12 @@ export function Header() {
         <div className="ml-auto flex items-center gap-2 md:hidden">
           <SocialIcons />
           <button
+            ref={menuButtonRef}
             type="button"
             className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 border border-border bg-surface/80 transition-colors hover:border-accent/40"
             aria-expanded={open}
             aria-controls="mobile-nav"
-            aria-label="Toggle navigation"
+            aria-label={open ? "Close navigation" : "Open navigation"}
             onClick={() => setOpen((v) => !v)}
           >
             <span
@@ -119,9 +168,12 @@ export function Header() {
 
       {open ? (
         <nav
+          ref={panelRef}
           id="mobile-nav"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation"
           className="border-b border-border bg-background/95 px-5 py-5 backdrop-blur-md md:hidden"
-          aria-label="Mobile"
         >
           <ul className="flex flex-col">
             {mainNav.map((item) => {
