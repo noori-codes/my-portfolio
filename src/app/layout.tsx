@@ -70,7 +70,7 @@ const personJsonLd = {
     "@type": "PostalAddress",
     addressCountry: site.location,
   },
-  sameAs: [site.contact.github, site.contact.youtube],
+  sameAs: [site.contact.github],
 };
 
 export default function RootLayout({

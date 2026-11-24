@@ -6,7 +6,7 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: `Contact ${site.fullName} — projects, teaching, and collaboration.`,
+  description: `Contact ${site.fullName} — projects, APIs, and collaboration.`,
 };
 
 export default function ContactPage() {
@@ -26,8 +26,8 @@ export default function ContactPage() {
             </span>
           </h1>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-            Projects, teaching, APIs, or collaboration—tell me what you&apos;re
-            building. I usually reply within a day or two.
+            Products, APIs, or collaboration—tell me what you&apos;re building.
+            I usually reply within a day or two.
           </p>
         </div>
       </section>
@@ -48,7 +48,7 @@ export default function ContactPage() {
           <aside className="h-fit border-t border-border pt-8 lg:sticky lg:top-24 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-10">
             <p className="section-label">Elsewhere</p>
             <p className="mt-3 mb-8 text-sm leading-relaxed text-muted">
-              Prefer email or social? Use these.
+              Prefer email or GitHub? Use these.
             </p>
 
             <div className="space-y-7">
@@ -71,14 +71,6 @@ export default function ContactPage() {
                     className="font-mono text-sm text-muted transition-colors hover:text-accent"
                   >
                     GitHub · noori-codes ↗
-                  </a>
-                  <a
-                    href={site.contact.youtube}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-mono text-sm text-muted transition-colors hover:text-accent"
-                  >
-                    YouTube · @techwithimx ↗
                   </a>
                 </div>
                 <div className="mt-4">

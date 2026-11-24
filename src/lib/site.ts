@@ -23,19 +23,19 @@ export type Project = {
 export const site = {
   brand: "IMX",
   fullName: "Imran Noori",
-  headline: "I ship full-stack products—and teach people to build them.",
+  headline: "I build and ship full-stack products end to end.",
   role: "Full-Stack Web Developer",
   location: "Afghanistan",
   availability: "Open to projects & collaboration",
   /** Compact header / chrome label */
   availabilityShort: "Available",
   /** Bump when site copy/structure changes — used by sitemap lastModified. */
-  contentUpdated: "2026-11-13",
+  contentUpdated: "2026-11-24",
   profileImage: "/images/my-photo.jpg",
   logoMark: "/images/imx-mark.png",
   ogImage: "/images/og-card.jpg",
   summary:
-    "I build and ship full-stack products like FrameOne, LinkHub, and IMX OS—auth, APIs, polished UIs, and real deploy pipelines. Alongside that I teach practical computing so students can move from tutorials to working software.",
+    "I build and ship full-stack products like FrameOne, LinkHub, and IMX OS—auth, APIs, polished UIs, and real deploy pipelines. Focused on product thinking, clean architecture, and work that holds up in production.",
   nav: [
     { name: "Home", path: "/" },
     { name: "Work", path: "/work" },
@@ -63,20 +63,6 @@ export const site = {
     "Responsive Design",
     "SSR",
     "Image Processing",
-  ],
-  experience: [
-    {
-      role: "Computer Instructor",
-      topics: [
-        "Windows",
-        "Linux",
-        "Microsoft Office",
-        "Adobe Photoshop",
-        "Web Development",
-      ],
-      description:
-        "Guide students through practical computing—from operating systems and productivity software to foundational web development—with hands-on learning.",
-    },
   ],
   projects: [
     {
@@ -211,36 +197,22 @@ export const site = {
     {
       slug: "natours",
       name: "Natours",
-      tagline: "Full-stack tour booking platform",
+      tagline: "Node/Express tour API practice",
       description:
-        "Production-style tour booking app with authentication, role-based access, bookings, reviews, image uploads, admin tools, and a secure REST API—built with Node.js, Express, and MongoDB.",
+        "Backend learning project: JWT auth, role-based access, bookings, reviews, and image uploads on Node.js, Express, and MongoDB. No public demo yet—kept here as a foundation, not a flagship.",
       stack: ["Node.js", "Express", "MongoDB", "Mongoose", "Pug", "JWT"],
       highlights: [
         "User auth & role-based authorization",
         "Tour booking & reviews",
         "Image upload & processing",
-        "Admin dashboard",
-        "Secure REST API",
+        "Admin-style routes",
+        "REST API patterns",
       ],
       featured: false,
       github: null,
       live: null,
       year: "2025",
-      kind: "Full-stack app",
-      caseStudy: {
-        problem:
-          "I needed a production-shaped backend project—auth, roles, bookings, and media—not another CRUD tutorial.",
-        approach:
-          "Built a tour platform with JWT auth, role-based access, reviews, image processing, and an admin surface on Node, Express, and MongoDB.",
-        outcome:
-          "A full MVC-style app that taught me how secure REST APIs and real user flows hang together.",
-        decisions: [
-          "Role-based access early so admin and user paths stay separate",
-          "Image processing in the upload path instead of ignoring media complexity",
-        ],
-        stackWhy:
-          "Classic Node/Express/Mongo stack to learn server fundamentals before frameworks abstract them away.",
-      },
+      kind: "Backend practice",
     },
     {
       slug: "the-wild-oasis",
@@ -334,14 +306,14 @@ export const site = {
     },
   ] satisfies Project[],
   /**
-   * Strong secondaries on Work “Also shipping” — public demos preferred.
-   * Natours stays in Earlier until a live URL / screenshot ships.
+   * Also shipping — full-stack (or near) builds with a public demo.
+   * Landings/games/unproven work stay in Earlier.
    */
-  secondarySlugs: ["the-wild-oasis", "laslesvpn", "omnifood"] as const,
+  secondarySlugs: ["the-wild-oasis"] as const,
   education: {
     level: "High School",
     grade: "Grade 11",
-    note: "Building professional skills through projects, teaching, and continuous self-learning.",
+    note: "Building professional skills through projects and continuous self-learning.",
   },
   languages: [
     { name: "Dari", level: "Native" },
@@ -373,14 +345,12 @@ export const site = {
   goals: [
     "Grow as a professional full-stack engineer",
     "Ship high-quality, scalable web applications",
-    "Keep teaching and sharing knowledge",
     "Contribute to open source",
   ],
   contact: {
     email: "imrannoori1919@gmail.com",
     github: "https://github.com/noori-codes",
     portfolio: "https://noori.qzz.io",
-    youtube: "https://www.youtube.com/@techwithimx",
   },
 } as const;
 
@@ -388,4 +358,22 @@ export type Site = typeof site;
 
 export function getProject(slug: string): Project | undefined {
   return site.projects.find((p) => p.slug === slug);
+}
+
+const secondarySlugSet = new Set<string>(site.secondarySlugs);
+
+/** Flagship → secondary → earlier — used for case-study Prev/Next. */
+export function projectsInStoryOrder(): Project[] {
+  const featured = site.projects.filter((p) => p.featured);
+  const secondary = site.secondarySlugs
+    .map((slug) => getProject(slug))
+    .filter((p): p is Project => Boolean(p));
+  const earlier = site.projects.filter(
+    (p) => !p.featured && !secondarySlugSet.has(p.slug),
+  );
+  return [...featured, ...secondary, ...earlier];
+}
+
+export function isSecondaryProject(slug: string): boolean {
+  return secondarySlugSet.has(slug);
 }

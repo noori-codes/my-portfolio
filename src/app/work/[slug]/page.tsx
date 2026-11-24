@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BrowserFrame } from "@/components/BrowserFrame";
-import { getProject, site, type Project } from "@/lib/site";
+import {
+  getProject,
+  projectsInStoryOrder,
+  site,
+  type Project,
+} from "@/lib/site";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -58,12 +63,12 @@ function adjacentProjects(slug: string): {
   prev: Project | undefined;
   next: Project | undefined;
 } {
-  const index = site.projects.findIndex((p) => p.slug === slug);
+  const ordered = projectsInStoryOrder();
+  const index = ordered.findIndex((p) => p.slug === slug);
   if (index < 0) return { prev: undefined, next: undefined };
-  const len = site.projects.length;
   return {
-    prev: site.projects[(index - 1 + len) % len],
-    next: site.projects[(index + 1) % len],
+    prev: index > 0 ? ordered[index - 1] : undefined,
+    next: index < ordered.length - 1 ? ordered[index + 1] : undefined,
   };
 }
 

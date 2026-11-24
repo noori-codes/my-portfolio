@@ -1,6 +1,6 @@
 # IMX Portfolio
 
-Personal portfolio for **Imran Noori (IMX)** — full-stack developer and computer instructor.
+Personal portfolio for **Imran Noori (IMX)** — full-stack developer.
 
 **Live:** [noori.qzz.io](https://noori.qzz.io)
 
@@ -79,4 +79,3 @@ Deploy on [Vercel](https://vercel.com) — connect the repo, add the SMTP env va
 
 - Portfolio: [noori.qzz.io](https://noori.qzz.io)
 - GitHub: [noori-codes](https://github.com/noori-codes)
-- YouTube: [@techwithimx](https://www.youtube.com/@techwithimx)

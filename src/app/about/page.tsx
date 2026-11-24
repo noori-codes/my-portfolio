@@ -6,7 +6,7 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About",
-  description: `About ${site.fullName} — full-stack developer and computer instructor.`,
+  description: `About ${site.fullName} — full-stack developer shipping production web apps.`,
 };
 
 const skillGroups = [
@@ -35,25 +35,23 @@ export default function AboutPage() {
             <h1 className="mt-5 text-4xl font-bold tracking-[-0.045em] sm:text-5xl lg:text-[3.5rem] lg:leading-[1.05]">
               Products in production.
               <span className="mt-2 block text-foreground/90">
-                Teaching in the room.
+                Built end to end.
               </span>
             </h1>
             <p className="mt-6 max-w-lg text-base leading-relaxed text-muted sm:text-lg">
               {site.fullName} — {site.role} based in {site.location}. I ship
-              full-stack apps and teach people the craft behind them.
+              full-stack apps with auth, APIs, and polish.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">
               <Link href="/work" className="btn btn-primary">
                 See the work
               </Link>
-              <a
-                href={site.contact.youtube}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/contact"
                 className="font-mono text-sm text-muted transition-colors hover:text-accent"
               >
-                @techwithimx ↗
-              </a>
+                Contact →
+              </Link>
             </div>
           </div>
 
@@ -87,17 +85,16 @@ export default function AboutPage() {
         <div className="page-shell grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <Reveal>
             <p className="section-label">Story</p>
-            <h2 className="section-title max-w-sm">
-              Build it. Ship it. Teach it.
-            </h2>
+            <h2 className="section-title max-w-sm">Build it. Ship it.</h2>
           </Reveal>
           <Reveal delay={60}>
             <p className="max-w-xl text-lg leading-relaxed text-muted">
               {site.summary}
             </p>
             <p className="mt-5 max-w-xl text-sm leading-relaxed text-muted-dim">
-              Right now that looks like {featuredNames}—real deploys, not
-              tutorial clones.
+              Flagship work right now: {featuredNames}—live deploys with real
+              product surface area. Earlier practice projects stay labeled as
+              foundations on the Work page.
             </p>
           </Reveal>
         </div>
@@ -106,61 +103,34 @@ export default function AboutPage() {
       <section className="border-b border-border py-16 sm:py-20">
         <div className="page-shell">
           <Reveal className="mb-12">
-            <p className="section-label">Two lanes</p>
-            <h2 className="section-title">How I spend my days</h2>
+            <p className="section-label">Focus</p>
+            <h2 className="section-title">What I build for</h2>
           </Reveal>
 
-          <div className="grid gap-10 border-t border-border pt-10 lg:grid-cols-2 lg:gap-16">
-            <Reveal>
-              <p className="font-mono text-[11px] tracking-[0.16em] text-accent uppercase">
-                Ship
-              </p>
-              <h3 className="mt-3 text-2xl font-semibold tracking-tight">
-                Full-stack products
-              </h3>
-              <p className="mt-4 max-w-md leading-relaxed text-muted">
-                Auth, APIs, databases, and polished UIs—end to end. I care about
-                product thinking as much as the stack.
-              </p>
-              <ul className="mt-6 space-y-2.5 font-mono text-sm text-muted-dim">
-                {site.services.map((service) => (
-                  <li key={service.title} className="flex gap-3">
-                    <span className="mt-2 size-1 shrink-0 bg-accent" aria-hidden />
-                    {service.title}
-                  </li>
-                ))}
-              </ul>
-              <Link
-                href="/work"
-                className="mt-7 inline-block font-mono text-sm text-accent transition-opacity hover:opacity-80"
-              >
-                Browse projects →
-              </Link>
-            </Reveal>
-
-            <Reveal delay={70}>
-              <p className="font-mono text-[11px] tracking-[0.16em] text-accent uppercase">
-                Teach
-              </p>
-              <h3 className="mt-3 text-2xl font-semibold tracking-tight">
-                Computer instructor
-              </h3>
-              <p className="mt-4 max-w-md leading-relaxed text-muted">
-                {site.experience[0]?.description}
-              </p>
-              <p className="mt-5 font-mono text-[11px] tracking-wide text-muted-dim">
-                {site.experience[0]?.topics.join(" · ")}
-              </p>
-              <a
-                href={site.contact.youtube}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-7 inline-block font-mono text-sm text-accent transition-opacity hover:opacity-80"
-              >
-                Watch @techwithimx ↗
-              </a>
-            </Reveal>
+          <div className="grid gap-10 border-t border-border pt-10 lg:grid-cols-3 lg:gap-12">
+            {site.services.map((service, i) => (
+              <Reveal key={service.title} delay={i * 50}>
+                <p className="font-mono text-[11px] tracking-[0.16em] text-accent uppercase">
+                  {String(i + 1).padStart(2, "0")}
+                </p>
+                <h3 className="mt-3 text-xl font-semibold tracking-tight">
+                  {service.title}
+                </h3>
+                <p className="mt-4 max-w-sm leading-relaxed text-muted">
+                  {service.description}
+                </p>
+              </Reveal>
+            ))}
           </div>
+
+          <Reveal delay={80} className="mt-10">
+            <Link
+              href="/work"
+              className="inline-block font-mono text-sm text-accent transition-opacity hover:opacity-80"
+            >
+              Browse projects →
+            </Link>
+          </Reveal>
         </div>
       </section>
 
@@ -233,10 +203,10 @@ export default function AboutPage() {
           </Reveal>
           <Reveal delay={90}>
             <p className="font-mono text-[11px] tracking-[0.14em] text-muted-dim uppercase">
-              Focus
+              Goals
             </p>
             <ul className="mt-4 space-y-2">
-              {site.goals.slice(0, 3).map((goal) => (
+              {site.goals.map((goal) => (
                 <li key={goal} className="text-sm text-muted">
                   {goal}
                 </li>
@@ -254,11 +224,10 @@ export default function AboutPage() {
           <Reveal>
             <p className="section-label">Contact</p>
             <h2 className="section-title max-w-xl">
-              Building something—or teaching a room?
+              Building something that needs a full-stack hand?
             </h2>
             <p className="section-lede">
-              Projects, APIs, curriculum, or collaboration. One message is
-              enough.
+              Products, APIs, or collaboration. One message is enough.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">
               <Link href="/contact" className="btn btn-primary">

@@ -3,20 +3,19 @@ import Link from "next/link";
 import { FeaturedProject } from "@/components/FeaturedProject";
 import { ProjectCard } from "@/components/ProjectCard";
 import { Reveal } from "@/components/Reveal";
-import { site } from "@/lib/site";
+import { isSecondaryProject, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Work",
   description: `Selected projects by ${site.fullName} — full-stack products, APIs, and modern frontends.`,
 };
 
-const secondarySet = new Set<string>(site.secondarySlugs);
-
 export default function WorkPage() {
   const featured = site.projects.filter((p) => p.featured);
   const archive = site.projects.filter((p) => !p.featured);
-  const secondary = archive.filter((p) => secondarySet.has(p.slug));
-  const earlier = archive.filter((p) => !secondarySet.has(p.slug));
+  const secondary = archive.filter((p) => isSecondaryProject(p.slug));
+  const earlier = archive.filter((p) => !isSecondaryProject(p.slug));
+  const withLive = site.projects.filter((p) => Boolean(p.live)).length;
 
   return (
     <div className="pb-28">
@@ -35,16 +34,20 @@ export default function WorkPage() {
           </h1>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
             Flagship products with auth, APIs, and polish—then stronger builds
-            and earlier practice work with public demos.
+            with public demos, then earlier practice work.
           </p>
           <div className="mt-8 flex flex-wrap gap-x-8 gap-y-2 font-mono text-[11px] tracking-[0.14em] text-muted-dim uppercase">
             <span>
-              <span className="text-accent">{String(featured.length).padStart(2, "0")}</span>{" "}
+              <span className="text-accent">
+                {String(featured.length).padStart(2, "0")}
+              </span>{" "}
               flagship
             </span>
             <span>
-              <span className="text-accent">{String(archive.length).padStart(2, "0")}</span>{" "}
-              more projects
+              <span className="text-accent">
+                {String(withLive).padStart(2, "0")}
+              </span>{" "}
+              with live demos
             </span>
           </div>
         </div>
@@ -83,8 +86,8 @@ export default function WorkPage() {
               <p className="section-label">Also shipping</p>
               <h2 className="section-title">Stronger builds</h2>
               <p className="section-lede">
-                Public demos and product UIs that moved me closer to production
-                work—still practice, still shipped.
+                Full-stack practice with a public demo—closer to production
+                product work.
               </p>
             </Reveal>
             <div className="border-t border-border">
@@ -105,8 +108,8 @@ export default function WorkPage() {
               <p className="section-label">Earlier</p>
               <h2 className="section-title">Foundations</h2>
               <p className="section-lede">
-                Landing pages, games, and backend drills that taught layout,
-                state, APIs, and shipping.
+                Landing pages, games, and backend drills—honest practice, not
+                flagship claims.
               </p>
             </Reveal>
             <div className="border-t border-border">

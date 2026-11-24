@@ -13,7 +13,7 @@ export function Footer() {
           <div>
             <BrandLogo size="sm" wordmark />
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted">
-              Shipping full-stack products and teaching the craft behind them.
+              Shipping full-stack products with auth, APIs, and polish.
             </p>
             <div className="mt-6">
               <SocialIcons />
@@ -56,14 +56,6 @@ export function Footer() {
               >
                 GitHub ↗
               </a>
-              <a
-                href={site.contact.youtube}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-link w-fit font-mono text-sm"
-              >
-                YouTube ↗
-              </a>
               <p className="pt-1 font-mono text-sm text-muted">{site.location}</p>
             </div>
           </div>
@@ -74,7 +66,7 @@ export function Footer() {
             © {year} {site.fullName}
           </p>
           <p className="font-mono text-xs text-muted-dim">
-            {site.brand} · ship &amp; teach
+            {site.brand} · build &amp; ship
           </p>
         </div>
       </div>
