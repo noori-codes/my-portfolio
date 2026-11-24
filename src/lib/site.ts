@@ -351,6 +351,7 @@ export const site = {
     email: "imrannoori1919@gmail.com",
     github: "https://github.com/noori-codes",
     portfolio: "https://noori.qzz.io",
+    youtube: "https://www.youtube.com/@techwithimx",
   },
 } as const;
 

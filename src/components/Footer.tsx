@@ -56,6 +56,14 @@ export function Footer() {
               >
                 GitHub ↗
               </a>
+              <a
+                href={site.contact.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-link w-fit font-mono text-sm"
+              >
+                YouTube ↗
+              </a>
               <p className="pt-1 font-mono text-sm text-muted">{site.location}</p>
             </div>
           </div>

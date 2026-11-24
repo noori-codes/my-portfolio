@@ -15,11 +15,27 @@ function GitHubIcon() {
   );
 }
 
+function YouTubeIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="size-[1.05rem]">
+      <path
+        fill="currentColor"
+        d="M23.5 6.2a3.1 3.1 0 0 0-2.2-2.2C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.3.5A3.1 3.1 0 0 0 .5 6.2 32.6 32.6 0 0 0 0 12a32.6 32.6 0 0 0 .5 5.8 3.1 3.1 0 0 0 2.2 2.2c1.8.5 9.3.5 9.3.5s7.5 0 9.3-.5a3.1 3.1 0 0 0 2.2-2.2A32.6 32.6 0 0 0 24 12a32.6 32.6 0 0 0-.5-5.8ZM9.8 15.5v-7l6.2 3.5-6.2 3.5Z"
+      />
+    </svg>
+  );
+}
+
 const links = [
   {
     label: "GitHub",
     href: site.contact.github,
     icon: GitHubIcon,
+  },
+  {
+    label: "YouTube",
+    href: site.contact.youtube,
+    icon: YouTubeIcon,
   },
 ] as const;
 

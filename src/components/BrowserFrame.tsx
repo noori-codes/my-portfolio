@@ -50,11 +50,6 @@ export function BrowserFrame({
   return (
     <div className={`browser-frame group/frame ${className}`}>
       <div className="browser-frame__chrome">
-        <div className="browser-frame__dots" aria-hidden>
-          <span />
-          <span />
-          <span />
-        </div>
         {hasLive && url ? (
           <a
             href={url}
