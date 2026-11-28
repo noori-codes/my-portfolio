@@ -38,7 +38,6 @@ export function Hero() {
             <span className="hero-dot hero-dot--a" aria-hidden />
             <span className="hero-dot hero-dot--b" aria-hidden />
             <span className="hero-dot hero-dot--c" aria-hidden />
-            <span className="hero-dot hero-dot--d" aria-hidden />
             <div className="hero-photo relative aspect-4/5 overflow-hidden bg-surface-2">
               <Image
                 src={site.profileImage}
@@ -46,14 +45,10 @@ export function Hero() {
                 fill
                 priority
                 sizes="(max-width: 1024px) 90vw, 380px"
-                className="object-cover object-[center_12%] saturate-[0.92] contrast-[1.04]"
+                className="object-cover object-[center_14%] saturate-[0.94] contrast-[1.03]"
               />
-              <div
-                className="pointer-events-none absolute inset-0 bg-linear-to-t from-background/40 via-transparent to-background/5"
-                aria-hidden
-              />
+              <div className="hero-photo-veil" aria-hidden />
             </div>
-            <span className="hero-photo-rim" aria-hidden />
           </div>
         </div>
       </div>
