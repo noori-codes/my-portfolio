@@ -77,7 +77,7 @@ export function FeaturedProject({
 
         <p className="mt-2 font-mono text-sm text-muted">{project.tagline}</p>
 
-        <p className="mt-4 max-w-md text-[0.95rem] leading-relaxed text-muted">
+        <p className="mt-4 max-w-md font-serif text-[1.02rem] leading-relaxed text-muted">
           {project.description}
         </p>
 

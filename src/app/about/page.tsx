@@ -26,19 +26,19 @@ export default function AboutPage() {
     <div className="pb-28">
       <section className="relative overflow-hidden border-b border-border">
         <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_90%_20%,rgba(var(--accent-rgb),0.07),transparent_45%)]"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_90%_10%,rgba(var(--accent-rgb),0.07),transparent_48%)]"
           aria-hidden
         />
-        <div className="page-shell relative grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:py-24">
+        <div className="page-shell relative grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16 lg:py-24">
           <div className="max-w-xl">
-            <p className="section-label">About</p>
-            <h1 className="mt-5 text-4xl font-bold tracking-[-0.045em] sm:text-5xl lg:text-[3.5rem] lg:leading-[1.05]">
+            <p className="section-kicker">About</p>
+            <h1 className="mt-5 text-[clamp(2.5rem,6vw,4rem)] font-semibold tracking-[-0.05em] leading-[1.02]">
               Products in production.
-              <span className="mt-2 block text-foreground/90">
+              <span className="mt-2 block text-foreground/85">
                 Built end to end.
               </span>
             </h1>
-            <p className="mt-6 max-w-lg text-base leading-relaxed text-muted sm:text-lg">
+            <p className="mt-6 max-w-lg font-serif text-lg leading-relaxed text-muted">
               {site.fullName} — {site.role} based in {site.location}. I ship
               full-stack apps with auth, APIs, and polish.
             </p>
@@ -56,23 +56,21 @@ export default function AboutPage() {
           </div>
 
           <div className="relative mx-auto w-full max-w-sm lg:mx-0 lg:ml-auto lg:max-w-md">
-            <div
-              className="pointer-events-none absolute -inset-8 bg-[radial-gradient(ellipse_at_center,rgba(var(--accent-rgb),0.14),transparent_68%)] blur-2xl"
-              aria-hidden
-            />
-            <div className="about-photo relative aspect-4/5 overflow-hidden border border-border/70 bg-surface-2 shadow-[0_30px_80px_-44px_rgba(0,0,0,0.9)]">
-              <Image
-                src={site.profileImage}
-                alt={site.fullName}
-                fill
-                priority
-                sizes="(max-width: 1024px) 90vw, 400px"
-                className="object-cover object-[center_12%] saturate-[0.92]"
-              />
-              <div
-                className="pointer-events-none absolute inset-0 bg-linear-to-t from-background/50 via-transparent to-transparent"
-                aria-hidden
-              />
+            <div className="hero-photo-wrap">
+              <span className="hero-dot hero-dot--a" aria-hidden />
+              <span className="hero-dot hero-dot--b" aria-hidden />
+              <span className="hero-dot hero-dot--c" aria-hidden />
+              <div className="hero-photo relative aspect-4/5 overflow-hidden bg-surface-2">
+                <Image
+                  src={site.profileImage}
+                  alt={site.fullName}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 90vw, 400px"
+                  className="object-cover object-[center_12%] saturate-[0.94]"
+                />
+                <div className="hero-photo-veil" aria-hidden />
+              </div>
             </div>
             <p className="mt-4 font-mono text-[11px] tracking-[0.14em] text-muted-dim uppercase">
               {site.availability}
@@ -82,19 +80,18 @@ export default function AboutPage() {
       </section>
 
       <section className="border-b border-border py-16 sm:py-20">
-        <div className="page-shell grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+        <div className="page-shell grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           <Reveal>
-            <p className="section-label">Story</p>
+            <p className="section-kicker">Story</p>
             <h2 className="section-title max-w-sm">Build it. Ship it.</h2>
           </Reveal>
           <Reveal delay={60}>
-            <p className="max-w-xl text-lg leading-relaxed text-muted">
+            <p className="max-w-xl font-serif text-lg leading-relaxed text-muted">
               {site.summary}
             </p>
             <p className="mt-5 max-w-xl text-sm leading-relaxed text-muted-dim">
-              Flagship work right now: {featuredNames}—live deploys with real
-              product surface area. Earlier practice projects stay labeled as
-              foundations on the Work page.
+              Flagship work right now: {featuredNames}. Earlier practice stays
+              labeled as foundations on the Work page.
             </p>
           </Reveal>
         </div>
@@ -103,13 +100,17 @@ export default function AboutPage() {
       <section className="border-b border-border py-16 sm:py-20">
         <div className="page-shell">
           <Reveal className="mb-12">
-            <p className="section-label">Focus</p>
+            <p className="section-kicker">Focus</p>
             <h2 className="section-title">What I build for</h2>
           </Reveal>
 
-          <div className="grid gap-10 border-t border-border pt-10 lg:grid-cols-3 lg:gap-12">
+          <div className="grid gap-0 border-t border-border lg:grid-cols-3">
             {site.services.map((service, i) => (
-              <Reveal key={service.title} delay={i * 50}>
+              <Reveal
+                key={service.title}
+                delay={i * 50}
+                className="border-b border-border py-10 lg:border-r lg:border-b-0 lg:px-8 lg:py-12 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0"
+              >
                 <p className="font-mono text-[11px] tracking-[0.16em] text-accent uppercase">
                   {String(i + 1).padStart(2, "0")}
                 </p>
@@ -138,7 +139,7 @@ export default function AboutPage() {
         <div className="page-shell">
           <Reveal className="mb-10 flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p className="section-label">Stack</p>
+              <p className="section-kicker">Stack</p>
               <h2 className="section-title">Tools I ship with</h2>
             </div>
             <p className="max-w-xs font-mono text-[11px] leading-relaxed tracking-wide text-muted-dim">
@@ -167,7 +168,7 @@ export default function AboutPage() {
             <p className="font-mono text-[11px] tracking-[0.14em] text-muted-dim uppercase">
               Concepts
             </p>
-            <p className="mt-3 text-sm leading-relaxed text-muted">
+            <p className="mt-3 font-serif text-base leading-relaxed text-muted">
               {site.concepts.join(" · ")}
             </p>
           </Reveal>
@@ -203,7 +204,7 @@ export default function AboutPage() {
           </Reveal>
           <Reveal delay={90}>
             <p className="font-mono text-[11px] tracking-[0.14em] text-muted-dim uppercase">
-              Goals
+              Direction
             </p>
             <ul className="mt-4 space-y-2">
               {site.goals.map((goal) => (
@@ -212,9 +213,6 @@ export default function AboutPage() {
                 </li>
               ))}
             </ul>
-            <p className="mt-6 font-mono text-[10px] leading-relaxed tracking-wide text-muted-dim">
-              Also studying · {site.education.level}, {site.education.grade}
-            </p>
           </Reveal>
         </div>
       </section>
@@ -222,7 +220,7 @@ export default function AboutPage() {
       <section className="py-16 sm:py-20">
         <div className="page-shell">
           <Reveal>
-            <p className="section-label">Contact</p>
+            <p className="section-kicker">Contact</p>
             <h2 className="section-title max-w-xl">
               Building something that needs a full-stack hand?
             </h2>

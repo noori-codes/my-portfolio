@@ -141,6 +141,7 @@ export default async function ProjectPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+
       <section className="border-b border-border py-16 sm:py-24">
         <div className="page-shell">
           <Link
@@ -152,16 +153,16 @@ export default async function ProjectPage({ params }: Props) {
 
           <div className="mt-10 flex flex-wrap items-center gap-3 font-mono text-[10px] tracking-[0.16em] text-muted-dim uppercase">
             {project.featured ? (
-              <span className="text-accent">Featured</span>
+              <span className="text-accent">Flagship</span>
             ) : null}
             <span>{project.kind}</span>
             <span>{project.year}</span>
           </div>
 
-          <h1 className="mt-4 max-w-4xl text-4xl font-bold tracking-[-0.045em] sm:text-5xl lg:text-6xl">
+          <h1 className="mt-4 max-w-4xl text-[clamp(2.5rem,6vw,4.5rem)] font-semibold tracking-[-0.05em] leading-[1.02]">
             {project.name}
           </h1>
-          <p className="mt-5 max-w-2xl text-lg text-muted sm:text-xl">
+          <p className="mt-5 max-w-2xl font-serif text-xl text-muted">
             {project.tagline}
           </p>
 
@@ -216,7 +217,7 @@ export default async function ProjectPage({ params }: Props) {
                     {block.label}
                   </h2>
                 </div>
-                <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted">
+                <p className="mt-5 max-w-2xl font-serif text-lg leading-relaxed text-muted">
                   {block.body}
                 </p>
               </div>
@@ -244,7 +245,7 @@ export default async function ProjectPage({ params }: Props) {
             ) : null}
 
             <div className="border-t border-border pt-8">
-              <h2 className="section-label">Highlights</h2>
+              <p className="section-kicker">Highlights</p>
               <ul className="mt-6 space-y-4">
                 {project.highlights.map((item) => (
                   <li key={item} className="flex gap-3 text-muted">
@@ -257,7 +258,7 @@ export default async function ProjectPage({ params }: Props) {
           </div>
 
           <aside className="h-fit border-t border-border pt-8 lg:sticky lg:top-24 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-10">
-            <h2 className="section-label">Stack</h2>
+            <p className="section-kicker">Stack</p>
             <ul className="mt-6 space-y-2.5">
               {project.stack.map((tech) => (
                 <li key={tech} className="font-mono text-sm text-muted">
@@ -267,7 +268,7 @@ export default async function ProjectPage({ params }: Props) {
             </ul>
 
             {project.caseStudy?.stackWhy ? (
-              <p className="mt-8 text-sm leading-relaxed text-muted">
+              <p className="mt-8 font-serif text-sm leading-relaxed text-muted">
                 {project.caseStudy.stackWhy}
               </p>
             ) : null}

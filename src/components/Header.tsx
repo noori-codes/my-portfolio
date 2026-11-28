@@ -46,9 +46,7 @@ export function Header() {
     if (!panel || !button) return;
 
     const getFocusable = () => {
-      const inPanel = [
-        ...panel.querySelectorAll<HTMLElement>(FOCUSABLE),
-      ];
+      const inPanel = [...panel.querySelectorAll<HTMLElement>(FOCUSABLE)];
       return [button, ...inPanel];
     };
 
@@ -100,14 +98,10 @@ export function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 h-[var(--header-h)] transition-[background,border-color,backdrop-filter] duration-300 ${
-        scrolled || open
-          ? "border-b border-border/80 bg-background/75 backdrop-blur-md"
-          : "border-b border-transparent"
-      }`}
+      className={`site-header${scrolled || open ? " is-scrolled" : ""}${open ? " is-open" : ""}`}
     >
       <div className="page-shell flex h-full items-center gap-4">
-        <BrandLogo size="md" priority wordmark />
+        <BrandLogo size="md" />
 
         <nav
           className="ml-auto hidden items-center gap-7 md:flex"
@@ -132,7 +126,7 @@ export function Header() {
           <SocialIcons />
 
           <span
-            className="hidden items-center gap-2 font-mono text-[11px] tracking-[0.12em] text-muted uppercase lg:inline-flex"
+            className="hidden items-center gap-2 font-mono text-[11px] tracking-[0.12em] text-muted uppercase md:inline-flex"
             title={site.availability}
           >
             <span className="size-1.5 shrink-0 bg-accent" aria-hidden />
@@ -155,20 +149,20 @@ export function Header() {
           <button
             ref={menuButtonRef}
             type="button"
-            className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 border border-border bg-surface/80 transition-colors hover:border-accent/40"
+            className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 border border-border bg-surface/80 transition-colors hover:border-accent/40"
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close navigation" : "Open navigation"}
             onClick={() => setOpen((v) => !v)}
           >
             <span
-              className={`block h-px w-3.5 bg-foreground transition-transform ${open ? "translate-y-[3.5px] rotate-45" : ""}`}
+              className={`block h-px w-4 bg-foreground transition-transform ${open ? "translate-y-[3.5px] rotate-45" : ""}`}
             />
             <span
-              className={`block h-px w-3.5 bg-foreground ${open ? "opacity-0" : ""}`}
+              className={`block h-px w-4 bg-foreground ${open ? "opacity-0" : ""}`}
             />
             <span
-              className={`block h-px w-3.5 bg-foreground transition-transform ${open ? "-translate-y-[3.5px] -rotate-45" : ""}`}
+              className={`block h-px w-4 bg-foreground transition-transform ${open ? "-translate-y-[3.5px] -rotate-45" : ""}`}
             />
           </button>
         </div>
@@ -181,7 +175,7 @@ export function Header() {
           role="dialog"
           aria-modal="true"
           aria-label="Navigation"
-          className="border-b border-border bg-background/95 px-5 py-5 backdrop-blur-md md:hidden"
+          className="border-b border-border bg-background/97 px-5 py-6 backdrop-blur-md md:hidden"
         >
           <ul className="flex flex-col">
             {mainNav.map((item) => {
@@ -200,14 +194,14 @@ export function Header() {
             })}
           </ul>
           <p
-            className="mt-5 flex items-center gap-2 font-mono text-[11px] tracking-[0.12em] text-muted uppercase"
+            className="mt-6 flex items-center gap-2 font-mono text-[11px] tracking-[0.12em] text-muted uppercase"
             title={site.availability}
           >
             <span className="size-1.5 shrink-0 bg-accent" aria-hidden />
-            {site.availabilityShort}
+            {site.availability}
           </p>
           {!onContact ? (
-            <Link href="/contact" className="btn btn-primary mt-4 w-full">
+            <Link href="/contact" className="btn btn-primary mt-5 w-full">
               Contact
             </Link>
           ) : null}

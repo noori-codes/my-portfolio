@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, Syne } from "next/font/google";
+import { JetBrains_Mono, Source_Serif_4, Space_Grotesk } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ScrollProgress } from "@/components/ScrollProgress";
@@ -7,13 +7,19 @@ import { SiteBackground } from "@/components/SiteBackground";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const syne = Syne({
+const spaceGrotesk = Space_Grotesk({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const plexMono = IBM_Plex_Mono({
+const sourceSerif = Source_Serif_4({
+  variable: "--font-serif",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+});
+
+const jetbrainsMono = JetBrains_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
@@ -79,7 +85,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${syne.variable} ${plexMono.variable} h-full`}>
+    <html
+      lang="en"
+      className={`${spaceGrotesk.variable} ${sourceSerif.variable} ${jetbrainsMono.variable} h-full`}
+    >
       <body className="flex min-h-full flex-col font-sans text-foreground antialiased">
         <SiteBackground />
         <a href="#main-content" className="skip-link">

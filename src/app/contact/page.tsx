@@ -14,18 +14,18 @@ export default function ContactPage() {
     <div className="pb-28">
       <section className="relative overflow-hidden border-b border-border">
         <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_80%_0%,rgba(var(--accent-rgb),0.07),transparent_45%)]"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_80%_0%,rgba(var(--accent-rgb),0.07),transparent_48%)]"
           aria-hidden
         />
         <div className="page-shell relative py-16 sm:py-20 lg:py-24">
-          <p className="section-label">{site.availability}</p>
-          <h1 className="mt-5 max-w-3xl text-4xl font-bold tracking-[-0.045em] sm:text-5xl lg:text-[3.5rem] lg:leading-[1.05]">
+          <p className="section-kicker">{site.availability}</p>
+          <h1 className="mt-5 max-w-3xl text-[clamp(2.5rem,6vw,4rem)] font-semibold tracking-[-0.05em] leading-[1.02]">
             Start a conversation.
-            <span className="mt-2 block text-foreground/90">
+            <span className="mt-2 block text-foreground/85">
               One message is enough.
             </span>
           </h1>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
+          <p className="mt-6 max-w-xl font-serif text-lg leading-relaxed text-muted">
             Products, APIs, or collaboration—tell me what you&apos;re building.
             I usually reply within a day or two.
           </p>
@@ -35,18 +35,18 @@ export default function ContactPage() {
       <section className="py-16 sm:py-20">
         <div className="page-shell grid gap-14 lg:grid-cols-[1.25fr_0.75fr] lg:gap-20">
           <div>
-            <p className="section-label">Message</p>
+            <p className="section-kicker">Message</p>
             <h2 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">
               Write me directly
             </h2>
-            <p className="mt-3 mb-9 max-w-md text-sm leading-relaxed text-muted">
+            <p className="mt-3 mb-9 max-w-md font-serif text-base leading-relaxed text-muted">
               Name, email, and a short note on the goal or timeline.
             </p>
             <ContactForm />
           </div>
 
           <aside className="h-fit border-t border-border pt-8 lg:sticky lg:top-24 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-10">
-            <p className="section-label">Elsewhere</p>
+            <p className="section-kicker">Elsewhere</p>
             <p className="mt-3 mb-8 text-sm leading-relaxed text-muted">
               Prefer email, GitHub, or YouTube? Use these.
             </p>

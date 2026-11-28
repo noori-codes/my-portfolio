@@ -6,7 +6,7 @@ import { site } from "@/lib/site";
 type Status = "idle" | "sending" | "sent" | "error";
 
 const fieldClass =
-  "w-full border border-border bg-surface/40 px-4 py-3.5 text-foreground outline-none transition-[border-color,background,box-shadow] duration-200 placeholder:text-muted-dim/80 hover:bg-surface/70 focus-visible:border-accent focus-visible:bg-background focus-visible:ring-2 focus-visible:ring-accent/35 disabled:opacity-60";
+  "w-full border border-border bg-surface/50 px-4 py-3.5 text-foreground outline-none transition-[border-color,background] duration-200 placeholder:text-muted-dim hover:bg-surface focus-visible:border-accent focus-visible:bg-background disabled:opacity-60";
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");

@@ -9,11 +9,12 @@ export function Footer() {
   return (
     <footer className="mt-auto border-t border-border">
       <div className="page-shell py-14 sm:py-16">
-        <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr_0.8fr] lg:gap-16">
+        <div className="grid gap-12 lg:grid-cols-[1.3fr_0.7fr_0.9fr] lg:gap-16">
           <div>
-            <BrandLogo size="sm" wordmark />
-            <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted">
-              Shipping full-stack products with auth, APIs, and polish.
+            <BrandLogo size="sm" />
+            <p className="mt-5 max-w-xs font-serif text-base leading-relaxed text-muted">
+              Independent full-stack builder. Products with auth, APIs, and
+              polish—shipped for real.
             </p>
             <div className="mt-6">
               <SocialIcons />

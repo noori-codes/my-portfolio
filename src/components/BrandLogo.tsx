@@ -1,51 +1,32 @@
-import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/lib/site";
 
 type Props = {
-  size?: "sm" | "md";
+  size?: "sm" | "md" | "lg";
   linked?: boolean;
   className?: string;
-  priority?: boolean;
-  wordmark?: boolean;
 };
 
-const sizes = {
-  sm: "h-8 w-9",
-  md: "h-9 w-11",
-} as const;
-
-const wordmarkClass = {
-  sm: "text-sm",
-  md: "text-[0.95rem]",
+const sizeClass = {
+  sm: "text-base tracking-[-0.04em]",
+  md: "text-lg tracking-[-0.045em]",
+  lg: "text-xl tracking-[-0.05em]",
 } as const;
 
 export function BrandLogo({
-  size = "sm",
+  size = "md",
   linked = true,
   className = "",
-  priority = false,
-  wordmark = false,
 }: Props) {
   const mark = (
-    <span className={`inline-flex items-center gap-2 ${className}`}>
-      <span className={`relative inline-block shrink-0 ${sizes[size]}`}>
-        <Image
-          src={site.logoMark}
-          alt=""
-          fill
-          sizes={size === "md" ? "44px" : "36px"}
-          priority={priority}
-          className="object-contain object-center"
-        />
-      </span>
-      {wordmark ? (
-        <span
-          className={`font-sans font-bold tracking-[-0.04em] text-foreground ${wordmarkClass[size]}`}
-        >
-          {site.brand}
-        </span>
-      ) : null}
+    <span
+      className={`inline-flex items-center gap-2 font-sans font-semibold text-foreground ${sizeClass[size]} ${className}`}
+    >
+      <span
+        className="inline-block size-1.5 shrink-0 bg-accent"
+        aria-hidden
+      />
+      {site.brand}
     </span>
   );
 
@@ -61,7 +42,7 @@ export function BrandLogo({
     <Link
       href="/"
       aria-label={`${site.brand} home`}
-      className="inline-flex shrink-0 transition-opacity hover:opacity-85"
+      className="inline-flex shrink-0 transition-opacity hover:opacity-80"
     >
       {mark}
     </Link>

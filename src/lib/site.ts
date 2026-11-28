@@ -23,19 +23,41 @@ export type Project = {
 export const site = {
   brand: "IMX",
   fullName: "Imran Noori",
-  headline: "I build and ship full-stack products end to end.",
+  headline: "I turn ideas into software people can use.",
   role: "Full-Stack Web Developer",
   location: "Afghanistan",
   availability: "Open to projects & collaboration",
   /** Compact header / chrome label */
   availabilityShort: "Available",
   /** Bump when site copy/structure changes — used by sitemap lastModified. */
-  contentUpdated: "2026-11-24",
+  contentUpdated: "2026-11-28",
   profileImage: "/images/my-photo.jpg",
   logoMark: "/images/imx-mark.png",
   ogImage: "/images/og-card.jpg",
   summary:
-    "I build and ship full-stack products like FrameOne, LinkHub, and IMX OS—auth, APIs, polished UIs, and real deploy pipelines. Focused on product thinking, clean architecture, and work that holds up in production.",
+    "I build full-stack products end to end—interfaces people touch, APIs that hold up, and data models that stay clear. FrameOne, LinkHub, and IMX OS are the proof: real deploys, not slide decks.",
+  buildLayers: [
+    {
+      title: "Interface",
+      detail:
+        "Responsive product UI with React and Next.js—layout, state, and polish that feels intentional.",
+    },
+    {
+      title: "API & auth",
+      detail:
+        "REST routes, JWT and session auth, permissions that match how the product actually works.",
+    },
+    {
+      title: "Data",
+      detail:
+        "Schemas and queries with Prisma, MongoDB, or Supabase—persistence without mystery.",
+    },
+    {
+      title: "Product shape",
+      detail:
+        "Onboarding, empty states, and flows designed as one system—not bolted-on screens.",
+    },
+  ] as const,
   nav: [
     { name: "Home", path: "/" },
     { name: "Work", path: "/work" },
@@ -70,14 +92,14 @@ export const site = {
       name: "FrameOne",
       tagline: "Cinematic movie & TV discovery app",
       description:
-        "Full-stack movie and TV discovery experience—trending titles, search, rich detail pages, favorites, and watchlists. Powered by TMDB, with Auth.js auth and Prisma + PostgreSQL persistence.",
+        "Full-stack movie and TV discovery experience—trending titles, search, rich detail pages, favorites, and watchlists. Powered by TMDB, with Auth.js auth and Prisma + SQLite persistence.",
       stack: [
         "Next.js",
+        "React",
         "Prisma",
-        "PostgreSQL",
+        "SQLite",
         "Auth.js",
         "TMDB API",
-        "Tailwind CSS",
       ],
       highlights: [
         "Home hero carousel and curated discovery rows",
@@ -96,16 +118,16 @@ export const site = {
         problem:
           "Movie discovery apps often feel either sparse or cluttered—hard to browse, search, and keep a personal watchlist in one polished place.",
         approach:
-          "Built a cinematic Next.js app on TMDB for catalog data, with Auth.js for accounts and Prisma + PostgreSQL for favorites, watchlists, and profile state.",
+          "Built a cinematic Next.js app on TMDB for catalog data, with Auth.js for accounts and Prisma + SQLite for favorites, watchlists, and profile state.",
         outcome:
           "A deployable discovery product with trending rows, detail pages (cast, similar titles, trailers), and personal lists that persist across sessions.",
         decisions: [
           "Use TMDB as the source of truth for catalog, posters, and trailers instead of scraping or hardcoding titles",
-          "Persist favorites and watchlists in PostgreSQL so personalization survives reloads and devices",
+          "Persist favorites and watchlists with Prisma so personalization survives reloads",
           "Keep the UI cinematic—hero carousel and horizontal rows—so browsing feels like a product, not a table of results",
         ],
         stackWhy:
-          "Next.js for app structure and performance, Prisma + Postgres for durable user data, Auth.js for credentials auth, TMDB for rich media metadata.",
+          "Next.js for app structure and performance, Prisma + SQLite for durable user data, Auth.js for credentials auth, TMDB for rich media metadata.",
       },
     },
     {

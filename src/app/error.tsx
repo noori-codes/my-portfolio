@@ -1,55 +1,29 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect } from "react";
-import { site } from "@/lib/site";
 
-type Props = {
+export default function Error({
+  reset,
+}: {
   error: Error & { digest?: string };
   reset: () => void;
-};
-
-export default function Error({ error, reset }: Props) {
-  useEffect(() => {
-    console.error(error);
-  }, [error]);
-
+}) {
   return (
-    <div className="flex min-h-[70vh] flex-col justify-center py-20">
-      <div className="page-shell">
-        <p className="section-label">Error</p>
-        <h1 className="mt-4 text-4xl font-bold tracking-[-0.045em] sm:text-5xl">
-          Something broke
-        </h1>
-        <p className="section-lede mt-5">
-          That page hit an unexpected error. Try again, or jump somewhere safe.
-        </p>
-
-        <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
-          <button type="button" onClick={reset} className="btn btn-primary">
-            Try again
-          </button>
-          <Link
-            href="/"
-            className="font-mono text-sm text-muted transition-colors hover:text-accent"
-          >
-            Back home →
-          </Link>
-          <Link
-            href="/contact"
-            className="font-mono text-sm text-muted transition-colors hover:text-accent"
-          >
-            Contact →
-          </Link>
-        </div>
-
-        <p className="mt-14 font-mono text-xs text-muted-dim">
-          <span className="text-accent">{site.brand.toLowerCase()}</span>
-          <span className="text-muted-dim"> · recover</span>
-          {error.digest ? (
-            <span className="text-muted-dim"> · {error.digest}</span>
-          ) : null}
-        </p>
+    <div className="page-shell flex min-h-[70vh] flex-col justify-center py-20">
+      <p className="section-kicker">Error</p>
+      <h1 className="mt-5 text-4xl font-semibold tracking-[-0.045em] sm:text-5xl">
+        Something went wrong
+      </h1>
+      <p className="mt-5 max-w-md font-serif text-lg text-muted">
+        Refresh and try again. If it keeps happening, write me directly.
+      </p>
+      <div className="mt-10 flex flex-wrap gap-4">
+        <button type="button" onClick={reset} className="btn btn-primary">
+          Try again
+        </button>
+        <Link href="/" className="btn btn-outline">
+          Home
+        </Link>
       </div>
     </div>
   );
